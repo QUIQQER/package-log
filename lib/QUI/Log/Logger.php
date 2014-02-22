@@ -1,14 +1,10 @@
 <?php
 
 /**
- * This file contains \QUI\Log\Logger class
+ * This file contains QUI\Log\Logger class
  */
 
 namespace QUI\Log;
-
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\FirePHPHandler;
 
 /**
  * QUIQQER logging service
@@ -18,18 +14,203 @@ use Monolog\Handler\FirePHPHandler;
 
 class Logger
 {
-    static function write($params)
+    /**
+     * Monolog Logger
+     * @var \Monolog\Logger
+     */
+    static $Logger = null;
+
+    /**
+     * Write a message to the logger
+     * event: onLogWrite
+     *
+     * @param String $message - Log message
+     * @param Integer $loglevel - \QUI\System\Log::LEVEL_*
+     */
+    static function write($message, $loglevel=\QUI\System\Log::LEVEL_INFO)
     {
-        $Package = \QUI::getPackageHandler()-getPackage( 'quiqqer/log' );
+        $Logger = self::getLogger();
+        $User   = \QUI::getUserBySession();
 
-        $message  = $params['message'];
-        $loglevel = $params['loglevel'];
+        $context = array(
+            'username' => $User->getName(),
+            'uid'      => $User->getId()
+        );
 
-        $Logger = new Logger( 'quiqqer_logger' );
+        switch ( $loglevel )
+        {
+            case \QUI\System\Log::LEVEL_DEBUG:
+                $Logger->addDebug( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_INFO:
+                $Logger->addInfo( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_NOTICE:
+                $Logger->addNotice( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_WARNING:
+                $Logger->addWarning( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_ERROR:
+                $Logger->addError( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_CRITICAL:
+                $Logger->addCritical( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_ALERT:
+                $Logger->addAlert( $message, $context );
+            break;
+
+            case \QUI\System\Log::LEVEL_EMERGENCY:
+                $Logger->addEmergency( $message, $context );
+            break;
+        }
+    }
+
+    /**
+     * Return the Logger object
+     *
+     * @return \Monolog\Logger
+     * @todo more handler
+     */
+    static function getLogger()
+    {
+        if ( self::$Logger ) {
+            return self::$Logger;
+        }
+
+        $PluginManager = \QUI::getPlugins();
+        $Plugin        = $PluginManager->get( 'quiqqer/log' );
+        $Logger        = new \Monolog\Logger( 'QUI:Log' );
+
+        self::$Logger = $Logger;
+
+        try
+        {
+            if ( $Plugin->getSettings('browser_logs', 'firephp' ) ) {
+                $Logger->pushHandler( new \Monolog\Handler\FirePHPHandler() );
+            }
+
+            if ( $Plugin->getSettings('browser_logs', 'chromephp' ) ) {
+                $Logger->pushHandler( new \Monolog\Handler\ChromePHPHandler() );
+            }
+
+            self::addCubeHandlerToLogger( $Logger );
+            self::addRedisHandlerToLogger( $Logger );
+
+        } catch ( \QUI\Exception $Exception )
+        {
+
+        }
+
+        return $Logger;
+    }
+
+    /**
+     * Return the quiqqer log plugins
+     */
+    static function getPlugin()
+    {
+        return \QUI::getPlugins()->get( 'quiqqer/log' );
+    }
+
+    /**
+     * Handler
+     */
 
 
+    /**
+     * Add a Cube handler to the logger, if settings are available
+     *
+     * @param \Monolog\Logger $Logger
+     */
+    static function addCubeHandlerToLogger(\Monolog\Logger $Logger)
+    {
+        $cube = self::getPlugin()->getSettings( 'cube' );
 
-        $Logger->pushHandler( new FirePHPHandler() );
+        if ( !$cube ) {
+            return;
+        }
 
+        try
+        {
+            $Handler = new \Monolog\Handler\CubeHandler(
+                self::getPlugin()->getSettings('cube', 'server' )
+            );
+
+            $Logger->pushHandler( $Handler );
+
+        } catch ( \Exception $Exception )
+        {
+
+        }
+    }
+
+    /**
+     * Add a NewRelic handler to the logger, if settings are available
+     *
+     * @param \Monolog\Logger $Logger
+     */
+    static function addNewRelicToLogger(\Monolog\Logger $Logger)
+    {
+        $newRelic = self::getPlugin()->getSettings( 'newRelic' );
+
+        if ( !$newRelic ) {
+            return;
+        }
+
+        try
+        {
+            $Handler = new \Monolog\Handler\NewRelicHandler(
+                \QUI\System\Log::LEVEL_INFO,
+                true,
+                self::getPlugin()->getSettings('newRelic', 'appname' )
+            );
+
+            $Logger->pushHandler( $Handler );
+
+        } catch ( \Exception $Exception )
+        {
+
+        }
+    }
+
+    /**
+     * Add a Redis handler to the logger, if settings are available
+     *
+     * @needle predis/predis
+     * @param \Monolog\Logger $Logger
+     */
+    static function addRedisHandlerToLogger(\Monolog\Logger $Logger)
+    {
+        $redis = self::getPlugin()->getSettings( 'redis' );
+
+        if ( !$redis ) {
+            return;
+        }
+
+        try
+        {
+            $Client = new \Predis\Client(
+                self::getPlugin()->getSettings('redis', 'server' )
+            );
+
+            $Handler = new \Monolog\Handler\RedisHandler(
+                $Client,
+                self::getPlugin()->getSettings('redis', 'server' )
+            );
+
+            $Logger->pushHandler( $Handler );
+
+        } catch ( \Exception $Exception )
+        {
+
+        }
     }
 }
