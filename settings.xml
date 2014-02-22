@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+
+    <config name="qui_logger">
+        <section name="browser_logs">
+            <conf name="firephp">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="chromephp">
+                <type><![CDATA[bool]]></type>
+            </conf>
+        </section>
+    </config>
+
+    <window>
+        <title>QUI Log Manager</title>
+        <params>
+            <icon>icon-cogs</icon>
+        </params>
+
+        <categories>
+            <category name="browser_logs">
+                <text>Allgemein Log Einstellungen</text>
+                <icon>icon-cogs</icon>
+
+                <settings title="browser_logs_section" name="browser_logs_section">
+                    <title>Browser Loggin</title>
+                    <input conf="browser_logs.firephp" type="checkbox">
+                        <text>FirePHP Logs einschalten</text>
+                    </input>
+                    <input conf="browser_logs.firephp" type="checkbox">
+                        <text>ChromePHP Logs einschalten</text>
+                    </input>
+                </settings>
+            </category>
+        </categories>
+    </window>
+
+</settings>
