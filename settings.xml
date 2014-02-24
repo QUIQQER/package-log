@@ -10,9 +10,25 @@
                 <type><![CDATA[bool]]></type>
             </conf>
         </section>
+
         <section name="cube">
             <conf name="server">
                 <type><![CDATA[string]]></type>
+            </conf>
+        </section>
+
+        <section name="newRelic">
+            <conf name="appname">
+                <type><![CDATA[string]]></type>
+            </conf>
+        </section>
+
+        <section name="syslogUdp">
+            <conf name="host">
+                <type><![CDATA[string]]></type>
+            </conf>
+            <conf name="port">
+                <type><![CDATA[integer]]></type>
             </conf>
         </section>
     </config>
@@ -48,8 +64,41 @@
                     <input conf="cube.server" type="string">
                         <text>Cube Server URL</text>
                         <description><![CDATA[
-                            Mehr informationen zu Cube Server finden Sie unter: https://github.com/square/cube
+                            Mehr Informationen zu Cube Server finden Sie unter: https://github.com/square/cube
                         ]]></description>
+                    </input>
+                </settings>
+            </category>
+
+            <category name="newrelic">
+                <text>NewRelic</text>
+
+                <settings title="newrelic_section" name="newrelic_section">
+                    <title>NewRelic APP-Name</title>
+                    <input conf="newRelic.appname" type="string">
+                        <text>NewRelic APP-Name</text>
+                        <description><![CDATA[
+                            Mehr Informationen zu New Relic finden Sie unter: https://www.newrelic.com
+                        ]]></description>
+                    </input>
+                </settings>
+            </category>
+
+
+            <category name="syslogudp">
+                <text>Syslog UDP Server</text>
+
+                <settings title="syslogudp_host" name="syslogudp_host">
+                    <title>Host</title>
+                    <input conf="syslogUdp.host" type="string">
+                        <text>Host IP</text>
+                    </input>
+                </settings>
+
+                <settings title="syslogudp_port" name="syslogudp_port">
+                    <title>Port</title>
+                    <input conf="syslogUdp.port" type="string">
+                        <text>UDP Syslog Port</text>
                     </input>
                 </settings>
             </category>

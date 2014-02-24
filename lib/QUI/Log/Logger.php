@@ -103,6 +103,7 @@ class Logger
 
             self::addCubeHandlerToLogger( $Logger );
             self::addRedisHandlerToLogger( $Logger );
+            self::addSyslogUDPHandlerToLogger( $Logger );
 
         } catch ( \QUI\Exception $Exception )
         {
@@ -204,6 +205,34 @@ class Logger
             $Handler = new \Monolog\Handler\RedisHandler(
                 $Client,
                 self::getPlugin()->getSettings('redis', 'server' )
+            );
+
+            $Logger->pushHandler( $Handler );
+
+        } catch ( \Exception $Exception )
+        {
+
+        }
+    }
+
+    /**
+     * Add a SystelogUPD handler to the logger, if settings are available
+     *
+     * @param \Monolog\Logger $Logger
+     */
+    static function addSyslogUDPHandlerToLogger(\Monolog\Logger $Logger)
+    {
+        $syslog = self::getPlugin()->getSettings( 'syslogUdp' );
+
+        if ( !$syslog ) {
+            return;
+        }
+
+        try
+        {
+            $Handler = new \Monolog\Handler\SyslogUdpHandler(
+                self::getPlugin()->getSettings('syslogUdp', 'host' ),
+                self::getPlugin()->getSettings('syslogUdp', 'port' )
             );
 
             $Logger->pushHandler( $Handler );
