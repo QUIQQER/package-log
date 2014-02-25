@@ -46,7 +46,7 @@
                 <icon>icon-cogs</icon>
 
                 <settings title="browser_logs_section" name="browser_logs_section">
-                    <title>Browser Loggin</title>
+                    <title>Browser Log Einstellungen</title>
                     <input conf="browser_logs.firephp" type="checkbox">
                         <text>FirePHP Logs einschalten</text>
                     </input>
@@ -60,7 +60,7 @@
                 <text>Cube Server</text>
 
                 <settings title="cube_section" name="cube_section">
-                    <title>Cube Server</title>
+                    <title>Cube Server Einstellungen</title>
                     <input conf="cube.server" type="string">
                         <text>Cube Server URL</text>
                         <description><![CDATA[
@@ -74,7 +74,7 @@
                 <text>NewRelic</text>
 
                 <settings title="newrelic_section" name="newrelic_section">
-                    <title>NewRelic APP-Name</title>
+                    <title>NewRelic Einstellungen</title>
                     <input conf="newRelic.appname" type="string">
                         <text>NewRelic APP-Name</text>
                         <description><![CDATA[
@@ -89,18 +89,15 @@
                 <text>Syslog UDP Server</text>
 
                 <settings title="syslogudp_host" name="syslogudp_host">
-                    <title>Host</title>
+                    <title>Syslog UDP Server Einstellungen</title>
                     <input conf="syslogUdp.host" type="string">
                         <text>Host IP</text>
                     </input>
-                </settings>
-
-                <settings title="syslogudp_port" name="syslogudp_port">
-                    <title>Port</title>
                     <input conf="syslogUdp.port" type="string">
                         <text>UDP Syslog Port</text>
                     </input>
                 </settings>
+
             </category>
 
         </categories>
