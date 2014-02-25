@@ -91,7 +91,11 @@
                 <settings title="syslogudp_host" name="syslogudp_host">
                     <title>Syslog UDP Server Einstellungen</title>
                     <input conf="syslogUdp.host" type="string">
-                        <text>Host IP</text>
+                        <text>UDP Syslog Host</text>
+                        <description><![CDATA[
+                            Es kann eine IP-Adresse oder ein Server DNS angegeben werden.
+                            z.B.: 192.168.1.200 oder my.server.com
+                        ]]></description>
                     </input>
                     <input conf="syslogUdp.port" type="string">
                         <text>UDP Syslog Port</text>
