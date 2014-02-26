@@ -2,6 +2,34 @@
 <settings>
 
     <config name="plugins/quiqqer/log">
+
+        <section name="log_levels">
+            <conf name="debug">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="info">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="notice">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="warning">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="error">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="critical">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="alert">
+                <type><![CDATA[bool]]></type>
+            </conf>
+            <conf name="emergency">
+                <type><![CDATA[bool]]></type>
+            </conf>
+        </section>
+
         <section name="browser_logs">
             <conf name="firephp">
                 <type><![CDATA[bool]]></type>
@@ -44,6 +72,37 @@
             <category name="browser_logs">
                 <text>Allgemein Log Einstellungen</text>
                 <icon>icon-cogs</icon>
+
+                <settings title="log_levels_section" name="log_levels_section">
+                    <title>Log Level Einstellungen</title>
+
+                    <input conf="log_levels.alert" type="checkbox">
+                        <text>Alert-Meldungen (Alarm) sollen geloggt werden</text>
+                    </input>
+                    <input conf="log_levels.critical" type="checkbox">
+                        <text>Critcal-Meldungen (kritisch) sollen geloggt werden</text>
+                    </input>
+                    <input conf="log_levels.debug" type="checkbox">
+                        <text>Debug-Meldungen sollen geloggt werden</text>
+                    </input>
+
+                    <input conf="log_levels.emergency" type="checkbox">
+                        <text>Emergency-Meldungen (Notfall) sollen geloggt werden</text>
+                    </input>
+                    <input conf="log_levels.error" type="checkbox">
+                        <text>Error-Meldungen (Fehler) sollen geloggt werden</text>
+                    </input>
+                    <input conf="log_levels.info" type="checkbox">
+                        <text>Info-Meldungen sollen geloggt werden</text>
+                    </input>
+                    <input conf="log_levels.notice" type="checkbox">
+                        <text>Notice-Meldungen (Hinweis) sollen geloggt werden</text>
+                    </input>
+                    <input conf="log_levels.warning" type="checkbox">
+                        <text>Warning-Meldungen (Warnung) sollen geloggt werden</text>
+                    </input>
+
+                </settings>
 
                 <settings title="browser_logs_section" name="browser_logs_section">
                     <title>Browser Log Einstellungen</title>

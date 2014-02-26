@@ -139,11 +139,15 @@ class Logger
             return;
         }
 
+        $server = self::getPlugin()->getSettings('cube', 'server' );
+
+        if ( empty( $server ) ) {
+            return;
+        }
+
         try
         {
-            $Handler = new \Monolog\Handler\CubeHandler(
-                self::getPlugin()->getSettings('cube', 'server' )
-            );
+            $Handler = new \Monolog\Handler\CubeHandler( $server );
 
             $Logger->pushHandler( $Handler );
 
@@ -166,12 +170,18 @@ class Logger
             return;
         }
 
+        $appname = self::getPlugin()->getSettings('newRelic', 'appname' );
+
+        if ( empty( $appname ) ) {
+            return;
+        }
+
         try
         {
             $Handler = new \Monolog\Handler\NewRelicHandler(
                 \QUI\System\Log::LEVEL_INFO,
                 true,
-                self::getPlugin()->getSettings('newRelic', 'appname' )
+                $appname
             );
 
             $Logger->pushHandler( $Handler );
@@ -196,15 +206,19 @@ class Logger
             return;
         }
 
+        $server = self::getPlugin()->getSettings('redis', 'server' );
+
+        if ( empty( $server ) ) {
+            return;
+        }
+
         try
         {
-            $Client = new \Predis\Client(
-                self::getPlugin()->getSettings('redis', 'server' )
-            );
+            $Client = new \Predis\Client( $server );
 
             $Handler = new \Monolog\Handler\RedisHandler(
                 $Client,
-                self::getPlugin()->getSettings('redis', 'server' )
+                $server
             );
 
             $Logger->pushHandler( $Handler );
@@ -228,12 +242,17 @@ class Logger
             return;
         }
 
+        $host = self::getPlugin()->getSettings('syslogUdp', 'host' );
+        $port = self::getPlugin()->getSettings('syslogUdp', 'port' );
+
+        if ( empty( $host ) ) {
+            return;
+        }
+
+
         try
         {
-            $Handler = new \Monolog\Handler\SyslogUdpHandler(
-                self::getPlugin()->getSettings('syslogUdp', 'host' ),
-                self::getPlugin()->getSettings('syslogUdp', 'port' )
-            );
+            $Handler = new \Monolog\Handler\SyslogUdpHandler( $host, $port );
 
             $Logger->pushHandler( $Handler );
 
