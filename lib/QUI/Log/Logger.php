@@ -21,6 +21,21 @@ class Logger
     static $Logger = null;
 
     /**
+     * which levels should be loged
+     * @var Array
+     */
+    static $logLevels = array(
+        'debug'     => true,
+        'info'      => true,
+        'notice'    => true,
+        'warning'   => true,
+        'error'     => true,
+        'critical'  => true,
+        'alert'     => true,
+        'emergency' => true
+    );
+
+    /**
      * Write a message to the logger
      * event: onLogWrite
      *
@@ -40,35 +55,51 @@ class Logger
         switch ( $loglevel )
         {
             case \QUI\System\Log::LEVEL_DEBUG:
-                $Logger->addDebug( $message, $context );
+                if ( self::$logLevels['debug'] ) {
+                    $Logger->addDebug( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_INFO:
-                $Logger->addInfo( $message, $context );
+                if ( self::$logLevels['info'] ) {
+                    $Logger->addInfo( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_NOTICE:
-                $Logger->addNotice( $message, $context );
+                if ( self::$logLevels['notice'] ) {
+                    $Logger->addNotice( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_WARNING:
-                $Logger->addWarning( $message, $context );
+                if ( self::$logLevels['warning'] ) {
+                    $Logger->addWarning( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_ERROR:
-                $Logger->addError( $message, $context );
+                if ( self::$logLevels['error'] ) {
+                    $Logger->addError( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_CRITICAL:
-                $Logger->addCritical( $message, $context );
+                if ( self::$logLevels['critical'] ) {
+                    $Logger->addCritical( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_ALERT:
-                $Logger->addAlert( $message, $context );
+                if ( self::$logLevels['alert'] ) {
+                    $Logger->addAlert( $message, $context );
+                }
             break;
 
             case \QUI\System\Log::LEVEL_EMERGENCY:
-                $Logger->addEmergency( $message, $context );
+                if ( self::$logLevels['emergency'] ) {
+                    $Logger->addEmergency( $message, $context );
+                }
             break;
         }
     }
@@ -91,16 +122,13 @@ class Logger
 
         self::$Logger = $Logger;
 
+        // which levels should be loged
+        self::$logLevels = self::getPlugin()->getSettings( 'log_levels' );
+
         try
         {
-            if ( $Plugin->getSettings('browser_logs', 'firephp' ) ) {
-                $Logger->pushHandler( new \Monolog\Handler\FirePHPHandler() );
-            }
-
-            if ( $Plugin->getSettings('browser_logs', 'chromephp' ) ) {
-                $Logger->pushHandler( new \Monolog\Handler\ChromePHPHandler() );
-            }
-
+            self::addChromePHPHandlerToLogger( $Logger );
+            self::addFirePHPHandlerToLogger( $Logger );
             self::addCubeHandlerToLogger( $Logger );
             self::addRedisHandlerToLogger( $Logger );
             self::addSyslogUDPHandlerToLogger( $Logger );
@@ -125,6 +153,32 @@ class Logger
      * Handler
      */
 
+    /**
+     * Add a ChromePHP handler to the logger, if settings are available
+     *
+     * @param \Monolog\Logger $Logger
+     */
+    static function addChromePHPHandlerToLogger(\Monolog\Logger $Logger)
+    {
+        $browser = self::getPlugin()->getSettings( 'browser_logs' );
+
+        if ( !$browser ) {
+            return;
+        }
+
+        $firephp     = self::getPlugin()->getSettings( 'browser_logs', 'chromephp' );
+        $userLogedIn = self::getPlugin()->getSettings( 'browser_logs', 'userLogedIn' );
+
+        if ( empty( $firephp ) || !$firephp ) {
+            return;
+        }
+
+        if ( $userLogedIn && !\QUI::getUserBySession()->getId() ) {
+            return;
+        }
+
+        $Logger->pushHandler( new \Monolog\Handler\ChromePHPHandler() );
+    }
 
     /**
      * Add a Cube handler to the logger, if settings are available
@@ -155,6 +209,33 @@ class Logger
         {
 
         }
+    }
+
+    /**
+     * Add a FirePHP handler to the logger, if settings are available
+     *
+     * @param \Monolog\Logger $Logger
+     */
+    static function addFirePHPHandlerToLogger(\Monolog\Logger $Logger)
+    {
+        $browser = self::getPlugin()->getSettings( 'browser_logs' );
+
+        if ( !$browser ) {
+            return;
+        }
+
+        $firephp     = self::getPlugin()->getSettings( 'browser_logs', 'firephp' );
+        $userLogedIn = self::getPlugin()->getSettings( 'browser_logs', 'userLogedIn' );
+
+        if ( empty( $firephp ) || !$firephp ) {
+            return;
+        }
+
+        if ( $userLogedIn && !\QUI::getUserBySession()->getId() ) {
+            return;
+        }
+
+        $Logger->pushHandler( new \Monolog\Handler\FirePHPHandler() );
     }
 
     /**

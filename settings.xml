@@ -106,6 +106,9 @@
 
                 <settings title="browser_logs_section" name="browser_logs_section">
                     <title>Browser Log Einstellungen</title>
+                    <input conf="browser_logs.userLogedIn" type="checkbox">
+                        <text>Browser Log nur für angemeldete Benutzer anzeigen.</text>
+                    </input>
                     <input conf="browser_logs.firephp" type="checkbox">
                         <text>FirePHP Logs einschalten</text>
                     </input>
