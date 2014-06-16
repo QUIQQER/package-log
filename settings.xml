@@ -3,6 +3,13 @@
 
     <config name="plugins/quiqqer/log">
 
+        <section name="log">
+            <conf name="logAllEvents">
+                <type><![CDATA[bool]]></type>
+                <default>0</default>
+            </conf>
+        </section>
+
         <section name="log_levels">
             <conf name="debug">
                 <type><![CDATA[bool]]></type>
@@ -74,6 +81,17 @@
                 <icon>icon-cogs</icon>
 
                 <settings title="log_levels_section" name="log_levels_section">
+                    <title>Allgemeine Einstellungen</title>
+                    <input conf="log.logAllEvents" type="checkbox">
+                        <text>Alle Events und Aktionen der Benutzer loggen</text>
+                        <description><![CDATA[
+                            Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
+                            Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funkion mit bedacht aktiviert werden.
+                            <br />
+                            Die Nachrichten werden als Info Nachrichten geloggt.
+                        ]]></description>
+                    </input>
+
                     <title>Log Level Einstellungen</title>
 
                     <input conf="log_levels.alert" type="checkbox">

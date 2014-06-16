@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events>
     <event on="onLogWrite" fire="\QUI\Log\Logger::write" />
+    <event on="onFireEvent" fire="\QUI\Log\Logger::logOnFireEvent" />
 </events>

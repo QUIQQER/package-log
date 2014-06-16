@@ -9,11 +9,17 @@ namespace QUI\Log;
 /**
  * QUIQQER logging service
  *
- * @author www.namerobot.com (Henning Leutz)
+ * @author www.pcsg.de (Henning Leutz)
  */
 
 class Logger
 {
+    /**
+     * log events?
+     * @var Bool|null
+     */
+    static $_logOnFireEvent = null;
+
     /**
      * Monolog Logger
      * @var \Monolog\Logger
@@ -34,6 +40,54 @@ class Logger
         'alert'     => true,
         'emergency' => true
     );
+
+    /**
+     * event on fire event
+     * log all events?
+     *
+     * @param Array $params
+     */
+    static function logOnFireEvent($params)
+    {
+        if ( is_null( self::$_logOnFireEvent ) )
+        {
+            self::$_logOnFireEvent = 0;
+
+            if ( self::getPlugin()->getSettings('log', 'logAllEvents' ) ) {
+                self::$_logOnFireEvent = 1;
+            }
+        }
+
+        if ( !self::$_logOnFireEvent ) {
+            return;
+        }
+
+        $arguments = func_get_args();
+
+        if ( isset( $arguments[ 0 ] ) &&
+             isset( $arguments[ 0 ]['event'] ) &&
+             $arguments[ 0 ]['event'] == 'userLoad'
+        )
+        {
+            return;
+        }
+
+
+        $Logger = self::getLogger();
+        $User   = \QUI::getUserBySession();
+
+        $context = array(
+            'username'  => $User->getName(),
+            'uid'       => $User->getId(),
+            'arguments' => $arguments
+        );
+
+        $numargs   = func_num_args();
+        $arguments = func_get_args();
+        $event     = $arguments[ 0 ]['event'];
+
+        $Logger->addInfo( 'event log '. $event, $context );
+    }
 
     /**
      * Write a message to the logger
@@ -116,9 +170,7 @@ class Logger
             return self::$Logger;
         }
 
-        $PluginManager = \QUI::getPlugins();
-        $Plugin        = $PluginManager->get( 'quiqqer/log' );
-        $Logger        = new \Monolog\Logger( 'QUI:Log' );
+        $Logger = new \Monolog\Logger( 'QUI:Log' );
 
         self::$Logger = $Logger;
 

@@ -1,9 +1,13 @@
-# QUIQQER Cron Package
+# QUIQQER Log Manager
 
 _German_
 
-Cron Package erweitert QUIQQER um eine Aufgaben Verwaltung.
-Crons sind sich wiederhohlende Aufgaben.
+Der QUIQQER Log Manager erweitert QUIQQER um einige Log Funktionalitäten.
 
-Jedes Plugin kann eigene Crons / Tasks zur Verfügung stellen
-mit dem Cron Manager können diese Tasks in intervallen ausgeführt werden.
++ Logs können über einen Logserver gesammelt werden
+    + ChromePHP
+    + FirePHP
+    + Cube Log Server
+    + Redis Log Server
+    + Syslog
++ Verschiedene Log Levels können geloggt werden
