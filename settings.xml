@@ -1,190 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings>
+<quiqqer>
+    <settings>
 
-    <config name="plugins/quiqqer/log">
+        <config name="plugins/quiqqer/log">
 
-        <section name="log">
-            <conf name="logAllEvents">
-                <type><![CDATA[bool]]></type>
-                <default>0</default>
-            </conf>
-        </section>
+            <section name="log">
+                <conf name="logAllEvents">
+                    <type><![CDATA[bool]]></type>
+                    <default>0</default>
+                </conf>
+            </section>
 
-        <section name="log_levels">
-            <conf name="debug">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="info">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="notice">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="warning">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="error">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="critical">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="alert">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="emergency">
-                <type><![CDATA[bool]]></type>
-            </conf>
-        </section>
+            <section name="log_levels">
+                <conf name="debug">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="info">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="notice">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="warning">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="error">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="critical">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="alert">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="emergency">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+            </section>
 
-        <section name="browser_logs">
-            <conf name="firephp">
-                <type><![CDATA[bool]]></type>
-            </conf>
-            <conf name="chromephp">
-                <type><![CDATA[bool]]></type>
-            </conf>
-        </section>
+            <section name="browser_logs">
+                <conf name="firephp">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+                <conf name="chromephp">
+                    <type><![CDATA[bool]]></type>
+                </conf>
+            </section>
 
-        <section name="cube">
-            <conf name="server">
-                <type><![CDATA[string]]></type>
-            </conf>
-        </section>
+            <section name="cube">
+                <conf name="server">
+                    <type><![CDATA[string]]></type>
+                </conf>
+            </section>
 
-        <section name="newRelic">
-            <conf name="appname">
-                <type><![CDATA[string]]></type>
-            </conf>
-        </section>
+            <section name="newRelic">
+                <conf name="appname">
+                    <type><![CDATA[string]]></type>
+                </conf>
+            </section>
 
-        <section name="syslogUdp">
-            <conf name="host">
-                <type><![CDATA[string]]></type>
-            </conf>
-            <conf name="port">
-                <type><![CDATA[integer]]></type>
-            </conf>
-        </section>
-    </config>
+            <section name="syslogUdp">
+                <conf name="host">
+                    <type><![CDATA[string]]></type>
+                </conf>
+                <conf name="port">
+                    <type><![CDATA[integer]]></type>
+                </conf>
+            </section>
+        </config>
 
-    <window>
-        <title>QUI Log Manager</title>
-        <params>
-            <icon>icon-cogs</icon>
-        </params>
-
-        <categories>
-
-            <category name="browser_logs">
-                <text>Allgemein Log Einstellungen</text>
+        <window>
+            <title>QUI Log Manager</title>
+            <params>
                 <icon>icon-cogs</icon>
+            </params>
 
-                <settings title="log_levels_section" name="log_levels_section">
-                    <title>Allgemeine Einstellungen</title>
-                    <input conf="log.logAllEvents" type="checkbox">
-                        <text>Alle Events und Aktionen der Benutzer loggen</text>
-                        <description><![CDATA[
-                            Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
-                            Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funkion mit bedacht aktiviert werden.
-                            <br />
-                            Die Nachrichten werden als Info Nachrichten geloggt.
-                        ]]></description>
-                    </input>
+            <categories>
 
-                    <title>Log Level Einstellungen</title>
+                <category name="browser_logs">
+                    <text>Allgemein Log Einstellungen</text>
+                    <icon>icon-cogs</icon>
 
-                    <input conf="log_levels.alert" type="checkbox">
-                        <text>Alert-Meldungen (Alarm) sollen geloggt werden</text>
-                    </input>
-                    <input conf="log_levels.critical" type="checkbox">
-                        <text>Critcal-Meldungen (kritisch) sollen geloggt werden</text>
-                    </input>
-                    <input conf="log_levels.debug" type="checkbox">
-                        <text>Debug-Meldungen sollen geloggt werden</text>
-                    </input>
+                    <settings title="log_levels_section" name="log_levels_section">
+                        <title>Allgemeine Einstellungen</title>
+                        <input conf="log.logAllEvents" type="checkbox">
+                            <text>Alle Events und Aktionen der Benutzer loggen</text>
+                            <description><![CDATA[
+                                Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
+                                Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funkion mit bedacht aktiviert werden.
+                                <br />
+                                Die Nachrichten werden als Info Nachrichten geloggt.
+                            ]]></description>
+                        </input>
 
-                    <input conf="log_levels.emergency" type="checkbox">
-                        <text>Emergency-Meldungen (Notfall) sollen geloggt werden</text>
-                    </input>
-                    <input conf="log_levels.error" type="checkbox">
-                        <text>Error-Meldungen (Fehler) sollen geloggt werden</text>
-                    </input>
-                    <input conf="log_levels.info" type="checkbox">
-                        <text>Info-Meldungen sollen geloggt werden</text>
-                    </input>
-                    <input conf="log_levels.notice" type="checkbox">
-                        <text>Notice-Meldungen (Hinweis) sollen geloggt werden</text>
-                    </input>
-                    <input conf="log_levels.warning" type="checkbox">
-                        <text>Warning-Meldungen (Warnung) sollen geloggt werden</text>
-                    </input>
+                        <title>Log Level Einstellungen</title>
 
-                </settings>
+                        <input conf="log_levels.alert" type="checkbox">
+                            <text>Alert-Meldungen (Alarm) sollen geloggt werden</text>
+                        </input>
+                        <input conf="log_levels.critical" type="checkbox">
+                            <text>Critcal-Meldungen (kritisch) sollen geloggt werden</text>
+                        </input>
+                        <input conf="log_levels.debug" type="checkbox">
+                            <text>Debug-Meldungen sollen geloggt werden</text>
+                        </input>
 
-                <settings title="browser_logs_section" name="browser_logs_section">
-                    <title>Browser Log Einstellungen</title>
-                    <input conf="browser_logs.userLogedIn" type="checkbox">
-                        <text>Browser Log nur für angemeldete Benutzer anzeigen.</text>
-                    </input>
-                    <input conf="browser_logs.firephp" type="checkbox">
-                        <text>FirePHP Logs einschalten</text>
-                    </input>
-                    <input conf="browser_logs.chromephp" type="checkbox">
-                        <text>ChromePHP Logs einschalten</text>
-                    </input>
-                </settings>
-            </category>
+                        <input conf="log_levels.emergency" type="checkbox">
+                            <text>Emergency-Meldungen (Notfall) sollen geloggt werden</text>
+                        </input>
+                        <input conf="log_levels.error" type="checkbox">
+                            <text>Error-Meldungen (Fehler) sollen geloggt werden</text>
+                        </input>
+                        <input conf="log_levels.info" type="checkbox">
+                            <text>Info-Meldungen sollen geloggt werden</text>
+                        </input>
+                        <input conf="log_levels.notice" type="checkbox">
+                            <text>Notice-Meldungen (Hinweis) sollen geloggt werden</text>
+                        </input>
+                        <input conf="log_levels.warning" type="checkbox">
+                            <text>Warning-Meldungen (Warnung) sollen geloggt werden</text>
+                        </input>
 
-            <category name="cube">
-                <text>Cube Server</text>
+                    </settings>
 
-                <settings title="cube_section" name="cube_section">
-                    <title>Cube Server Einstellungen</title>
-                    <input conf="cube.server" type="string">
-                        <text>Cube Server URL</text>
-                        <description><![CDATA[
-                            Mehr Informationen zu Cube Server finden Sie unter: https://github.com/square/cube
-                        ]]></description>
-                    </input>
-                </settings>
-            </category>
+                    <settings title="browser_logs_section" name="browser_logs_section">
+                        <title>Browser Log Einstellungen</title>
+                        <input conf="browser_logs.userLogedIn" type="checkbox">
+                            <text>Browser Log nur für angemeldete Benutzer anzeigen.</text>
+                        </input>
+                        <input conf="browser_logs.firephp" type="checkbox">
+                            <text>FirePHP Logs einschalten</text>
+                        </input>
+                        <input conf="browser_logs.chromephp" type="checkbox">
+                            <text>ChromePHP Logs einschalten</text>
+                        </input>
+                    </settings>
+                </category>
 
-            <category name="newrelic">
-                <text>NewRelic</text>
+                <category name="cube">
+                    <text>Cube Server</text>
 
-                <settings title="newrelic_section" name="newrelic_section">
-                    <title>NewRelic Einstellungen</title>
-                    <input conf="newRelic.appname" type="string">
-                        <text>NewRelic APP-Name</text>
-                        <description><![CDATA[
-                            Mehr Informationen zu New Relic finden Sie unter: https://www.newrelic.com
-                        ]]></description>
-                    </input>
-                </settings>
-            </category>
+                    <settings title="cube_section" name="cube_section">
+                        <title>Cube Server Einstellungen</title>
+                        <input conf="cube.server" type="string">
+                            <text>Cube Server URL</text>
+                            <description><![CDATA[
+                                Mehr Informationen zu Cube Server finden Sie unter: https://github.com/square/cube
+                            ]]></description>
+                        </input>
+                    </settings>
+                </category>
+
+                <category name="newrelic">
+                    <text>NewRelic</text>
+
+                    <settings title="newrelic_section" name="newrelic_section">
+                        <title>NewRelic Einstellungen</title>
+                        <input conf="newRelic.appname" type="string">
+                            <text>NewRelic APP-Name</text>
+                            <description><![CDATA[
+                                Mehr Informationen zu New Relic finden Sie unter: https://www.newrelic.com
+                            ]]></description>
+                        </input>
+                    </settings>
+                </category>
 
 
-            <category name="syslogudp">
-                <text>Syslog UDP Server</text>
+                <category name="syslogudp">
+                    <text>Syslog UDP Server</text>
 
-                <settings title="syslogudp_host" name="syslogudp_host">
-                    <title>Syslog UDP Server Einstellungen</title>
-                    <input conf="syslogUdp.host" type="string">
-                        <text>UDP Syslog Host</text>
-                        <description><![CDATA[
-                            Es kann eine IP-Adresse oder ein Server DNS angegeben werden.
-                            z.B.: 192.168.1.200 oder my.server.com
-                        ]]></description>
-                    </input>
-                    <input conf="syslogUdp.port" type="string">
-                        <text>UDP Syslog Port</text>
-                    </input>
-                </settings>
+                    <settings title="syslogudp_host" name="syslogudp_host">
+                        <title>Syslog UDP Server Einstellungen</title>
+                        <input conf="syslogUdp.host" type="string">
+                            <text>UDP Syslog Host</text>
+                            <description><![CDATA[
+                                Es kann eine IP-Adresse oder ein Server DNS angegeben werden.
+                                z.B.: 192.168.1.200 oder my.server.com
+                            ]]></description>
+                        </input>
+                        <input conf="syslogUdp.port" type="string">
+                            <text>UDP Syslog Port</text>
+                        </input>
+                    </settings>
 
-            </category>
+                </category>
 
-        </categories>
-    </window>
+            </categories>
+        </window>
 
-</settings>
+    </settings>
+</quiqqer>
