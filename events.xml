@@ -2,4 +2,5 @@
 <events>
     <event on="onLogWrite" fire="\QUI\Log\Logger::write" />
     <event on="onFireEvent" fire="\QUI\Log\Logger::logOnFireEvent" />
+    <event on="onAdminLoad" fire="\QUI\Log\Admin::onAdminLoad" />
 </events>
