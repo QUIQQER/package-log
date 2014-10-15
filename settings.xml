@@ -45,6 +45,9 @@
                 <conf name="chromephp">
                     <type><![CDATA[bool]]></type>
                 </conf>
+                <conf name="debug">
+                    <type><![CDATA[bool]]></type>
+                </conf>
             </section>
 
             <section name="cube">
@@ -133,6 +136,9 @@
                         </input>
                         <input conf="browser_logs.chromephp" type="checkbox">
                             <text>ChromePHP Logs einschalten</text>
+                        </input>
+                        <input conf="browser_logs.debug" type="checkbox">
+                            <text>Browser Debugin einschalten</text>
                         </input>
                     </settings>
                 </category>
