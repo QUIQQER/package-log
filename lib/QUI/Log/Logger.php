@@ -6,6 +6,10 @@
 
 namespace QUI\Log;
 
+use QUI;
+use QUI\System\Log;
+use Monolog;
+
 /**
  * QUIQQER logging service
  *
@@ -82,7 +86,6 @@ class Logger
             'arguments' => $arguments
         );
 
-        $numargs   = func_num_args();
         $arguments = func_get_args();
         $event     = $arguments[ 0 ]['event'];
 
@@ -94,9 +97,9 @@ class Logger
      * event: onLogWrite
      *
      * @param String $message - Log message
-     * @param Integer $loglevel - \QUI\System\Log::LEVEL_*
+     * @param Integer $loglevel - Log::LEVEL_*
      */
-    static function write($message, $loglevel=\QUI\System\Log::LEVEL_INFO)
+    static function write($message, $loglevel=Log::LEVEL_INFO)
     {
         $Logger = self::getLogger();
         $User   = \QUI::getUserBySession();
@@ -108,49 +111,49 @@ class Logger
 
         switch ( $loglevel )
         {
-            case \QUI\System\Log::LEVEL_DEBUG:
+            case Log::LEVEL_DEBUG:
                 if ( self::$logLevels['debug'] ) {
                     $Logger->addDebug( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_INFO:
+            case Log::LEVEL_INFO:
                 if ( self::$logLevels['info'] ) {
                     $Logger->addInfo( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_NOTICE:
+            case Log::LEVEL_NOTICE:
                 if ( self::$logLevels['notice'] ) {
                     $Logger->addNotice( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_WARNING:
+            case Log::LEVEL_WARNING:
                 if ( self::$logLevels['warning'] ) {
                     $Logger->addWarning( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_ERROR:
+            case Log::LEVEL_ERROR:
                 if ( self::$logLevels['error'] ) {
                     $Logger->addError( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_CRITICAL:
+            case Log::LEVEL_CRITICAL:
                 if ( self::$logLevels['critical'] ) {
                     $Logger->addCritical( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_ALERT:
+            case Log::LEVEL_ALERT:
                 if ( self::$logLevels['alert'] ) {
                     $Logger->addAlert( $message, $context );
                 }
             break;
 
-            case \QUI\System\Log::LEVEL_EMERGENCY:
+            case Log::LEVEL_EMERGENCY:
                 if ( self::$logLevels['emergency'] ) {
                     $Logger->addEmergency( $message, $context );
                 }
@@ -170,7 +173,7 @@ class Logger
             return self::$Logger;
         }
 
-        $Logger = new \Monolog\Logger( 'QUI:Log' );
+        $Logger = new Monolog\Logger( 'QUI:Log' );
 
         self::$Logger = $Logger;
 
@@ -185,7 +188,7 @@ class Logger
             self::addRedisHandlerToLogger( $Logger );
             self::addSyslogUDPHandlerToLogger( $Logger );
 
-        } catch ( \QUI\Exception $Exception )
+        } catch ( QUI\Exception $Exception )
         {
 
         }
@@ -198,7 +201,7 @@ class Logger
      */
     static function getPlugin()
     {
-        return \QUI::getPlugins()->get( 'quiqqer/log' );
+        return \QUI::getPluginManager()->get( 'quiqqer/log' );
     }
 
     /**
@@ -210,7 +213,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addChromePHPHandlerToLogger(\Monolog\Logger $Logger)
+    static function addChromePHPHandlerToLogger(Monolog\Logger $Logger)
     {
         $browser = self::getPlugin()->getSettings( 'browser_logs' );
 
@@ -225,11 +228,11 @@ class Logger
             return;
         }
 
-        if ( $userLogedIn && !\QUI::getUserBySession()->getId() ) {
+        if ( $userLogedIn && !QUI::getUserBySession()->getId() ) {
             return;
         }
 
-        $Logger->pushHandler( new \Monolog\Handler\ChromePHPHandler() );
+        $Logger->pushHandler( new Monolog\Handler\ChromePHPHandler() );
     }
 
     /**
@@ -237,7 +240,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addCubeHandlerToLogger(\Monolog\Logger $Logger)
+    static function addCubeHandlerToLogger(Monolog\Logger $Logger)
     {
         $cube = self::getPlugin()->getSettings( 'cube' );
 
@@ -253,7 +256,7 @@ class Logger
 
         try
         {
-            $Handler = new \Monolog\Handler\CubeHandler( $server );
+            $Handler = new Monolog\Handler\CubeHandler( $server );
 
             $Logger->pushHandler( $Handler );
 
@@ -268,7 +271,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addFirePHPHandlerToLogger(\Monolog\Logger $Logger)
+    static function addFirePHPHandlerToLogger(Monolog\Logger $Logger)
     {
         $browser = self::getPlugin()->getSettings( 'browser_logs' );
 
@@ -287,7 +290,7 @@ class Logger
             return;
         }
 
-        $Logger->pushHandler( new \Monolog\Handler\FirePHPHandler() );
+        $Logger->pushHandler( new Monolog\Handler\FirePHPHandler() );
     }
 
     /**
@@ -295,7 +298,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addNewRelicToLogger(\Monolog\Logger $Logger)
+    static function addNewRelicToLogger(Monolog\Logger $Logger)
     {
         $newRelic = self::getPlugin()->getSettings( 'newRelic' );
 
@@ -311,8 +314,8 @@ class Logger
 
         try
         {
-            $Handler = new \Monolog\Handler\NewRelicHandler(
-                \QUI\System\Log::LEVEL_INFO,
+            $Handler = new Monolog\Handler\NewRelicHandler(
+                Log::LEVEL_INFO,
                 true,
                 $appname
             );
@@ -331,7 +334,7 @@ class Logger
      * @needle predis/predis
      * @param \Monolog\Logger $Logger
      */
-    static function addRedisHandlerToLogger(\Monolog\Logger $Logger)
+    static function addRedisHandlerToLogger(Monolog\Logger $Logger)
     {
         $redis = self::getPlugin()->getSettings( 'redis' );
 
@@ -349,7 +352,7 @@ class Logger
         {
             $Client = new \Predis\Client( $server );
 
-            $Handler = new \Monolog\Handler\RedisHandler(
+            $Handler = new Monolog\Handler\RedisHandler(
                 $Client,
                 $server
             );
@@ -367,7 +370,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addSyslogUDPHandlerToLogger(\Monolog\Logger $Logger)
+    static function addSyslogUDPHandlerToLogger(Monolog\Logger $Logger)
     {
         $syslog = self::getPlugin()->getSettings( 'syslogUdp' );
 
@@ -385,7 +388,7 @@ class Logger
 
         try
         {
-            $Handler = new \Monolog\Handler\SyslogUdpHandler( $host, $port );
+            $Handler = new Monolog\Handler\SyslogUdpHandler( $host, $port );
 
             $Logger->pushHandler( $Handler );
 
