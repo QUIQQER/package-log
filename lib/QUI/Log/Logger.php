@@ -92,6 +92,81 @@ class Logger
         $Logger->addInfo( 'event log '. $event, $context );
     }
 
+
+    /**
+     * event : on header loaded -> set error reporting
+     */
+    static function onHeaderLoaded()
+    {
+        if ( self::$logLevels['debug'] || DEVELOPMENT == 1 )
+        {
+            error_reporting( E_ALL );
+
+            if ( DEVELOPMENT == 1 ) {
+                error_reporting( E_ALL ^ E_DEPRECATED );
+            }
+
+            return;
+        }
+
+        $errorlevel = error_reporting();
+        $errorlevel = $errorlevel & E_ERROR;
+
+        if ( self::$logLevels['warning'] ) {
+            $errorlevel = $errorlevel & E_WARNING;
+        }
+
+        if ( self::$logLevels['error'] ||
+             self::$logLevels['critical'] ||
+             self::$logLevels['alert'] )
+        {
+            $errorlevel = $errorlevel & E_PARSE;
+        }
+
+        if ( self::$logLevels['notice'] ) {
+            $errorlevel = $errorlevel & E_NOTICE;
+        }
+
+        if ( self::$logLevels['error'] ) {
+            $errorlevel = $errorlevel & E_CORE_ERROR;
+        }
+
+        if ( self::$logLevels['warning'] ) {
+            $errorlevel = $errorlevel & E_CORE_WARNING;
+        }
+
+        if ( self::$logLevels['error'] ) {
+            $errorlevel = $errorlevel & E_COMPILE_ERROR;
+        }
+
+        if ( self::$logLevels['warning'] ) {
+            $errorlevel = $errorlevel & E_COMPILE_WARNING;
+        }
+
+        if ( self::$logLevels['error'] ) {
+            $errorlevel = $errorlevel & E_USER_ERROR;
+        }
+
+        if ( self::$logLevels['warning'] ) {
+            $errorlevel = $errorlevel & E_USER_WARNING;
+        }
+
+        if ( self::$logLevels['notice'] ) {
+            $errorlevel = $errorlevel & E_USER_NOTICE;
+        }
+
+        if ( self::$logLevels['info'] ) {
+            $errorlevel = $errorlevel & E_STRICT;
+        }
+
+        if ( self::$logLevels['error'] ) {
+            $errorlevel = $errorlevel & E_RECOVERABLE_ERROR;
+        }
+
+
+        error_reporting( $errorlevel );
+    }
+
     /**
      * Write a message to the logger
      * event: onLogWrite
