@@ -9,6 +9,7 @@ namespace QUI\Log;
 /**
  * QUIQQER logging service
  *
+ * @package quiqqer/log
  * @author www.pcsg.de (Henning Leutz)
  */
 

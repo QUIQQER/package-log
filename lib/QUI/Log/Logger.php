@@ -13,6 +13,7 @@ use Monolog;
 /**
  * QUIQQER logging service
  *
+ * @package quiqqer/log
  * @author www.pcsg.de (Henning Leutz)
  */
 

@@ -7,9 +7,7 @@
  */
 function package_quiqqer_log_ajax_get($page, $limit, $search='', $sortOn, $sortBy)
 {
-    $dir   = VAR_DIR .'log/';
-    $list  = array();
-    $files = \QUI\Utils\System\File::readDir( $dir );
+    $LogManager = new \QUI\Log\Manager();
 
     if ( !isset( $sortOn ) || empty( $sortOn ) ) {
         $sortOn = 'mdate';
@@ -19,41 +17,10 @@ function package_quiqqer_log_ajax_get($page, $limit, $search='', $sortOn, $sortB
         $sortBy = 'DESC';
     }
 
+    $LogManager->setAttribute( 'sortOn', $sortOn );
+    $LogManager->setAttribute( 'sortBy', $sortBy );
 
-    rsort( $files );
-
-    foreach ( $files as $file )
-    {
-        if ( $search && strpos( $file, $search ) === false ) {
-            continue;
-        }
-
-        $mtime = filemtime( $dir . $file );
-
-        $list[] = array(
-            'file'  => $file,
-            'mtime' => $mtime,
-            'mdate' => date( 'Y-m-d H:i:s', $mtime )
-        );
-    }
-
-    // sort
-    if ( $sortOn == 'mdate' )
-    {
-        usort($list, function ($a, $b) {
-            return ($a['mtime'] < $b['mtime']) ? -1 : 1;
-        });
-
-    } else if ( $sortOn == 'file' )
-    {
-        usort($list, function ($a, $b) {
-            return ($a['file'] < $b['file']) ? -1 : 1;
-        });
-    }
-
-    if ( $sortBy == 'DESC' ) {
-        rsort( $list );
-    }
+    $list = $LogManager->search();
 
     return \QUI\Utils\Grid::getResult( $list, $page, $limit );
 }

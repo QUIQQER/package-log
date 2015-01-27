@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<crons>
+    <cron exec="\QUI\Log\Cron::sendLogsFromLastDay">
+        <title>Logs von gestern an E-Mail senden</title>
+        <description>Täglich die neusten Logs an eine E-Mail Adresse senden</description>
+        <params>
+            <param name="email" type="email" />
+        </params>
+    </cron>
+</crons>
