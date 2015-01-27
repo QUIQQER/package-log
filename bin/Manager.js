@@ -24,7 +24,7 @@ define('package/quiqqer/log/bin/Manager', [
     var lg = 'quiqqer/log';
 
     /**
-     * @class controls/logs/Panel
+     * @class package/quiqqer/log/bin/Manager
      */
     return new Class({
 
@@ -86,7 +86,10 @@ define('package/quiqqer/log/bin/Manager', [
 
             this.Loader.show();
 
-            Ajax.get('ajax_system_logs_get', function(result)
+            var sortOn = this.$Grid.options.sortOn,
+                sortBy = this.$Grid.options.sortBy;
+
+            Ajax.get('package_quiqqer_log_ajax_get', function(result)
             {
                 // open buttons
                 for ( var i = 0, len = result.data.length; i < len; i++ )
@@ -112,9 +115,12 @@ define('package/quiqqer/log/bin/Manager', [
                 self.$Grid.setData( result );
                 self.Loader.hide();
             }, {
+                'package' : 'quiqqer/log',
                 page   : this.getAttribute( 'page' ),
                 limit  : this.getAttribute( 'limit' ),
-                search : this.getAttribute( 'search' )
+                search : this.getAttribute( 'search' ),
+                sortOn : sortOn,
+                sortBy : sortBy
             });
         },
 
@@ -168,12 +174,13 @@ define('package/quiqqer/log/bin/Manager', [
          */
         deleteLog : function(file, callback)
         {
-            Ajax.get('ajax_system_logs_delete', function()
+            Ajax.get('package_quiqqer_log_ajax_delete', function()
             {
                 if ( typeof callback !== 'undefined' ) {
                     callback();
                 }
             }, {
+                'package' : 'quiqqer/log',
                 file : file
             });
         },
@@ -222,23 +229,18 @@ define('package/quiqqer/log/bin/Manager', [
 
             this.Loader.show();
 
-            Ajax.get('ajax_system_logs_file', function(result)
+            Ajax.get('package_quiqqer_log_ajax_file', function(result)
             {
-                require(['classes/utils/SyntaxHighlighter'], function(Highlighter)
-                {
-                    File.set(
-                        'html',
-                        '<pre class="box language-bash" style="margin: 0;">'+ result +'</pre>'
-                    );
+                File.set(
+                    'html',
+                    '<pre class="box language-bash" style="margin: 0;">'+ result +'</pre>'
+                );
 
-                    new Highlighter().highlight(
-                        File.getElement( 'pre' )
-                    );
+                Control.Loader.hide();
+                Control.refresh();
 
-                    Control.Loader.hide();
-                    Control.refresh();
-                });
             }, {
+                'package' : 'quiqqer/log',
                 file : this.$file
             });
         },
@@ -269,14 +271,16 @@ define('package/quiqqer/log/bin/Manager', [
                     dataType  : 'string',
                     width     : 200
                 }, {
-                    header    : Locale.get( 'quiqqer/system', 'date' ),
+                    header    : Locale.get( 'quiqqer/system', 'e_date' ),
                     dataIndex : 'mdate',
                     dataType  : 'date',
                     width     : 200
                 }],
-
+                sortBy     : 'DESC',
+                sortOn     : 'mdate',
                 pagination : true,
-                onrefresh  : this.$gridRefresh
+                onrefresh  : this.$gridRefresh,
+                serverSort : true
             });
 
             this.$Grid.addEvents({
