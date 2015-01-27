@@ -3,5 +3,6 @@
     <event on="onLogWrite" fire="\QUI\Log\Logger::write" />
     <event on="onFireEvent" fire="\QUI\Log\Logger::logOnFireEvent" />
     <event on="onAdminLoad" fire="\QUI\Log\Admin::onAdminLoad" />
+    <event on="onAdminLoadFooter" fire="\QUI\Log\Admin::onAdminLoadFooter" />
     <event on="onHeaderLoaded" fire="\QUI\Log\Logger::onHeaderLoaded" />
 </events>

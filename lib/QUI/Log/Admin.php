@@ -36,4 +36,35 @@ class Admin
             ';
         }
     }
+
+    /**
+     * event : on admin load footer
+     */
+    static function onAdminLoadFooter()
+    {
+        $Package = \QUI::getPackageManager()->getInstalledPackage( 'quiqqer/log' );
+
+        if ( $Package->getConfig()->get( 'log', 'logAdminJsErrors' ) )
+        {
+            echo '<script type="text/javascript">
+                  /* <![CDATA[ */
+
+                    require(["qui/QUI", "Ajax"], function(QUI, Ajax)
+                    {
+                        QUI.addEvent("onError", function(msg, url, linenumber)
+                        {
+                            Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
+                                "package" : "quiqqer/log",
+                                msg        : msg,
+                                url        : url,
+                                linenumber : linenumber
+                            });
+                        });
+                    });
+
+                  /* ]]> */
+                  </script>
+            ';
+        }
+    }
 }

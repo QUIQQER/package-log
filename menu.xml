@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <item parent="/extras/"
+          name="log-manager"
+          icon="icon-terminal"
+          require="package/quiqqer/log/bin/Manager"
+    >
+        Logverwaltung
+    </item>
+</menu>

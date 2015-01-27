@@ -9,6 +9,10 @@
                     <type><![CDATA[bool]]></type>
                     <default>0</default>
                 </conf>
+                <conf name="logAdminJsErrors">
+                    <type><![CDATA[bool]]></type>
+                    <default>0</default>
+                </conf>
             </section>
 
             <section name="log_levels">
@@ -75,7 +79,7 @@
         <window>
             <title>QUI Log Manager</title>
             <params>
-                <icon>icon-cogs</icon>
+                <icon>icon-time</icon>
             </params>
 
             <categories>
@@ -84,7 +88,7 @@
                     <text>Allgemein Log Einstellungen</text>
                     <icon>icon-cogs</icon>
 
-                    <settings title="log_levels_section" name="log_levels_section">
+                    <settings title="log_section" name="log_section">
                         <title>Allgemeine Einstellungen</title>
                         <input conf="log.logAllEvents" type="checkbox">
                             <text>Alle Events und Aktionen der Benutzer loggen</text>
@@ -96,6 +100,15 @@
                             ]]></description>
                         </input>
 
+                        <input conf="log.logAdminJsErrors" type="checkbox">
+                            <text>JavaScript Fehler in der Administration loggen</text>
+                            <description><![CDATA[
+                                Falls JavaScript Fehler in der Administration erscheinen, werden diese an den Server gesendet und in eine seperate JavaScript error log gespeichert.
+                            ]]></description>
+                        </input>
+                    </settings>
+
+                    <settings title="log_levels_section" name="log_levels_section">
                         <title>Log Level Einstellungen</title>
 
                         <input conf="log_levels.alert" type="checkbox">
