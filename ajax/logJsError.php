@@ -18,6 +18,5 @@ function package_quiqqer_log_ajax_logJsError($msg, $url, $linenumber)
 
 \QUI::$Ajax->register(
     'package_quiqqer_log_ajax_logJsError',
-    array( 'msg', 'url', 'linenumber' ),
-    'Permission::checkAdminUser'
+    array( 'msg', 'url', 'linenumber' )
 );
