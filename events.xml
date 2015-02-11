@@ -5,4 +5,5 @@
     <event on="onAdminLoad" fire="\QUI\Log\Admin::onAdminLoad" />
     <event on="onAdminLoadFooter" fire="\QUI\Log\Admin::onAdminLoadFooter" />
     <event on="onHeaderLoaded" fire="\QUI\Log\Logger::onHeaderLoaded" />
+    <event on="onTemplateGetHeader" fire="\QUI\Log\Events::onTemplateGetHeader" />
 </events>

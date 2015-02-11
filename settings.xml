@@ -13,6 +13,10 @@
                     <type><![CDATA[bool]]></type>
                     <default>0</default>
                 </conf>
+                <conf name="logFrontendJsErrors">
+                    <type><![CDATA[bool]]></type>
+                    <default>0</default>
+                </conf>
             </section>
 
             <section name="log_levels">
@@ -104,6 +108,13 @@
                             <text>JavaScript Fehler in der Administration loggen</text>
                             <description><![CDATA[
                                 Falls JavaScript Fehler in der Administration erscheinen, werden diese an den Server gesendet und in eine seperate JavaScript error log gespeichert.
+                            ]]></description>
+                        </input>
+
+                        <input conf="log.logFrontendJsErrors" type="checkbox">
+                            <text>JavaScript Fehler im Frontend loggen</text>
+                            <description><![CDATA[
+                                Falls JavaScript Fehler im Frontend erscheinen, werden diese an den Server gesendet und in eine seperate JavaScript error log gespeichert.
                             ]]></description>
                         </input>
                     </settings>
