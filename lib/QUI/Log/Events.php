@@ -35,16 +35,19 @@ class Events
               /* <![CDATA[ */
                 if ( typeof require !== "undefined" )
                 {
-                    require(["qui/QUI", "Ajax"], function(QUI, Ajax)
+                    require(["qui/QUI"], function(QUI)
                     {
                         QUI.addEvent("onError", function(msg, url, linenumber)
                         {
-                            Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
-                                "package" : "quiqqer/log",
-                                msg        : msg,
-                                url        : url,
-                                linenumber : linenumber
-                            });
+                            require(["Ajax"], function(Ajax)
+                            {
+                                Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
+                                    "package" : "quiqqer/log",
+                                    errMsg        : msg,
+                                    errUrl        : url,
+                                    errLinenumber : linenumber
+                                });
+                            })
                         });
                     });
                 }
