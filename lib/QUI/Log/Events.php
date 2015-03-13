@@ -39,6 +39,12 @@ class Events
                     {
                         QUI.addEvent("onError", function(msg, url, linenumber)
                         {
+                            console.error(
+                                "Message "+ msg +"\n"+
+                                "URL "+ url +"\n"+
+                                "Linenumber "+ linenumber
+                            );
+
                             require(["Ajax"], function(Ajax)
                             {
                                 Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
