@@ -47,6 +47,10 @@ class Events
 
                             require(["Ajax"], function(Ajax)
                             {
+                                if ( !Ajax ) {
+                                    return;
+                                }
+
                                 Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
                                     "package" : "quiqqer/log",
                                     errMsg        : msg,

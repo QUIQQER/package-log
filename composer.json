@@ -1,6 +1,6 @@
 {
     "name" : "quiqqer/log",
-    "type" : "quiqqer-library",
+    "type" : "quiqqer-module",
     "description" : "Provided extra log functionality.",
     "version" : "dev-master",
     "license" : "GPL-2.0+",
