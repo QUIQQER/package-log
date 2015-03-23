@@ -7,7 +7,7 @@
  * @param String $errUrl
  * @param Integer|String $errLinenumber
  */
-function package_quiqqer_log_ajax_logJsError($errMsg, $errUrl, $errLinenumber)
+function package_quiqqer_log_ajax_logJsError($errMsg, $errUrl, $errLinenumber, $browser)
 {
     $User = QUI::getUserBySession();
 
@@ -16,6 +16,7 @@ function package_quiqqer_log_ajax_logJsError($errMsg, $errUrl, $errLinenumber)
     $error .= "File: {$errUrl}\n";
     $error .= "Line Number: {$errLinenumber}\n";
     $error .= "Error: {$errMsg}\n";
+    $error .= "Browser: {$browser}\n";
     $error .= "\n";
     $error .= "Username: {$User->getName()}\n";
     $error .= "\n================================\n";
@@ -25,5 +26,5 @@ function package_quiqqer_log_ajax_logJsError($errMsg, $errUrl, $errLinenumber)
 
 \QUI::$Ajax->register(
     'package_quiqqer_log_ajax_logJsError',
-    array( 'errMsg', 'errUrl', 'errLinenumber' )
+    array( 'errMsg', 'errUrl', 'errLinenumber', 'browser' )
 );

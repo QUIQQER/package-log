@@ -77,7 +77,8 @@ class Admin
                                     "package" : "quiqqer/log",
                                     errMsg        : msg,
                                     errUrl        : url,
-                                    errLinenumber : linenumber
+                                    errLinenumber : linenumber,
+                                    browser       : navigator.userAgent.toString()
                                 });
                             })
                         });
