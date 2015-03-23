@@ -47,7 +47,7 @@ class Events
 
                             require(["Ajax"], function(Ajax)
                             {
-                                if ( typeof Ajax !== "undefined" ) {
+                                if ( typeof Ajax === "undefined" ) {
                                     return;
                                 }
 
