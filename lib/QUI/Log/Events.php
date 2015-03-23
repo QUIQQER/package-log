@@ -51,6 +51,13 @@ class Events
                                     return;
                                 }
 
+                                if ( msg === '' &&
+                                     url === '' &&
+                                     linenumber === '' )
+                                {
+                                    return;
+                                }
+
                                 Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
                                     "package" : "quiqqer/log",
                                     errMsg        : msg,

@@ -54,12 +54,32 @@ class Admin
                     {
                         QUI.addEvent("onError", function(msg, url, linenumber)
                         {
-                            Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
-                                "package" : "quiqqer/log",
-                                msg        : msg,
-                                url        : url,
-                                linenumber : linenumber
-                            });
+                            console.error(
+                                "Message "+ msg +"\n"+
+                                "URL "+ url +"\n"+
+                                "Linenumber "+ linenumber
+                            );
+
+                            require(["Ajax"], function(Ajax)
+                            {
+                                if ( typeof Ajax === "undefined" ) {
+                                    return;
+                                }
+
+                                if ( msg === "" &&
+                                     url === "" &&
+                                     linenumber === "" )
+                                {
+                                    return;
+                                }
+
+                                Ajax.post("package_quiqqer_log_ajax_logJsError", false, {
+                                    "package" : "quiqqer/log",
+                                    errMsg        : msg,
+                                    errUrl        : url,
+                                    errLinenumber : linenumber
+                                });
+                            })
                         });
                     });
 
