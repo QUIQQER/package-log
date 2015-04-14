@@ -81,7 +81,7 @@
         </config>
 
         <window>
-            <title>QUI Log Manager</title>
+            <title>Log-Einstellungen</title>
             <params>
                 <icon>icon-time</icon>
             </params>
