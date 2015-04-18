@@ -13,16 +13,16 @@ use QUI\Utils\System\File;
  * Class Manager - log manager
  *
  * @package quiqqer/log
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  */
-
 class Manager extends QUI\QDOM
 {
     /**
      * constructor
+     *
      * @param array $params
      */
-    public function __construct($params=array())
+    public function __construct($params = array())
     {
         // default
         $this->setAttributes(array(
@@ -30,7 +30,7 @@ class Manager extends QUI\QDOM
             'sortNy' => 'DESC'
         ));
 
-        $this->setAttributes( $params );
+        $this->setAttributes($params);
     }
 
     /**
@@ -38,63 +38,63 @@ class Manager extends QUI\QDOM
      * If search string is empty, all logs are returned
      *
      * @param string $search
+     *
      * @return array
      */
-    public function search($search='')
+    public function search($search = '')
     {
-        $dir   = VAR_DIR .'log/';
-        $list  = array();
-        $files = File::readDir( $dir );
+        $dir = VAR_DIR.'log/';
+        $list = array();
+        $files = File::readDir($dir);
 
-        $sortOn = $this->getAttribute( 'sortOn' );
-        $sortBy = $this->getAttribute( 'sortBy' );
+        $sortOn = $this->getAttribute('sortOn');
+        $sortBy = $this->getAttribute('sortBy');
 
-        if ( empty( $sortOn ) ) {
+        if (empty($sortOn)) {
             $sortOn = 'mdate';
         }
 
-        if ( empty( $sortBy ) ) {
+        if (empty($sortBy)) {
             $sortBy = 'DESC';
         }
 
-        if ( empty( $search ) ) {
+        if (empty($search)) {
             $search = false;
         }
 
 
-        rsort( $files );
+        rsort($files);
 
-        foreach ( $files as $file )
-        {
-            if ( $search && strpos( $file, $search ) === false ) {
+        foreach ($files as $file) {
+            if ($search && strpos($file, $search) === false) {
                 continue;
             }
 
-            $mtime = filemtime( $dir . $file );
+            $mtime = filemtime($dir.$file);
 
             $list[] = array(
                 'file'  => $file,
                 'mtime' => $mtime,
-                'mdate' => date( 'Y-m-d H:i:s', $mtime )
+                'mdate' => date('Y-m-d H:i:s', $mtime)
             );
         }
 
         // sort
-        if ( $sortOn == 'mdate' )
-        {
+        if ($sortOn == 'mdate') {
             usort($list, function ($a, $b) {
                 return ($a['mtime'] < $b['mtime']) ? -1 : 1;
             });
 
-        } else if ( $sortOn == 'file' )
-        {
-            usort($list, function ($a, $b) {
-                return ($a['file'] < $b['file']) ? -1 : 1;
-            });
+        } else {
+            if ($sortOn == 'file') {
+                usort($list, function ($a, $b) {
+                    return ($a['file'] < $b['file']) ? -1 : 1;
+                });
+            }
         }
 
-        if ( $sortBy == 'DESC' ) {
-            rsort( $list );
+        if ($sortBy == 'DESC') {
+            rsort($list);
         }
 
         return $list;

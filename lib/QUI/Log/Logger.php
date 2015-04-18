@@ -14,37 +14,40 @@ use Monolog;
  * QUIQQER logging service
  *
  * @package quiqqer/log
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  */
-
 class Logger
 {
     /**
      * log events?
+     *
      * @var Bool|null
      */
     static $_logOnFireEvent = null;
 
     /**
      * Monolog Logger
+     *
      * @var \Monolog\Logger
      */
     static $Logger = null;
 
     /**
      * which levels should be loged
+     *
      * @var Array
      */
-    static $logLevels = array(
-        'debug'     => true,
-        'info'      => true,
-        'notice'    => true,
-        'warning'   => true,
-        'error'     => true,
-        'critical'  => true,
-        'alert'     => true,
-        'emergency' => true
-    );
+    static $logLevels
+        = array(
+            'debug'     => true,
+            'info'      => true,
+            'notice'    => true,
+            'warning'   => true,
+            'error'     => true,
+            'critical'  => true,
+            'alert'     => true,
+            'emergency' => true
+        );
 
     /**
      * event on fire event
@@ -54,32 +57,30 @@ class Logger
      */
     static function logOnFireEvent($params)
     {
-        if ( is_null( self::$_logOnFireEvent ) )
-        {
+        if (is_null(self::$_logOnFireEvent)) {
             self::$_logOnFireEvent = 0;
 
-            if ( self::getPlugin()->getSettings('log', 'logAllEvents' ) ) {
+            if (self::getPlugin()->getSettings('log', 'logAllEvents')) {
                 self::$_logOnFireEvent = 1;
             }
         }
 
-        if ( !self::$_logOnFireEvent ) {
+        if (!self::$_logOnFireEvent) {
             return;
         }
 
         $arguments = func_get_args();
 
-        if ( isset( $arguments[ 0 ] ) &&
-             isset( $arguments[ 0 ]['event'] ) &&
-             $arguments[ 0 ]['event'] == 'userLoad'
-        )
-        {
+        if (isset($arguments[0])
+            && isset($arguments[0]['event'])
+            && $arguments[0]['event'] == 'userLoad'
+        ) {
             return;
         }
 
 
         $Logger = self::getLogger();
-        $User   = \QUI::getUserBySession();
+        $User = \QUI::getUserBySession();
 
         $context = array(
             'username'  => $User->getName(),
@@ -88,9 +89,9 @@ class Logger
         );
 
         $arguments = func_get_args();
-        $event     = $arguments[ 0 ]['event'];
+        $event = $arguments[0]['event'];
 
-        $Logger->addInfo( 'event log '. $event, $context );
+        $Logger->addInfo('event log '.$event, $context);
     }
 
 
@@ -99,12 +100,11 @@ class Logger
      */
     static function onHeaderLoaded()
     {
-        if ( self::$logLevels['debug'] || DEVELOPMENT == 1 )
-        {
-            error_reporting( E_ALL );
+        if (self::$logLevels['debug'] || DEVELOPMENT == 1) {
+            error_reporting(E_ALL);
 
-            if ( DEVELOPMENT == 1 ) {
-                error_reporting( E_ALL ^ E_DEPRECATED );
+            if (DEVELOPMENT == 1) {
+                error_reporting(E_ALL ^ E_DEPRECATED);
             }
 
             return;
@@ -113,127 +113,126 @@ class Logger
         $errorlevel = error_reporting();
         $errorlevel = $errorlevel & E_ERROR;
 
-        if ( self::$logLevels['warning'] ) {
+        if (self::$logLevels['warning']) {
             $errorlevel = $errorlevel & E_WARNING;
         }
 
-        if ( self::$logLevels['error'] ||
-             self::$logLevels['critical'] ||
-             self::$logLevels['alert'] )
-        {
+        if (self::$logLevels['error']
+            || self::$logLevels['critical']
+            || self::$logLevels['alert']
+        ) {
             $errorlevel = $errorlevel & E_PARSE;
         }
 
-        if ( self::$logLevels['notice'] ) {
+        if (self::$logLevels['notice']) {
             $errorlevel = $errorlevel & E_NOTICE;
         }
 
-        if ( self::$logLevels['error'] ) {
+        if (self::$logLevels['error']) {
             $errorlevel = $errorlevel & E_CORE_ERROR;
         }
 
-        if ( self::$logLevels['warning'] ) {
+        if (self::$logLevels['warning']) {
             $errorlevel = $errorlevel & E_CORE_WARNING;
         }
 
-        if ( self::$logLevels['error'] ) {
+        if (self::$logLevels['error']) {
             $errorlevel = $errorlevel & E_COMPILE_ERROR;
         }
 
-        if ( self::$logLevels['warning'] ) {
+        if (self::$logLevels['warning']) {
             $errorlevel = $errorlevel & E_COMPILE_WARNING;
         }
 
-        if ( self::$logLevels['error'] ) {
+        if (self::$logLevels['error']) {
             $errorlevel = $errorlevel & E_USER_ERROR;
         }
 
-        if ( self::$logLevels['warning'] ) {
+        if (self::$logLevels['warning']) {
             $errorlevel = $errorlevel & E_USER_WARNING;
         }
 
-        if ( self::$logLevels['notice'] ) {
+        if (self::$logLevels['notice']) {
             $errorlevel = $errorlevel & E_USER_NOTICE;
         }
 
-        if ( self::$logLevels['info'] ) {
+        if (self::$logLevels['info']) {
             $errorlevel = $errorlevel & E_STRICT;
         }
 
-        if ( self::$logLevels['error'] ) {
+        if (self::$logLevels['error']) {
             $errorlevel = $errorlevel & E_RECOVERABLE_ERROR;
         }
 
 
-        error_reporting( $errorlevel );
+        error_reporting($errorlevel);
     }
 
     /**
      * Write a message to the logger
      * event: onLogWrite
      *
-     * @param String $message - Log message
+     * @param String  $message  - Log message
      * @param Integer $loglevel - Log::LEVEL_*
      */
-    static function write($message, $loglevel=Log::LEVEL_INFO)
+    static function write($message, $loglevel = Log::LEVEL_INFO)
     {
         $Logger = self::getLogger();
-        $User   = \QUI::getUserBySession();
+        $User = \QUI::getUserBySession();
 
         $context = array(
             'username' => $User->getName(),
             'uid'      => $User->getId()
         );
 
-        switch ( $loglevel )
-        {
+        switch ($loglevel) {
             case Log::LEVEL_DEBUG:
-                if ( self::$logLevels['debug'] ) {
-                    $Logger->addDebug( $message, $context );
+                if (self::$logLevels['debug']) {
+                    $Logger->addDebug($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_INFO:
-                if ( self::$logLevels['info'] ) {
-                    $Logger->addInfo( $message, $context );
+                if (self::$logLevels['info']) {
+                    $Logger->addInfo($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_NOTICE:
-                if ( self::$logLevels['notice'] ) {
-                    $Logger->addNotice( $message, $context );
+                if (self::$logLevels['notice']) {
+                    $Logger->addNotice($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_WARNING:
-                if ( self::$logLevels['warning'] ) {
-                    $Logger->addWarning( $message, $context );
+                if (self::$logLevels['warning']) {
+                    $Logger->addWarning($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_ERROR:
-                if ( self::$logLevels['error'] ) {
-                    $Logger->addError( $message, $context );
+                if (self::$logLevels['error']) {
+                    $Logger->addError($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_CRITICAL:
-                if ( self::$logLevels['critical'] ) {
-                    $Logger->addCritical( $message, $context );
+                if (self::$logLevels['critical']) {
+                    $Logger->addCritical($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_ALERT:
-                if ( self::$logLevels['alert'] ) {
-                    $Logger->addAlert( $message, $context );
+                if (self::$logLevels['alert']) {
+                    $Logger->addAlert($message, $context);
                 }
-            break;
+                break;
 
             case Log::LEVEL_EMERGENCY:
-                if ( self::$logLevels['emergency'] ) {
-                    $Logger->addEmergency( $message, $context );
+                if (self::$logLevels['emergency']) {
+                    $Logger->addEmergency($message, $context);
                 }
-            break;
+                break;
         }
     }
 
@@ -245,27 +244,25 @@ class Logger
      */
     static function getLogger()
     {
-        if ( self::$Logger ) {
+        if (self::$Logger) {
             return self::$Logger;
         }
 
-        $Logger = new Monolog\Logger( 'QUI:Log' );
+        $Logger = new Monolog\Logger('QUI:Log');
 
         self::$Logger = $Logger;
 
         // which levels should be loged
-        self::$logLevels = self::getPlugin()->getSettings( 'log_levels' );
+        self::$logLevels = self::getPlugin()->getSettings('log_levels');
 
-        try
-        {
-            self::addChromePHPHandlerToLogger( $Logger );
-            self::addFirePHPHandlerToLogger( $Logger );
-            self::addCubeHandlerToLogger( $Logger );
-            self::addRedisHandlerToLogger( $Logger );
-            self::addSyslogUDPHandlerToLogger( $Logger );
+        try {
+            self::addChromePHPHandlerToLogger($Logger);
+            self::addFirePHPHandlerToLogger($Logger);
+            self::addCubeHandlerToLogger($Logger);
+            self::addRedisHandlerToLogger($Logger);
+            self::addSyslogUDPHandlerToLogger($Logger);
 
-        } catch ( QUI\Exception $Exception )
-        {
+        } catch (QUI\Exception $Exception) {
 
         }
 
@@ -277,7 +274,7 @@ class Logger
      */
     static function getPlugin()
     {
-        return \QUI::getPluginManager()->get( 'quiqqer/log' );
+        return \QUI::getPluginManager()->get('quiqqer/log');
     }
 
     /**
@@ -291,24 +288,25 @@ class Logger
      */
     static function addChromePHPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $browser = self::getPlugin()->getSettings( 'browser_logs' );
+        $browser = self::getPlugin()->getSettings('browser_logs');
 
-        if ( !$browser ) {
+        if (!$browser) {
             return;
         }
 
-        $firephp     = self::getPlugin()->getSettings( 'browser_logs', 'chromephp' );
-        $userLogedIn = self::getPlugin()->getSettings( 'browser_logs', 'userLogedIn' );
+        $firephp = self::getPlugin()->getSettings('browser_logs', 'chromephp');
+        $userLogedIn = self::getPlugin()
+                           ->getSettings('browser_logs', 'userLogedIn');
 
-        if ( empty( $firephp ) || !$firephp ) {
+        if (empty($firephp) || !$firephp) {
             return;
         }
 
-        if ( $userLogedIn && !QUI::getUserBySession()->getId() ) {
+        if ($userLogedIn && !QUI::getUserBySession()->getId()) {
             return;
         }
 
-        $Logger->pushHandler( new Monolog\Handler\ChromePHPHandler() );
+        $Logger->pushHandler(new Monolog\Handler\ChromePHPHandler());
     }
 
     /**
@@ -318,26 +316,24 @@ class Logger
      */
     static function addCubeHandlerToLogger(Monolog\Logger $Logger)
     {
-        $cube = self::getPlugin()->getSettings( 'cube' );
+        $cube = self::getPlugin()->getSettings('cube');
 
-        if ( !$cube ) {
+        if (!$cube) {
             return;
         }
 
-        $server = self::getPlugin()->getSettings('cube', 'server' );
+        $server = self::getPlugin()->getSettings('cube', 'server');
 
-        if ( empty( $server ) ) {
+        if (empty($server)) {
             return;
         }
 
-        try
-        {
-            $Handler = new Monolog\Handler\CubeHandler( $server );
+        try {
+            $Handler = new Monolog\Handler\CubeHandler($server);
 
-            $Logger->pushHandler( $Handler );
+            $Logger->pushHandler($Handler);
 
-        } catch ( \Exception $Exception )
-        {
+        } catch (\Exception $Exception) {
 
         }
     }
@@ -349,24 +345,25 @@ class Logger
      */
     static function addFirePHPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $browser = self::getPlugin()->getSettings( 'browser_logs' );
+        $browser = self::getPlugin()->getSettings('browser_logs');
 
-        if ( !$browser ) {
+        if (!$browser) {
             return;
         }
 
-        $firephp     = self::getPlugin()->getSettings( 'browser_logs', 'firephp' );
-        $userLogedIn = self::getPlugin()->getSettings( 'browser_logs', 'userLogedIn' );
+        $firephp = self::getPlugin()->getSettings('browser_logs', 'firephp');
+        $userLogedIn = self::getPlugin()
+                           ->getSettings('browser_logs', 'userLogedIn');
 
-        if ( empty( $firephp ) || !$firephp ) {
+        if (empty($firephp) || !$firephp) {
             return;
         }
 
-        if ( $userLogedIn && !\QUI::getUserBySession()->getId() ) {
+        if ($userLogedIn && !\QUI::getUserBySession()->getId()) {
             return;
         }
 
-        $Logger->pushHandler( new Monolog\Handler\FirePHPHandler() );
+        $Logger->pushHandler(new Monolog\Handler\FirePHPHandler());
     }
 
     /**
@@ -376,30 +373,28 @@ class Logger
      */
     static function addNewRelicToLogger(Monolog\Logger $Logger)
     {
-        $newRelic = self::getPlugin()->getSettings( 'newRelic' );
+        $newRelic = self::getPlugin()->getSettings('newRelic');
 
-        if ( !$newRelic ) {
+        if (!$newRelic) {
             return;
         }
 
-        $appname = self::getPlugin()->getSettings('newRelic', 'appname' );
+        $appname = self::getPlugin()->getSettings('newRelic', 'appname');
 
-        if ( empty( $appname ) ) {
+        if (empty($appname)) {
             return;
         }
 
-        try
-        {
+        try {
             $Handler = new Monolog\Handler\NewRelicHandler(
                 Log::LEVEL_INFO,
                 true,
                 $appname
             );
 
-            $Logger->pushHandler( $Handler );
+            $Logger->pushHandler($Handler);
 
-        } catch ( \Exception $Exception )
-        {
+        } catch (\Exception $Exception) {
 
         }
     }
@@ -408,35 +403,34 @@ class Logger
      * Add a Redis handler to the logger, if settings are available
      *
      * @needle predis/predis
+     *
      * @param \Monolog\Logger $Logger
      */
     static function addRedisHandlerToLogger(Monolog\Logger $Logger)
     {
-        $redis = self::getPlugin()->getSettings( 'redis' );
+        $redis = self::getPlugin()->getSettings('redis');
 
-        if ( !$redis ) {
+        if (!$redis) {
             return;
         }
 
-        $server = self::getPlugin()->getSettings('redis', 'server' );
+        $server = self::getPlugin()->getSettings('redis', 'server');
 
-        if ( empty( $server ) ) {
+        if (empty($server)) {
             return;
         }
 
-        try
-        {
-            $Client = new \Predis\Client( $server );
+        try {
+            $Client = new \Predis\Client($server);
 
             $Handler = new Monolog\Handler\RedisHandler(
                 $Client,
                 $server
             );
 
-            $Logger->pushHandler( $Handler );
+            $Logger->pushHandler($Handler);
 
-        } catch ( \Exception $Exception )
-        {
+        } catch (\Exception $Exception) {
 
         }
     }
@@ -448,28 +442,26 @@ class Logger
      */
     static function addSyslogUDPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $syslog = self::getPlugin()->getSettings( 'syslogUdp' );
+        $syslog = self::getPlugin()->getSettings('syslogUdp');
 
-        if ( !$syslog ) {
+        if (!$syslog) {
             return;
         }
 
-        $host = self::getPlugin()->getSettings('syslogUdp', 'host' );
-        $port = self::getPlugin()->getSettings('syslogUdp', 'port' );
+        $host = self::getPlugin()->getSettings('syslogUdp', 'host');
+        $port = self::getPlugin()->getSettings('syslogUdp', 'port');
 
-        if ( empty( $host ) ) {
+        if (empty($host)) {
             return;
         }
 
 
-        try
-        {
-            $Handler = new Monolog\Handler\SyslogUdpHandler( $host, $port );
+        try {
+            $Handler = new Monolog\Handler\SyslogUdpHandler($host, $port);
 
-            $Logger->pushHandler( $Handler );
+            $Logger->pushHandler($Handler);
 
-        } catch ( \Exception $Exception )
-        {
+        } catch (\Exception $Exception) {
 
         }
     }
