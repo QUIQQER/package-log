@@ -1,9 +1,48 @@
-# QUIQQER Cron Package
+QUIQQER Log
+========
 
-_German_
+Erweitert QUIQQER um eine erweiterte Logverwaltung.
 
-Cron Package erweitert QUIQQER um eine Aufgaben Verwaltung.
-Crons sind sich wiederhohlende Aufgaben.
+Packetname:
 
-Jedes Plugin kann eigene Crons / Tasks zur Verfügung stellen
-mit dem Cron Manager können diese Tasks in intervallen ausgeführt werden.
+    quiqqer/log
+
+
+Features
+--------
+
+- Erweiterte Logverwaltung
+- JavaScript Fehler Loging
+- Log Level Einstellungen
+- FirePHP, ChromePHP Loging (Browser Debuging)
+- Kann Logs zu einem Cube Server senden
+- Kann Logs zu einem New Relic senden
+- Kann Logs zu einem Syslog UDP Server senden
+
+
+Installation
+------------
+
+Der Paketname ist: quiqqer/log
+
+
+Mitwirken
+----------
+
+- Issue Tracker: https://dev.quiqqer.com/quiqqer/package-log/issues
+- Source Code: https://dev.quiqqer.com/quiqqer/package-log/tree/master
+
+
+Support
+-------
+
+Falls Sie ein Fehler gefunden haben oder Verbesserungen wünschen,
+Dann können Sie gerne an support@pcsg.de eine E-Mail schreiben.
+
+
+License
+-------
+
+
+Entwickler
+--------
