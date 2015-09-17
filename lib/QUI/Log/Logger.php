@@ -80,7 +80,7 @@ class Logger
 
 
         $Logger = self::getLogger();
-        $User = \QUI::getUserBySession();
+        $User   = \QUI::getUserBySession();
 
         $context = array(
             'username'  => $User->getName(),
@@ -89,9 +89,9 @@ class Logger
         );
 
         $arguments = func_get_args();
-        $event = $arguments[0]['event'];
+        $event     = $arguments[0]['event'];
 
-        $Logger->addInfo('event log '.$event, $context);
+        $Logger->addInfo('event log ' . $event, $context);
     }
 
 
@@ -172,13 +172,13 @@ class Logger
      * Write a message to the logger
      * event: onLogWrite
      *
-     * @param String  $message  - Log message
+     * @param String $message - Log message
      * @param Integer $loglevel - Log::LEVEL_*
      */
     static function write($message, $loglevel = Log::LEVEL_INFO)
     {
         $Logger = self::getLogger();
-        $User = \QUI::getUserBySession();
+        $User   = \QUI::getUserBySession();
 
         $context = array(
             'username' => $User->getName(),
@@ -240,7 +240,6 @@ class Logger
      * Return the Logger object
      *
      * @return \Monolog\Logger
-     * @todo more handler
      */
     static function getLogger()
     {
@@ -265,6 +264,13 @@ class Logger
         } catch (QUI\Exception $Exception) {
 
         }
+
+        try {
+            QUI::getEvents()->fireEvent('quiqqerLogGetLogger', array($Logger));
+        } catch (QUI\Exception $Exception) {
+
+        }
+
 
         return $Logger;
     }
@@ -294,9 +300,9 @@ class Logger
             return;
         }
 
-        $firephp = self::getPlugin()->getSettings('browser_logs', 'chromephp');
+        $firephp     = self::getPlugin()->getSettings('browser_logs', 'chromephp');
         $userLogedIn = self::getPlugin()
-                           ->getSettings('browser_logs', 'userLogedIn');
+            ->getSettings('browser_logs', 'userLogedIn');
 
         if (empty($firephp) || !$firephp) {
             return;
@@ -351,9 +357,9 @@ class Logger
             return;
         }
 
-        $firephp = self::getPlugin()->getSettings('browser_logs', 'firephp');
+        $firephp     = self::getPlugin()->getSettings('browser_logs', 'firephp');
         $userLogedIn = self::getPlugin()
-                           ->getSettings('browser_logs', 'userLogedIn');
+            ->getSettings('browser_logs', 'userLogedIn');
 
         if (empty($firephp) || !$firephp) {
             return;

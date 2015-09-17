@@ -46,3 +46,11 @@ License
 
 Entwickler
 --------
+
+Erweitert QUIQQER um ein neues globales Event
+- onQuiqqerLogGetLogger [ Monolog\Logger $Logger ]
+
+Wird gefeuert wenn ein Monolog Logger initialisiert wurde
+Mit diesem Event können neue Monolog Logger dem $Logger hinzugefügrt werden.
+
+onQuiqqerLogGetLogger
