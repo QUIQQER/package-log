@@ -78,6 +78,9 @@ class Logger
             return;
         }
 
+        if ($arguments[0] == 'userLoad') {
+            return;
+        }
 
         $Logger = self::getLogger();
         $User   = \QUI::getUserBySession();
@@ -89,8 +92,13 @@ class Logger
         );
 
         $arguments = func_get_args();
-        $event     = $arguments[0]['event'];
 
+        if (isset($arguments[0]['event'])) {
+            $event = $arguments[0]['event'];
+        } else {
+            $event = $arguments[0];
+        }
+        
         $Logger->addInfo('event log ' . $event, $context);
     }
 
