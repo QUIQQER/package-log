@@ -80,7 +80,7 @@
             </section>
         </config>
 
-        <window>
+        <window name="quiqqer-log-settings">
             <title>Log-Einstellungen</title>
             <params>
                 <icon>icon-time</icon>
@@ -88,7 +88,7 @@
 
             <categories>
 
-                <category name="browser_logs">
+                <category name="browser_logs" index="1">
                     <text>Allgemein Log Einstellungen</text>
                     <icon>icon-cogs</icon>
 
@@ -167,7 +167,7 @@
                     </settings>
                 </category>
 
-                <category name="cube">
+                <category name="cube" index="2">
                     <text>Cube Server</text>
 
                     <settings title="cube_section" name="cube_section">
@@ -181,7 +181,7 @@
                     </settings>
                 </category>
 
-                <category name="newrelic">
+                <category name="newrelic" index="3">
                     <text>NewRelic</text>
 
                     <settings title="newrelic_section" name="newrelic_section">
@@ -195,8 +195,7 @@
                     </settings>
                 </category>
 
-
-                <category name="syslogudp">
+                <category name="syslogudp" index="4">
                     <text>Syslog UDP Server</text>
 
                     <settings title="syslogudp_host" name="syslogudp_host">
