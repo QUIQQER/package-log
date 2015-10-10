@@ -15,6 +15,7 @@ use Monolog;
  *
  * @package quiqqer/log
  * @author  www.pcsg.de (Henning Leutz)
+ * @licence For copyright and license information, please view the /README.md
  */
 class Logger
 {
@@ -98,7 +99,7 @@ class Logger
         } else {
             $event = $arguments[0];
         }
-        
+
         $Logger->addInfo('event log ' . $event, $context);
     }
 
@@ -263,22 +264,46 @@ class Logger
         self::$logLevels = self::getPlugin()->getSettings('log_levels');
 
         try {
-            self::addChromePHPHandlerToLogger($Logger);
-            self::addFirePHPHandlerToLogger($Logger);
-            self::addCubeHandlerToLogger($Logger);
-            self::addRedisHandlerToLogger($Logger);
-            self::addSyslogUDPHandlerToLogger($Logger);
-
+            $Logger->pushHandler(new QUI\Log\Monolog\LogHandler());
         } catch (QUI\Exception $Exception) {
 
         }
 
         try {
-            QUI::getEvents()->fireEvent('quiqqerLogGetLogger', array($Logger));
+            self::addChromePHPHandlerToLogger($Logger);
         } catch (QUI\Exception $Exception) {
-
+            $Logger->addNotice($Exception->getMessage());
         }
 
+        try {
+            self::addFirePHPHandlerToLogger($Logger);
+        } catch (QUI\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
+
+        try {
+            self::addCubeHandlerToLogger($Logger);
+        } catch (QUI\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
+
+        try {
+            self::addRedisHandlerToLogger($Logger);
+        } catch (QUI\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
+
+        try {
+            self::addSyslogUDPHandlerToLogger($Logger);
+        } catch (QUI\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
+
+        try {
+            QUI::getEvents()->fireEvent('quiqqerLogGetLogger', array($Logger));
+        } catch (QUI\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
 
         return $Logger;
     }
