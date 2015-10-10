@@ -101,6 +101,9 @@ class Logger
         }
 
         $Logger->addInfo('event log ' . $event, $context);
+
+        Log::write('event log ' . $event);
+//        Log::writeRecursive($context);
     }
 
 
