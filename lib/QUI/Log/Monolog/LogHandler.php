@@ -31,6 +31,9 @@ class LogHandler extends AbstractProcessingHandler
         if (DEBUG_MODE) {
             $filename = 'debug';
 
+        } elseif (DEVELOPMENT) {
+            $filename = 'dev';
+
         } elseif ($record['context']
                   && isset($record['context']['filename'])
                   && $record['context']['filename']
