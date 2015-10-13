@@ -56,6 +56,6 @@ class LogHandler extends AbstractProcessingHandler
                    "{$record['level_name']} - ".
                    $record['message'];
 
-        error_log($message, 3, $file );
+        error_log($message, 3, $file);
     }
 }
