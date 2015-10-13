@@ -282,6 +282,12 @@ class Logger
         }
 
         try {
+            self::addBrowserPHPHandlerToLogger($Logger);
+        } catch (QUI\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
+
+        try {
             self::addCubeHandlerToLogger($Logger);
         } catch (QUI\Exception $Exception) {
             $Logger->addNotice($Exception->getMessage());
@@ -321,6 +327,34 @@ class Logger
      */
 
     /**
+     * Add a Browser php handler to the logger, if settings are available
+     *
+     * @param \Monolog\Logger $Logger
+     */
+    static function addBrowserPHPHandlerToLogger(Monolog\Logger $Logger)
+    {
+        $browser = self::getPlugin()->getSettings('browser_logs');
+
+        if (!$browser) {
+            return;
+        }
+
+        $browserphp   = self::getPlugin()->getSettings('browser_logs', 'browserphp');
+        $userLogedIn = self::getPlugin()
+            ->getSettings('browser_logs', 'userLogedIn');
+
+        if (empty($browserphp) || !$browserphp) {
+            return;
+        }
+
+        if ($userLogedIn && !QUI::getUserBySession()->getId()) {
+            return;
+        }
+
+        $Logger->pushHandler(new Monolog\Handler\BrowserConsoleHandler());
+    }
+
+    /**
      * Add a ChromePHP handler to the logger, if settings are available
      *
      * @param \Monolog\Logger $Logger
@@ -333,11 +367,11 @@ class Logger
             return;
         }
 
-        $firephp     = self::getPlugin()->getSettings('browser_logs', 'chromephp');
+        $chromephp   = self::getPlugin()->getSettings('browser_logs', 'chromephp');
         $userLogedIn = self::getPlugin()
             ->getSettings('browser_logs', 'userLogedIn');
 
-        if (empty($firephp) || !$firephp) {
+        if (empty($chromephp) || !$chromephp) {
             return;
         }
 
@@ -398,7 +432,7 @@ class Logger
             return;
         }
 
-        if ($userLogedIn && !\QUI::getUserBySession()->getId()) {
+        if ($userLogedIn && !QUI::getUserBySession()->getId()) {
             return;
         }
 

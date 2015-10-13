@@ -53,6 +53,9 @@
                 <conf name="chromephp">
                     <type><![CDATA[bool]]></type>
                 </conf>
+                <conf name="browserphp">
+                    <type><![CDATA[bool]]></type>
+                </conf>
                 <conf name="debug">
                     <type><![CDATA[bool]]></type>
                 </conf>
@@ -154,6 +157,9 @@
                         <title>Browser Log Einstellungen</title>
                         <input conf="browser_logs.userLogedIn" type="checkbox">
                             <text>Browser Log nur für angemeldete Benutzer anzeigen.</text>
+                        </input>
+                        <input conf="browser_logs.browserphp" type="checkbox">
+                            <text>BrowserPHP Logs einschalten</text>
                         </input>
                         <input conf="browser_logs.firephp" type="checkbox">
                             <text>FirePHP Logs einschalten</text>
