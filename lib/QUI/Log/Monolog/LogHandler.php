@@ -49,12 +49,13 @@ class LogHandler extends AbstractProcessingHandler
         $dir  = VAR_DIR . 'log/';
         $file = $dir . $filename . '.log';
 
+
         QUI\Utils\System\File::mkdir($dir);
 
-        error_log(
-            (string)$record['formatted'],
-            3,
-            $file
-        );
+        $message = "[{$record['datetime']->format('Y-m-d H:i:s')}] - " .
+                   "{$record['level_name']} - ".
+                   $record['message'];
+
+        error_log($message, 3, $file );
     }
 }
