@@ -52,7 +52,7 @@ class LogHandler extends AbstractProcessingHandler
 
         QUI\Utils\System\File::mkdir($dir);
 
-        $message = "[{$record['datetime']->format('Y-m-d H:i:s')}] - " .
+        $message = "\n[{$record['datetime']->format('Y-m-d H:i:s')}] - " .
                    "{$record['level_name']} - ".
                    $record['message'];
 
