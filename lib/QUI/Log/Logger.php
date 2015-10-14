@@ -430,6 +430,14 @@ class Logger
             return;
         }
 
+        $server = self::getPlugin()->getSettings('graylog', 'server');
+        $port   = self::getPlugin()->getSettings('graylog', 'port');
+
+        if (empty($server) || empty($port)) {
+            return;
+        }
+
+
         if (!class_exists('\Gelf\Publisher')) {
             $Logger->addInfo(
                 '\Gelf\Publisher class is missing. Please install: "graylog2/gelf-php": "~1.2"'
@@ -437,7 +445,6 @@ class Logger
 
             return;
         }
-
 
         try {
             $Publisher = new \Gelf\Publisher(
