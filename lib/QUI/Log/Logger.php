@@ -440,8 +440,14 @@ class Logger
 
 
         try {
-            $Publisher = new \Gelf\Publisher();
-            $Handler   = new Monolog\Handler\GelfHandler($Publisher);
+            $Publisher = new \Gelf\Publisher(
+                new \Gelf\Transport\TcpTransport(
+                    self::getPlugin()->getSettings('graylog', 'server'),
+                    self::getPlugin()->getSettings('graylog', 'port')
+                )
+            );
+
+            $Handler = new Monolog\Handler\GelfHandler($Publisher);
 
             $Logger->pushHandler($Handler);
 

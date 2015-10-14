@@ -71,6 +71,9 @@
                 <conf name="server">
                     <type><![CDATA[string]]></type>
                 </conf>
+                <conf name="port">
+                    <type><![CDATA[string]]></type>
+                </conf>
             </section>
 
             <section name="newRelic">
@@ -186,9 +189,9 @@
                         <title>Cube Server Einstellungen</title>
                         <input conf="graylog.server" type="string">
                             <text>GrayLog2 Server URL</text>
-                            <description><![CDATA[
-
-                            ]]></description>
+                        </input>
+                        <input conf="graylog.port" type="number">
+                            <text>GrayLog2 Server PORT</text>
                         </input>
                     </settings>
                 </category>
