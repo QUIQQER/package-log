@@ -263,51 +263,19 @@ class Logger
         // which levels should be loged
         self::$logLevels = self::getPlugin()->getSettings('log_levels');
 
-        try {
-            $Logger->pushHandler(new QUI\Log\Monolog\LogHandler());
-        } catch (QUI\Exception $Exception) {
+        $Logger->pushHandler(new QUI\Log\Monolog\LogHandler());
 
-        }
-
-        try {
-            self::addChromePHPHandlerToLogger($Logger);
-        } catch (QUI\Exception $Exception) {
-            $Logger->addNotice($Exception->getMessage());
-        }
-
-        try {
-            self::addFirePHPHandlerToLogger($Logger);
-        } catch (QUI\Exception $Exception) {
-            $Logger->addNotice($Exception->getMessage());
-        }
-
-        try {
-            self::addBrowserPHPHandlerToLogger($Logger);
-        } catch (QUI\Exception $Exception) {
-            $Logger->addNotice($Exception->getMessage());
-        }
-
-        try {
-            self::addCubeHandlerToLogger($Logger);
-        } catch (QUI\Exception $Exception) {
-            $Logger->addNotice($Exception->getMessage());
-        }
-
-        try {
-            self::addRedisHandlerToLogger($Logger);
-        } catch (QUI\Exception $Exception) {
-            $Logger->addNotice($Exception->getMessage());
-        }
-
-        try {
-            self::addSyslogUDPHandlerToLogger($Logger);
-        } catch (QUI\Exception $Exception) {
-            $Logger->addNotice($Exception->getMessage());
-        }
+        self::addGraylogToLogger($Logger);
+        self::addChromePHPHandlerToLogger($Logger);
+        self::addFirePHPHandlerToLogger($Logger);
+        self::addBrowserPHPHandlerToLogger($Logger);
+        self::addCubeHandlerToLogger($Logger);
+        self::addRedisHandlerToLogger($Logger);
+        self::addSyslogUDPHandlerToLogger($Logger);
 
         try {
             QUI::getEvents()->fireEvent('quiqqerLogGetLogger', array($Logger));
-        } catch (QUI\Exception $Exception) {
+        } catch (\Exception $Exception) {
             $Logger->addNotice($Exception->getMessage());
         }
 
@@ -319,7 +287,7 @@ class Logger
      */
     static function getPlugin()
     {
-        return \QUI::getPluginManager()->get('quiqqer/log');
+        return QUI::getPluginManager()->get('quiqqer/log');
     }
 
     /**
@@ -339,7 +307,7 @@ class Logger
             return;
         }
 
-        $browserphp   = self::getPlugin()->getSettings('browser_logs', 'browserphp');
+        $browserphp  = self::getPlugin()->getSettings('browser_logs', 'browserphp');
         $userLogedIn = self::getPlugin()
             ->getSettings('browser_logs', 'userLogedIn');
 
@@ -351,7 +319,11 @@ class Logger
             return;
         }
 
-        $Logger->pushHandler(new Monolog\Handler\BrowserConsoleHandler());
+        try {
+            $Logger->pushHandler(new Monolog\Handler\BrowserConsoleHandler());
+        } catch (\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
     }
 
     /**
@@ -379,7 +351,11 @@ class Logger
             return;
         }
 
-        $Logger->pushHandler(new Monolog\Handler\ChromePHPHandler());
+        try {
+            $Logger->pushHandler(new Monolog\Handler\ChromePHPHandler());
+        } catch (\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
     }
 
     /**
@@ -403,11 +379,9 @@ class Logger
 
         try {
             $Handler = new Monolog\Handler\CubeHandler($server);
-
             $Logger->pushHandler($Handler);
-
         } catch (\Exception $Exception) {
-
+            $Logger->addNotice($Exception->getMessage());
         }
     }
 
@@ -436,7 +410,44 @@ class Logger
             return;
         }
 
-        $Logger->pushHandler(new Monolog\Handler\FirePHPHandler());
+        try {
+            $Logger->pushHandler(new Monolog\Handler\FirePHPHandler());
+        } catch (\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
+    }
+
+    /**
+     * Add a graylog handler to the logger, if settings are available
+     *
+     * @param Monolog\Logger $Logger
+     */
+    static function addGraylogToLogger(Monolog\Logger $Logger)
+    {
+        $graylog = self::getPlugin()->getSettings('graylog');
+
+        if (!$graylog) {
+            return;
+        }
+
+        if (!class_exists('\Gelf\Publisher')) {
+            $Logger->addInfo(
+                '\Gelf\Publisher class is missing. Please install: "graylog2/gelf-php": "~1.2"'
+            );
+
+            return;
+        }
+
+
+        try {
+            $Publisher = new \Gelf\Publisher();
+            $Handler   = new Monolog\Handler\GelfHandler($Publisher);
+
+            $Logger->pushHandler($Handler);
+
+        } catch (\Exception $Exception) {
+            $Logger->addNotice($Exception->getMessage());
+        }
     }
 
     /**
@@ -468,7 +479,7 @@ class Logger
             $Logger->pushHandler($Handler);
 
         } catch (\Exception $Exception) {
-
+            $Logger->addNotice($Exception->getMessage());
         }
     }
 
@@ -504,7 +515,7 @@ class Logger
             $Logger->pushHandler($Handler);
 
         } catch (\Exception $Exception) {
-
+            $Logger->addNotice($Exception->getMessage());
         }
     }
 
@@ -531,11 +542,9 @@ class Logger
 
         try {
             $Handler = new Monolog\Handler\SyslogUdpHandler($host, $port);
-
             $Logger->pushHandler($Handler);
-
         } catch (\Exception $Exception) {
-
+            $Logger->addNotice($Exception->getMessage());
         }
     }
 }

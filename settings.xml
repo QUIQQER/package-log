@@ -67,6 +67,12 @@
                 </conf>
             </section>
 
+            <section name="graylog">
+                <conf name="server">
+                    <type><![CDATA[string]]></type>
+                </conf>
+            </section>
+
             <section name="newRelic">
                 <conf name="appname">
                     <type><![CDATA[string]]></type>
@@ -173,7 +179,21 @@
                     </settings>
                 </category>
 
-                <category name="cube" index="2">
+                <category name="graylog" index="2">
+                    <text>GrayLog2 Server</text>
+
+                    <settings title="graylog_section" name="graylog_section">
+                        <title>Cube Server Einstellungen</title>
+                        <input conf="graylog.server" type="string">
+                            <text>GrayLog2 Server URL</text>
+                            <description><![CDATA[
+
+                            ]]></description>
+                        </input>
+                    </settings>
+                </category>
+
+                <category name="cube" index="3">
                     <text>Cube Server</text>
 
                     <settings title="cube_section" name="cube_section">
@@ -187,7 +207,7 @@
                     </settings>
                 </category>
 
-                <category name="newrelic" index="3">
+                <category name="newrelic" index="4">
                     <text>NewRelic</text>
 
                     <settings title="newrelic_section" name="newrelic_section">
@@ -201,7 +221,7 @@
                     </settings>
                 </category>
 
-                <category name="syslogudp" index="4">
+                <category name="syslogudp" index="5">
                     <text>Syslog UDP Server</text>
 
                     <settings title="syslogudp_host" name="syslogudp_host">
