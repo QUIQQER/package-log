@@ -187,7 +187,7 @@ class Logger
     static function write($message, $loglevel = Log::LEVEL_INFO)
     {
         $Logger = self::getLogger();
-        $User   = \QUI::getUserBySession();
+        $User   = QUI::getUserBySession();
 
         $context = array(
             'username' => $User->getName(),
@@ -264,6 +264,7 @@ class Logger
         self::$logLevels = self::getPlugin()->getSettings('log_levels');
 
         $Logger->pushHandler(new QUI\Log\Monolog\LogHandler());
+
 
         self::addGraylogToLogger($Logger);
         self::addChromePHPHandlerToLogger($Logger);

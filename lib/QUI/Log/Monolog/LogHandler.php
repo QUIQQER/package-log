@@ -5,6 +5,7 @@
  */
 namespace QUI\Log\Monolog;
 
+use Monolog\Formatter\NormalizerFormatter;
 use QUI;
 use Monolog\Handler\AbstractProcessingHandler;
 
@@ -53,8 +54,12 @@ class LogHandler extends AbstractProcessingHandler
         QUI\Utils\System\File::mkdir($dir);
 
         $message = "\n[{$record['datetime']->format('Y-m-d H:i:s')}] - " .
-                   "{$record['level_name']} - ".
+                   "{$record['level_name']} - " .
                    $record['message'];
+
+        if (DEBUG_MODE || DEVELOPMENT) {
+            $message .= "\n" . json_encode($record['context'], \JSON_PRETTY_PRINT) . "\n";
+        }
 
         error_log($message, 3, $file);
     }
