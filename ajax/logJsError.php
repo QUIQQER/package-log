@@ -26,10 +26,10 @@ function package_quiqqer_log_ajax_logJsError(
     $error .= "Username: {$User->getName()}\n";
     $error .= "\n================================\n";
 
-    \QUI\System\Log::addError($error, 'js_errors');
+    QUI\System\Log::addError($error, array(), 'js_errors');
 }
 
-\QUI::$Ajax->register(
+QUI::$Ajax->register(
     'package_quiqqer_log_ajax_logJsError',
     array('errMsg', 'errUrl', 'errLinenumber', 'browser')
 );
