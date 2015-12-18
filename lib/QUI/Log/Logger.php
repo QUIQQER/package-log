@@ -22,7 +22,7 @@ class Logger
     /**
      * log events?
      *
-     * @var Bool|null
+     * @var boolean|null
      */
     protected static $logOnFireEvent = null;
 
@@ -180,8 +180,8 @@ class Logger
      * Write a message to the logger
      * event: onLogWrite
      *
-     * @param String $message - Log message
-     * @param Integer $loglevel - Log::LEVEL_*
+     * @param string $message - Log message
+     * @param integer $loglevel - Log::LEVEL_*
      */
     public static function write($message, $loglevel = Log::LEVEL_INFO)
     {

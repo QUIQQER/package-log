@@ -3,10 +3,10 @@
 /**
  * Log a javascript error
  *
- * @param String $errMsg
- * @param String $errUrl
- * @param Integer|String $errLinenumber
- * @param String $browser - Browser String
+ * @param string $errMsg
+ * @param string $errUrl
+ * @param integer|String $errLinenumber
+ * @param string $browser - Browser String
  */
 function package_quiqqer_log_ajax_logJsError(
     $errMsg,
@@ -17,7 +17,7 @@ function package_quiqqer_log_ajax_logJsError(
     $User = QUI::getUserBySession();
 
     $error = "\n";
-    $error .= "Time: ".date('Y-m-d H:i:s')."\n\n";
+    $error .= "Time: " . date('Y-m-d H:i:s') . "\n\n";
     $error .= "File: {$errUrl}\n";
     $error .= "Line Number: {$errLinenumber}\n";
     $error .= "Error: {$errMsg}\n";

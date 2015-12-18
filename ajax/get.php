@@ -3,11 +3,11 @@
 /**
  * Return the log list
  *
- * @param        $page
- * @param        $limit
+ * @param string|integer $page
+ * @param string|integer $limit
  * @param string $search
- * @param        $sortOn
- * @param        $sortBy
+ * @param string $sortOn
+ * @param string $sortBy
  *
  * @return array
  */
@@ -18,7 +18,7 @@ function package_quiqqer_log_ajax_get(
     $sortOn = 'mdate',
     $sortBy = 'DESC'
 ) {
-    $LogManager = new \QUI\Log\Manager();
+    $LogManager = new QUI\Log\Manager();
 
     if (!isset($sortOn) || empty($sortOn)) {
         $sortOn = 'mdate';
@@ -31,12 +31,12 @@ function package_quiqqer_log_ajax_get(
     $LogManager->setAttribute('sortOn', $sortOn);
     $LogManager->setAttribute('sortBy', $sortBy);
 
-    $list = $LogManager->search( $search );
+    $list = $LogManager->search($search);
 
-    return \QUI\Utils\Grid::getResult($list, $page, $limit);
+    return QUI\Utils\Grid::getResult($list, $page, $limit);
 }
 
-\QUI::$Ajax->register(
+QUI::$Ajax->register(
     'package_quiqqer_log_ajax_get',
     array('page', 'limit', 'search', 'sortOn', 'sortBy'),
     'Permission::checkSU'

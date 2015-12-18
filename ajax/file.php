@@ -3,12 +3,12 @@
 /**
  * System logs
  *
- * @param String $file - Name of the log
- * @return Array
+ * @param string $file - Name of the log
+ * @return array
  */
 function package_quiqqer_log_ajax_file($file)
 {
-    $log = VAR_DIR.'log/'.$file;
+    $log = VAR_DIR . 'log/' . $file;
 
     if (!file_exists($log)) {
         return '';
