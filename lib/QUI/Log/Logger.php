@@ -24,49 +24,48 @@ class Logger
      *
      * @var Bool|null
      */
-    static $_logOnFireEvent = null;
+    protected static $logOnFireEvent = null;
 
     /**
      * Monolog Logger
      *
      * @var \Monolog\Logger
      */
-    static $Logger = null;
+    public static $Logger = null;
 
     /**
      * which levels should be loged
      *
-     * @var Array
+     * @var array
      */
-    static $logLevels
-        = array(
-            'debug'     => true,
-            'info'      => true,
-            'notice'    => true,
-            'warning'   => true,
-            'error'     => true,
-            'critical'  => true,
-            'alert'     => true,
-            'emergency' => true
-        );
+    public static $logLevels = array(
+        'debug' => true,
+        'info' => true,
+        'notice' => true,
+        'warning' => true,
+        'error' => true,
+        'critical' => true,
+        'alert' => true,
+        'emergency' => true
+    );
 
     /**
      * event on fire event
      * log all events?
      *
-     * @param Array $params
+     * @param array $params
      */
-    static function logOnFireEvent($params)
+    public static function logOnFireEvent($params)
     {
-        if (is_null(self::$_logOnFireEvent)) {
-            self::$_logOnFireEvent = 0;
+        if (self::$logOnFireEvent === null) {
+            self::$logOnFireEvent = 0;
 
             if (self::getPlugin()->getSettings('log', 'logAllEvents')) {
-                self::$_logOnFireEvent = 1;
+                self::$logOnFireEvent = 1;
             }
         }
 
-        if (!self::$_logOnFireEvent) {
+        if (!self::$logOnFireEvent) {
             return;
         }
 
@@ -87,8 +86,8 @@ class Logger
         $User   = \QUI::getUserBySession();
 
         $context = array(
-            'username'  => $User->getName(),
-            'uid'       => $User->getId(),
+            'username' => $User->getName(),
+            'uid' => $User->getId(),
             'arguments' => $arguments
         );
 
@@ -107,7 +106,7 @@ class Logger
     /**
      * event : on header loaded -> set error reporting
      */
-    static function onHeaderLoaded()
+    public static function onHeaderLoaded()
     {
         if (self::$logLevels['debug'] || DEVELOPMENT == 1) {
             error_reporting(E_ALL);
@@ -184,14 +183,14 @@ class Logger
      * @param String $message - Log message
      * @param Integer $loglevel - Log::LEVEL_*
      */
-    static function write($message, $loglevel = Log::LEVEL_INFO)
+    public static function write($message, $loglevel = Log::LEVEL_INFO)
     {
         $Logger = self::getLogger();
         $User   = QUI::getUserBySession();
 
         $context = array(
             'username' => $User->getName(),
-            'uid'      => $User->getId()
+            'uid' => $User->getId()
         );
 
         switch ($loglevel) {
@@ -250,7 +249,7 @@ class Logger
      *
      * @return \Monolog\Logger
      */
-    static function getLogger()
+    public static function getLogger()
     {
         if (self::$Logger) {
             return self::$Logger;
@@ -286,7 +285,7 @@ class Logger
     /**
      * Return the quiqqer log plugins
      */
-    static function getPlugin()
+    public static function getPlugin()
     {
         return QUI::getPluginManager()->get('quiqqer/log');
     }
@@ -300,7 +299,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addBrowserPHPHandlerToLogger(Monolog\Logger $Logger)
+    public static function addBrowserPHPHandlerToLogger(Monolog\Logger $Logger)
     {
         $browser = self::getPlugin()->getSettings('browser_logs');
 
@@ -332,7 +331,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addChromePHPHandlerToLogger(Monolog\Logger $Logger)
+    public static function addChromePHPHandlerToLogger(Monolog\Logger $Logger)
     {
         $browser = self::getPlugin()->getSettings('browser_logs');
 
@@ -364,7 +363,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addCubeHandlerToLogger(Monolog\Logger $Logger)
+    public static function addCubeHandlerToLogger(Monolog\Logger $Logger)
     {
         $cube = self::getPlugin()->getSettings('cube');
 
@@ -391,7 +390,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addFirePHPHandlerToLogger(Monolog\Logger $Logger)
+    public static function addFirePHPHandlerToLogger(Monolog\Logger $Logger)
     {
         $browser = self::getPlugin()->getSettings('browser_logs');
 
@@ -423,7 +422,7 @@ class Logger
      *
      * @param Monolog\Logger $Logger
      */
-    static function addGraylogToLogger(Monolog\Logger $Logger)
+    public static function addGraylogToLogger(Monolog\Logger $Logger)
     {
         $graylog = self::getPlugin()->getSettings('graylog');
 
@@ -469,7 +468,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addNewRelicToLogger(Monolog\Logger $Logger)
+    public static function addNewRelicToLogger(Monolog\Logger $Logger)
     {
         $newRelic = self::getPlugin()->getSettings('newRelic');
 
@@ -504,7 +503,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addRedisHandlerToLogger(Monolog\Logger $Logger)
+    public static function addRedisHandlerToLogger(Monolog\Logger $Logger)
     {
         $redis = self::getPlugin()->getSettings('redis');
 
@@ -538,7 +537,7 @@ class Logger
      *
      * @param \Monolog\Logger $Logger
      */
-    static function addSyslogUDPHandlerToLogger(Monolog\Logger $Logger)
+    public static function addSyslogUDPHandlerToLogger(Monolog\Logger $Logger)
     {
         $syslog = self::getPlugin()->getSettings('syslogUdp');
 

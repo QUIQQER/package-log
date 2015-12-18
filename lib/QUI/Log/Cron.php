@@ -19,12 +19,12 @@ class Cron
     /**
      * Send the logs from the last day
      *
-     * @param Array             $params
+     * @param array             $params
      * @param \QUI\Cron\Manager $CronManager
      *
      * @throws QUI\Exception
      */
-    static function sendLogsFromLastDay($params, $CronManager)
+    public static function sendLogsFromLastDay($params, $CronManager)
     {
         if (!isset($params['email'])) {
             throw new QUI\Exception('Need a email parameter to send the log');

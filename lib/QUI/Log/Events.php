@@ -21,11 +21,11 @@ class Events
      * Extend the template header and register the on error event
      * @param $Template
      */
-    static function onTemplateGetHeader($Template)
+    public static function onTemplateGetHeader($Template)
     {
-        $Package = \QUI::getPackageManager()->getInstalledPackage( 'quiqqer/log' );
+        $Package = \QUI::getPackageManager()->getInstalledPackage('quiqqer/log');
 
-        if ( !$Package->getConfig()->get( 'log', 'logFrontendJsErrors' ) ) {
+        if (!$Package->getConfig()->get('log', 'logFrontendJsErrors')) {
             return;
         }
 
@@ -66,5 +66,4 @@ class Events
               </script>'
         );
     }
-
 }
