@@ -95,14 +95,14 @@
         <window name="quiqqer-log-settings">
             <title>Log-Einstellungen</title>
             <params>
-                <icon>icon-time</icon>
+                <icon>fa fa-clock-o</icon>
             </params>
 
             <categories>
 
                 <category name="browser_logs" index="1">
                     <text>Allgemein Log Einstellungen</text>
-                    <icon>icon-cogs</icon>
+                    <icon>fa fa-cogs</icon>
 
                     <settings title="log_section" name="log_section">
                         <title>Allgemeine Einstellungen</title>
