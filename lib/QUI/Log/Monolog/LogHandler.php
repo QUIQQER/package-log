@@ -57,9 +57,7 @@ class LogHandler extends AbstractProcessingHandler
                    "{$record['level_name']} - " .
                    $record['message'];
 
-        if (DEBUG_MODE || DEVELOPMENT) {
-            $message .= "\n" . json_encode($record['context'], \JSON_PRETTY_PRINT) . "\n";
-        }
+        $message .= "\n" . json_encode($record['context'], \JSON_PRETTY_PRINT) . "\n";
 
         error_log($message, 3, $file);
     }
