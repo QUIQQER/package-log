@@ -43,8 +43,8 @@ class Manager extends QUI\QDOM
      */
     public function search($search = '')
     {
-        $dir = VAR_DIR.'log/';
-        $list = array();
+        $dir   = VAR_DIR . 'log/';
+        $list  = array();
         $files = File::readDir($dir);
 
         $sortOn = $this->getAttribute('sortOn');
@@ -70,7 +70,7 @@ class Manager extends QUI\QDOM
                 continue;
             }
 
-            $mtime = filemtime($dir.$file);
+            $mtime = filemtime($dir . $file);
 
             $list[] = array(
                 'file'  => $file,
@@ -84,7 +84,6 @@ class Manager extends QUI\QDOM
             usort($list, function ($a, $b) {
                 return ($a['mtime'] < $b['mtime']) ? -1 : 1;
             });
-
         } else {
             if ($sortOn == 'file') {
                 usort($list, function ($a, $b) {

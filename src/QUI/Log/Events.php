@@ -19,7 +19,7 @@ class Events
     /**
      * Event on template get header
      * Extend the template header and register the on error event
-     * @param $Template
+     * @param QUI\Template $Template
      */
     public static function onTemplateGetHeader($Template)
     {

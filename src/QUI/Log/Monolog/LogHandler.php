@@ -5,7 +5,6 @@
  */
 namespace QUI\Log\Monolog;
 
-use Monolog\Formatter\NormalizerFormatter;
 use QUI;
 use Monolog\Handler\AbstractProcessingHandler;
 
@@ -31,20 +30,15 @@ class LogHandler extends AbstractProcessingHandler
 
         if (DEBUG_MODE) {
             $filename = 'debug';
-
         } elseif (DEVELOPMENT) {
             $filename = 'dev';
-
         } elseif ($record['context']
                   && isset($record['context']['filename'])
                   && $record['context']['filename']
         ) {
-            $filename = $record['context']['filename']
-                        . date('-Y-m-d');
-
+            $filename = $record['context']['filename'] . date('-Y-m-d');
         } else {
-            $filename = QUI\System\Log::levelToLogName($record['level'])
-                        . date('-Y-m-d');
+            $filename = QUI\System\Log::levelToLogName($record['level']) . date('-Y-m-d');
         }
 
         $dir  = VAR_DIR . 'log/';

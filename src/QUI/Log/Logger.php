@@ -39,13 +39,13 @@ class Logger
      * @var array
      */
     public static $logLevels = array(
-        'debug' => true,
-        'info' => true,
-        'notice' => true,
-        'warning' => true,
-        'error' => true,
-        'critical' => true,
-        'alert' => true,
+        'debug'     => true,
+        'info'      => true,
+        'notice'    => true,
+        'warning'   => true,
+        'error'     => true,
+        'critical'  => true,
+        'alert'     => true,
         'emergency' => true
     );
 
@@ -86,8 +86,8 @@ class Logger
         $User   = \QUI::getUserBySession();
 
         $context = array(
-            'username' => $User->getName(),
-            'uid' => $User->getId(),
+            'username'  => $User->getName(),
+            'uid'       => $User->getId(),
             'arguments' => $arguments
         );
 
@@ -190,7 +190,7 @@ class Logger
 
         $context = array(
             'username' => $User->getName(),
-            'uid' => $User->getId()
+            'uid'      => $User->getId()
         );
 
         switch ($loglevel) {
@@ -457,7 +457,6 @@ class Logger
             $Handler = new Monolog\Handler\GelfHandler($Publisher);
 
             $Logger->pushHandler($Handler);
-
         } catch (\Exception $Exception) {
             $Logger->addNotice($Exception->getMessage());
         }
@@ -490,7 +489,6 @@ class Logger
             );
 
             $Logger->pushHandler($Handler);
-
         } catch (\Exception $Exception) {
             $Logger->addNotice($Exception->getMessage());
         }
@@ -526,7 +524,6 @@ class Logger
             );
 
             $Logger->pushHandler($Handler);
-
         } catch (\Exception $Exception) {
             $Logger->addNotice($Exception->getMessage());
         }

@@ -6,13 +6,14 @@
 
 namespace QUI\Log;
 
+use QUI;
+
 /**
  * QUIQQER logging service
  *
  * @package quiqqer/log
  * @author  www.pcsg.de (Henning Leutz)
  */
-
 class Admin
 {
     /**
@@ -20,8 +21,8 @@ class Admin
      */
     public static function onAdminLoad()
     {
-        $Package = \QUI::getPackageManager()
-                       ->getInstalledPackage('quiqqer/log');
+        $Package = QUI::getPackageManager()
+            ->getInstalledPackage('quiqqer/log');
 
         if ($Package->getConfig()->get('browser_logs', 'debug')) {
             echo '<script type="text/javascript">
@@ -43,8 +44,7 @@ class Admin
      */
     public static function onAdminLoadFooter()
     {
-        $Package = \QUI::getPackageManager()
-                       ->getInstalledPackage('quiqqer/log');
+        $Package = \QUI::getPackageManager()->getInstalledPackage('quiqqer/log');
 
         if ($Package->getConfig()->get('log', 'logAdminJsErrors')) {
             echo '<script type="text/javascript">
