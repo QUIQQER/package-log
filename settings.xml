@@ -93,7 +93,7 @@
         </config>
 
         <window name="quiqqer-log-settings">
-            <title>Log-Einstellungen</title>
+            <title>Logs</title>
             <params>
                 <icon>fa fa-clock-o</icon>
             </params>
