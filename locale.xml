@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
+    <groups name="quiqqer/log" datatype="php,js">
+        <locale name="package.title">
+            <de><![CDATA[QUIQQER: Log]]></de>
+            <en><![CDATA[QUIQQER: Log]]></en>
+        </locale>
+        <locale name="package.title">
+            <de><![CDATA[Log Manager und Logging Funktionalität für QUIQQER.]]></de>
+            <en><![CDATA[Log management and logging functionality for QUIQQER.]]></en>
+        </locale>
+    </groups>
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>
