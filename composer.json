@@ -2,7 +2,7 @@
   "name": "quiqqer\/log",
   "type": "quiqqer-module",
   "description": "Provided extra log functionality.",
-  "version": "dev-master",
+  "version": "1.2.0",
   "license": "GPL-2.0+",
   "authors": [
     {
