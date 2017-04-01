@@ -1,9 +1,9 @@
 QUIQQER Log
 ========
 
-Erweitert QUIQQER um eine erweiterte Logverwaltung.
+Ergänzt QUIQQER um eine erweiterte Logverwaltung.
 
-Packetname:
+Paketname:
 
     quiqqer/log
 
@@ -12,8 +12,8 @@ Features
 --------
 
 - Erweiterte Logverwaltung
-- JavaScript Fehler Loging
-- Log Level Einstellungen
+- JavaScript Fehler-Loging
+- Log-Level-Einstellungen
 - FirePHP, ChromePHP Loging (Browser Debuging)
 - Kann Logs zu einem Cube Server senden
 - Kann Logs zu einem New Relic senden
@@ -36,8 +36,10 @@ Mitwirken
 Support
 -------
 
-Falls Sie ein Fehler gefunden haben oder Verbesserungen wünschen,
-Dann können Sie gerne an support@pcsg.de eine E-Mail schreiben.
+Falls Sie Fehler gefunden, Wünsche oder Verbesserungsvorschläge haben, 
+können Sie uns gern per Mail an support@pcsg.de darüber informieren.  
+Wir werden versuchen auf Ihre Wünsche einzugehen bzw. diese an die 
+zuständigen Entwickler des Projektes weiterleiten.
 
 
 License
@@ -50,7 +52,7 @@ Entwickler
 Erweitert QUIQQER um ein neues globales Event
 - onQuiqqerLogGetLogger [ Monolog\Logger $Logger ]
 
-Wird gefeuert wenn ein Monolog Logger initialisiert wurde
+Wird gefeuert wenn ein Monolog Logger initialisiert wurde.
 Mit diesem Event können neue Monolog Logger dem $Logger hinzugefügrt werden.
 
 onQuiqqerLogGetLogger
