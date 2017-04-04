@@ -11,12 +11,12 @@ define('package/quiqqer/log/bin/Manager', [
     'Ajax',
     'Locale',
     'qui/controls/buttons/Button',
-    'qui/controls/buttons/Seperator',
+    'qui/controls/buttons/Separator',
     'qui/controls/windows/Confirm',
 
     'css!package/quiqqer/log/bin/Manager.css'
 
-], function (Panel, Grid, Ajax, Locale, QUIButton, QUIButtonSeperator, QUIConfirm) {
+], function (Panel, Grid, Ajax, Locale, QUIButton, QUIButtonSeparator, QUIConfirm) {
     "use strict";
 
     var lg = 'quiqqer/log';
@@ -277,7 +277,7 @@ define('package/quiqqer/log/bin/Manager', [
                 placeholder: Locale.get(lg, 'logs.panel.search.placeholder'),
                 events     : {
                     keyup: function (event) {
-                        if (event.key == 'enter') {
+                        if (event.key === 'enter') {
                             Control.getButtons('search').onclick();
                         }
                     }
@@ -306,7 +306,7 @@ define('package/quiqqer/log/bin/Manager', [
             );
 
             this.addButton(
-                new QUIButtonSeperator()
+                new QUIButtonSeparator()
             );
 
 
@@ -323,7 +323,7 @@ define('package/quiqqer/log/bin/Manager', [
             );
 
             this.addButton(
-                new QUIButtonSeperator()
+                new QUIButtonSeparator()
             );
 
             this.addButton(
