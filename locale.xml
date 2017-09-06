@@ -6,8 +6,8 @@
             <en><![CDATA[QUIQQER - Log]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Log Manager und Logging Funktionalität für QUIQQER.]]></de>
-            <en><![CDATA[Log management and logging functionality for QUIQQER.]]></en>
+            <de><![CDATA[Ergänzt QUIQQER um eine erweiterte Logverwaltung. Verwalten Sie die Logs von QUIQQER, schauen Sie Fehlermeldungen nach oder machen Sie sich ein Überblick was im System so passiert.]]></de>
+            <en><![CDATA[Extend QUIQQER with a log management. Manage the logs of QUIQQER, check for errors, or get an overview of what's happening in the system.]]></en>
         </locale>
     </groups>
     <groups name="quiqqer/log" datatype="js">
