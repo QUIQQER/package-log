@@ -5,6 +5,6 @@
           icon="fa fa-terminal"
           require="package/quiqqer/log/bin/Manager"
     >
-        Logverwaltung
+        <locale group="quiqqer/log" var="menu.title"/>
     </item>
 </menu>

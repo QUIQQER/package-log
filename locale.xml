@@ -10,6 +10,12 @@
             <en><![CDATA[Extend QUIQQER with a log management. Manage the logs of QUIQQER, check for errors, or get an overview of what's happening in the system.]]></en>
         </locale>
     </groups>
+    <groups name="quiqqer/log" datatype="php,js">
+        <locale name="menu.title">
+            <de><![CDATA[Logverwaltung]]></de>
+            <en><![CDATA[Log Management]]></en>
+        </locale>
+    </groups>
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>
