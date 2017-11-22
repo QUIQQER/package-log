@@ -232,6 +232,8 @@ define('package/quiqqer/log/bin/Manager', [
                 Control.Loader.hide();
                 Control.refresh();
 
+                var LogFileData = File.getElement('#qui-logs-file-data');
+                LogFileData.scrollTop = LogFileData.scrollHeight;
             }, {
                 'package': 'quiqqer/log',
                 file     : this.$file
