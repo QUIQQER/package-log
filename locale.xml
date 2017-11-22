@@ -61,5 +61,9 @@
             <de><![CDATA[Suche starten]]></de>
             <en><![CDATA[Start search]]></en>
         </locale>
+        <locale name="logs.panel.message.trimmed">
+            <de><![CDATA[Hinweis: Diese Log-Datei wurde gekürzt. Herunterladen um den gesamten Inhalt zu sehen.]]></de>
+            <en><![CDATA[Notice: This log file is truncated. Download to view the entire content.]]></en>
+        </locale>
     </groups>
 </locales>

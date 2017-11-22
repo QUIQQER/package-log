@@ -6,6 +6,7 @@
 
 define('package/quiqqer/log/bin/Manager', [
 
+    'qui/QUI',
     'qui/controls/desktop/Panel',
     'controls/grid/Grid',
     'Ajax',
@@ -16,7 +17,7 @@ define('package/quiqqer/log/bin/Manager', [
 
     'css!package/quiqqer/log/bin/Manager.css'
 
-], function (Panel, Grid, Ajax, Locale, QUIButton, QUIButtonSeparator, QUIConfirm) {
+], function (QUI, Panel, Grid, Ajax, Locale, QUIButton, QUIButtonSeparator, QUIConfirm) {
     "use strict";
 
     var lg = 'quiqqer/log';
@@ -216,9 +217,16 @@ define('package/quiqqer/log/bin/Manager', [
             this.Loader.show();
 
             Ajax.get('package_quiqqer_log_ajax_file', function (result) {
+
+                if (result.isLogTrimmed) {
+                    QUI.getMessageHandler().then(function (MessageHandler) {
+                        MessageHandler.addAttention(Locale.get(lg, 'logs.panel.message.trimmed'));
+                    });
+                }
+
                 File.set(
                     'html',
-                    '<pre class="box language-bash" style="margin: 0;">' + result + '</pre>'
+                    '<pre id="qui-logs-file-data" class="box language-bash" style="margin: 0;">' + result.data + '</pre>'
                 );
 
                 Control.Loader.hide();
