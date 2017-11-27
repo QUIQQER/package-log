@@ -8,7 +8,7 @@ require_once $packagesDir . '/header.php';
 $logName = urldecode(filter_var($_GET['log'], FILTER_SANITIZE_STRING));
 $logFile = VAR_DIR . 'log/' . $logName;
 
-if (!file_exists($logFile)) {
+if (!file_exists($logFile) || is_dir($logFile) || !QUI::getUserBySession()->isSU()) {
     exit;
 }
 
