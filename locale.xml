@@ -37,6 +37,10 @@
             <de><![CDATA[Markierte Log-Dateien löschen]]></de>
             <en><![CDATA[Delete selected log files]]></en>
         </locale>
+        <locale name="logs.panel.btn.download.marked">
+            <de><![CDATA[Markierte Log-Datei herunterladen]]></de>
+            <en><![CDATA[Download selected log file]]></en>
+        </locale>
         <locale name="logs.panel.btn.open.log">
             <de><![CDATA[Log vom [date] öffnen]]></de>
             <en><![CDATA[Open log from [date]]]></en>

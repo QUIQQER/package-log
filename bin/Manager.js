@@ -35,6 +35,7 @@ define('package/quiqqer/log/bin/Manager', [
             'resize',
             'refreshFile',
             'deleteActiveLog',
+            'downloadActiveLog',
             '$onCreate',
             '$onResize',
             '$onDestroy',
@@ -201,6 +202,30 @@ define('package/quiqqer/log/bin/Manager', [
             }).open();
         },
 
+
+        /**
+         * Download the active log
+         */
+        downloadActiveLog: function () {
+            var data         = this.$Grid.getSelectedData(),
+                log          = data[0].file,
+                downloadFile = URL_OPT_DIR + 'quiqqer/log/bin/downloadLog.php?log=' + encodeURIComponent(log),
+                iframeId     = Math.floor(Date.now() / 1000),
+                Frame        = new Element('iframe', {
+                    id             : 'download-iframe-' + iframeId,
+                    src            : downloadFile,
+                    styles         : {
+                        left    : -1000,
+                        height  : 10,
+                        position: 'absolute',
+                        top     : -1000,
+                        width   : 10
+                    },
+                    'data-iframeid': iframeId
+                }).inject(document.body);
+        },
+
+
         /**
          * Refresh the current file
          *
@@ -348,6 +373,22 @@ define('package/quiqqer/log/bin/Manager', [
                 })
             );
 
+            this.addButton(
+                new QUIButtonSeparator()
+            );
+
+            this.addButton(
+                new QUIButton({
+                    name     : 'download',
+                    text     : Locale.get(lg, 'logs.panel.btn.download.marked'),
+                    textimage: 'fa fa-download',
+                    disabled : true,
+                    events   : {
+                        onClick: this.downloadActiveLog
+                    }
+                })
+            );
+
             //this.resize.delay( 200 );
             this.getLogs.delay(100, this);
         },
@@ -446,13 +487,16 @@ define('package/quiqqer/log/bin/Manager', [
          * @param {Object} data - Grid Data
          */
         $gridClick: function (data) {
-            var len    = data.target.selected.length,
-                Delete = this.getButtons('delete');
+            var len      = data.target.selected.length,
+                Delete   = this.getButtons('delete'),
+                Download = this.getButtons('download');
 
             Delete.disable();
+            Download.disable();
 
             if (len) {
                 Delete.enable();
+                Download.enable();
             }
         },
 
