@@ -5,7 +5,8 @@ define('QUIQQER_SYSTEM', true);
 $packagesDir = str_replace('quiqqer/log/bin', '', dirname(__FILE__));
 require_once $packagesDir . '/header.php';
 
-if (!QUI::getUserBySession()->getPermission('quiqqer.packages.quiqqerlog.canUse')) {
+$User = QUI::getUserBySession();
+if (!$User->getPermission('quiqqer.packages.quiqqerlog.canUse') || !$User->canUseBackend()) {
     exit;
 }
 
