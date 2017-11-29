@@ -19,6 +19,29 @@
                 </conf>
             </section>
 
+            <section name="log_cleanup">
+                <conf name="isArchivingEnabled">
+                    <type><![CDATA[bool]]></type>
+                    <defaultvalue>1</defaultvalue>
+                </conf>
+                <conf name="minLogAgeForDelete">
+                    <type><![CDATA[integer]]></type>
+                    <defaultvalue>180</defaultvalue>
+                </conf>
+                <conf name="minLogAgeForArchiving">
+                    <type><![CDATA[integer]]></type>
+                    <defaultvalue>3</defaultvalue>
+                </conf>
+                <conf name="minArchiveAgeForDelete">
+                    <type><![CDATA[integer]]></type>
+                    <defaultvalue>360</defaultvalue>
+                </conf>
+                <conf name="isArchiveDeletionEnabled">
+                    <type><![CDATA[bool]]></type>
+                    <defaultvalue>0</defaultvalue>
+                </conf>
+            </section>
+
             <section name="log_levels">
                 <conf name="debug">
                     <type><![CDATA[bool]]></type>
@@ -182,7 +205,54 @@
                     </settings>
                 </category>
 
-                <category name="graylog" index="2">
+
+                <category name="log_cleanup" index="2">
+                    <text>
+                        <locale group="quiqqer/log" var="settings.cleanup.text"/>
+                    </text>
+
+                    <icon>fa fa-paint-brush</icon>
+
+                    <settings title="log_archiving" name="log_archiving">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.cleanup.archiving.title"/>
+                        </title>
+                        <input conf="log_cleanup.isArchivingEnabled" type="checkbox">
+                            <text>
+                                <locale group="quiqqer/log" var="settings.cleanup.archiving.isArchivingEnabled"/>
+                            </text>
+                        </input>
+                        <input conf="log_cleanup.minLogAgeForArchiving" type="number">
+                            <text>
+                                <locale group="quiqqer/log" var="settings.cleanup.archiving.minLogAgeForArchiving"/>
+                            </text>
+                        </input>
+                    </settings>
+
+                    <settings title="log_deletion" name="log_deletion">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.cleanup.deletion.title"/>
+                        </title>
+                        <input conf="log_cleanup.minLogAgeForDelete" type="number">
+                            <text>
+                                <locale group="quiqqer/log" var="settings.cleanup.archiving.minLogAgeForDelete"/>
+                            </text>
+                        </input>
+                        <input conf="log_cleanup.isArchiveDeletionEnabled" type="checkbox">
+                            <text>
+                                <locale group="quiqqer/log" var="settings.cleanup.archiving.isArchiveDeletionEnabled"/>
+                            </text>
+                        </input>
+                        <input conf="log_cleanup.minArchiveAgeForDelete" type="number">
+                            <text>
+                                <locale group="quiqqer/log" var="settings.cleanup.archiving.minArchiveAgeForDelete"/>
+                            </text>
+                        </input>
+                    </settings>
+                </category>
+
+
+                <category name="graylog" index="3">
                     <text>GrayLog2 Server</text>
 
                     <settings title="graylog_section" name="graylog_section">
@@ -196,7 +266,7 @@
                     </settings>
                 </category>
 
-                <category name="cube" index="3">
+                <category name="cube" index="4">
                     <text>Cube Server</text>
 
                     <settings title="cube_section" name="cube_section">
@@ -210,7 +280,7 @@
                     </settings>
                 </category>
 
-                <category name="newrelic" index="4">
+                <category name="newrelic" index="5">
                     <text>NewRelic</text>
 
                     <settings title="newrelic_section" name="newrelic_section">
@@ -224,7 +294,7 @@
                     </settings>
                 </category>
 
-                <category name="syslogudp" index="5">
+                <category name="syslogudp" index="6">
                     <text>Syslog UDP Server</text>
 
                     <settings title="syslogudp_host" name="syslogudp_host">

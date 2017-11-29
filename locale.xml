@@ -16,6 +16,47 @@
             <en><![CDATA[Log Management]]></en>
         </locale>
     </groups>
+    <groups name="quiqqer/log" datatype="php">
+        <locale name="settings.cleanup.text">
+            <de><![CDATA[Log-Bereinigung & -Archivierung]]></de>
+            <en><![CDATA[Log Cleanup & Archiving]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.title">
+            <de><![CDATA[Log-Archivierung]]></de>
+            <en><![CDATA[Log Archiving]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.deletion.title">
+            <de><![CDATA[Log-Bereinigung]]></de>
+            <en><![CDATA[Log Cleanup]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.isArchivingEnabled">
+            <de><![CDATA[Logs archivieren?]]></de>
+            <en><![CDATA[Archive logs?]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.minLogAgeForArchiving">
+            <de><![CDATA[Logs nach wie vielen Tagen archivieren?]]></de>
+            <en><![CDATA[Archive logs after how many days?]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.minLogAgeForDelete">
+            <de><![CDATA[Logs nach wie vielen Tagen löschen?]]></de>
+            <en><![CDATA[Delete logs after how many days?]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.isArchiveDeletionEnabled">
+            <de><![CDATA[Archivierte Logs löschen?]]></de>
+            <en><![CDATA[Delete archived logs?]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.minArchiveAgeForDelete">
+            <de><![CDATA[Archivierte Logs nach wie vielen Tagen löschen?]]></de>
+            <en><![CDATA[Delete archived logs after how many days?]]></en>
+        </locale>
+    </groups>
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>
