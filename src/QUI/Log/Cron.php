@@ -19,7 +19,7 @@ class Cron
     /**
      * Send the logs from the last day
      *
-     * @param array             $params
+     * @param array $params
      * @param \QUI\Cron\Manager $CronManager
      *
      * @throws QUI\Exception
@@ -30,16 +30,16 @@ class Cron
             throw new QUI\Exception('Need a email parameter to send the log');
         }
 
-        $logDir = VAR_DIR.'log/';
+        $logDir = VAR_DIR . 'log/';
 
         $Date = new \DateTime();
         $Date->add(\DateInterval::createFromDateString('yesterday'));
 
-        $Mailer = new QUI\Mail\Mailer();
+        $Mailer     = new QUI\Mail\Mailer();
         $LogManager = new QUI\Log\Manager();
 
-        $body = '';
-        $result = $LogManager->search($Date->format('Y-m-d').'.log');
+        $body   = '';
+        $result = $LogManager->search($Date->format('Y-m-d') . '.log');
 
         $Mailer->addRecipient($params['email']);
         $Mailer->setSubject('Logs from the last day');
@@ -50,7 +50,7 @@ class Cron
                 continue;
             }
 
-            $file = $logDir.$entry['file'];
+            $file = $logDir . $entry['file'];
 
             if (file_exists($file)) {
                 $Mailer->addAttachments($file);

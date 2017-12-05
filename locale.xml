@@ -66,8 +66,8 @@
             <de><![CDATA[Löscht Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
             <en><![CDATA[Deletes log files which are older than defined in the log settings]]></en>
         </locale>
-     </groups>
-
+    </groups>
+    
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>
