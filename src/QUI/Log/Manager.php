@@ -46,7 +46,7 @@ class Manager extends QUI\QDOM
      */
     public function search($search = '')
     {
-        $dir   = VAR_DIR . 'log/';
+        $dir   = self::LOG_DIR;
         $list  = array();
         $files = File::readDir($dir);
 
