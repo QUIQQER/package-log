@@ -110,7 +110,8 @@ class Manager extends QUI\QDOM
      * @param int $days - Maximum for the logs in days
      * @return Collection|\DirectoryIterator
      */
-    public static function getLogsOlderThanDays($days) {
+    public static function getLogsOlderThanDays($days)
+    {
         return self::getLogsOlderThanSeconds($days * 24 * 60 * 60);
     }
 
