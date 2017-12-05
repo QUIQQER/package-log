@@ -20,6 +20,8 @@ class Manager extends QUI\QDOM
 {
     const LOG_DIR = VAR_DIR . 'log/';
 
+    const LOG_ARCHIVE_DIR = self::LOG_DIR . 'archived/';
+
     /**
      * constructor
      *
@@ -153,6 +155,34 @@ class Manager extends QUI\QDOM
 
         foreach ($OldLogs as $OldLog) {
             unlink($OldLog->getRealPath());
+        }
+    }
+
+
+    /**
+     * Archives all log files which are older than the given amount of days
+     *
+     * @param int $days
+     *
+     * @throws QUI\Exception
+     */
+    public static function archiveLogsOlderThanDays($days)
+    {
+        $OldLogs = Manager::getLogsOlderThanDays($days);
+
+        $oldLogsGrouped = array();
+
+        foreach ($OldLogs as $OldLog) {
+            $date                    = date('Y-m-d', $OldLog->getCTime());
+            $oldLogsGrouped[$date][] = $OldLog->getRealPath();
+        }
+
+        foreach ($oldLogsGrouped as $date => $oldLogFiles) {
+            $zipPath = Manager::LOG_DIR . 'archived/' . $date . '.zip';
+
+            QUI\System\Log::write($zipPath);
+
+            QUI\Archiver\Zip::zipFiles($oldLogFiles, $zipPath);
         }
     }
 }

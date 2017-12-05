@@ -17,4 +17,12 @@
         </description>
     </cron>
 
+    <cron exec="\QUI\Log\Cron::archiveLogs">
+        <title>
+            <locale group="quiqqer/log" var="cron.cleanup.archive.title"/>
+        </title>
+        <description>
+            <locale group="quiqqer/log" var="cron.cleanup.archive.desc"/>
+        </description>
+    </cron>
 </crons>

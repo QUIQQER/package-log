@@ -62,6 +62,28 @@ class Cron
 
 
     /**
+     * Archive old log files
+     *
+     * @param $params
+     * @param $CronManager
+     *
+     * @throws QUI\Exception
+     */
+    public static function archiveLogs($params, $CronManager)
+    {
+        $Package = QUI::getPackage('quiqqer/log');
+        $Config  = $Package->getConfig();
+
+        $minLogAgeForArchiving = $Config->getValue('log_cleanup', 'minLogAgeForArchiving');
+
+        Manager::archiveLogsOlderThanDays($minLogAgeForArchiving);
+
+        // Files are copied into the zip file, so now delete them
+        Manager::deleteLogsOlderThanDays($minLogAgeForArchiving);
+    }
+
+
+    /**
      * Deletes old log files (and archives)
      *
      * @param $params

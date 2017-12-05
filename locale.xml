@@ -66,8 +66,18 @@
             <de><![CDATA[Löscht Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
             <en><![CDATA[Deletes log files which are older than defined in the log settings]]></en>
         </locale>
+
+        <locale name="cron.cleanup.archive.title">
+            <de><![CDATA[Alte Logs archivieren]]></de>
+            <en><![CDATA[Archive old logs]]></en>
+        </locale>
+
+        <locale name="cron.cleanup.archive.desc">
+            <de><![CDATA[Archiviert Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
+            <en><![CDATA[Archives log files which are older than defined in the log settings]]></en>
+        </locale>
     </groups>
-    
+
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>
