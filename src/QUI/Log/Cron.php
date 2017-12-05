@@ -74,10 +74,6 @@ class Cron
 
         $minLogAgeForDelete = $Config->getValue('log_cleanup', 'minLogAgeForDelete');
 
-        $OldLogs = Manager::getLogsOlderThanDays($minLogAgeForDelete);
-
-        foreach ($OldLogs as $OldLog) {
-            unlink($OldLog->getRealPath());
-        }
+        Manager::deleteLogsOlderThanDays($minLogAgeForDelete);
     }
 }

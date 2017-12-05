@@ -139,4 +139,19 @@ class Manager extends QUI\QDOM
 
         return $OlderLogs;
     }
+
+
+    /**
+     * Deletes all log files which are older than the given amount of days
+     *
+     * @param int $days
+     */
+    public static function deleteLogsOlderThanDays($days)
+    {
+        $OldLogs = Manager::getLogsOlderThanDays($days);
+
+        foreach ($OldLogs as $OldLog) {
+            unlink($OldLog->getRealPath());
+        }
+    }
 }
