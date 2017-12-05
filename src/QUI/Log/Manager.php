@@ -1,11 +1,12 @@
 <?php
 
 /**
- * his file contains \QUI\Log\Manager
+ * this file contains \QUI\Log\Manager
  */
 
 namespace QUI\Log;
 
+use DusanKasan\Knapsack\Collection;
 use QUI;
 use QUI\Utils\System\File;
 
@@ -17,6 +18,8 @@ use QUI\Utils\System\File;
  */
 class Manager extends QUI\QDOM
 {
+    const LOG_DIR = VAR_DIR . 'log/';
+
     /**
      * constructor
      *
@@ -97,5 +100,43 @@ class Manager extends QUI\QDOM
         }
 
         return $list;
+    }
+
+
+    /**
+     * Returns Log files created before the given amount of days
+     * (Wrapper for the getLogsOlderThanSeconds()-function)
+     *
+     * @param int $days - Maximum for the logs in days
+     * @return Collection|\DirectoryIterator
+     */
+    public static function getLogsOlderThanDays($days) {
+        return self::getLogsOlderThanSeconds($days * 24 * 60 * 60);
+    }
+
+    /**
+     * Returns Log files created before the given amount of seconds
+     *
+     * @param int $seconds - Maximum age for the log in seconds
+     * @return Collection|\DirectoryIterator
+     */
+    public static function getLogsOlderThanSeconds($seconds)
+    {
+        $DirectoryIterator   = new \DirectoryIterator(self::LOG_DIR);
+        $DirectoryCollection = \DusanKasan\Knapsack\Collection::from($DirectoryIterator);
+
+        $OlderLogs = $DirectoryCollection->filter(function ($log, $key) use ($seconds) {
+            /* @var $log \DirectoryIterator */
+
+            if ($log->isDot() || !$log->isFile() || $log->getExtension() != 'log') {
+                return false;
+            }
+
+            $logAge = time() - $log->getCTime();
+
+            return ($logAge >= $seconds);
+        });
+
+        return $OlderLogs;
     }
 }

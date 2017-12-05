@@ -7,4 +7,14 @@
             <param name="email" type="email" />
         </params>
     </cron>
+
+    <cron exec="\QUI\Log\Cron::deleteLogs">
+        <title>
+            <locale group="quiqqer/log" var="cron.cleanup.delete.title"/>
+        </title>
+        <description>
+            <locale group="quiqqer/log" var="cron.cleanup.delete.desc"/>
+        </description>
+    </cron>
+
 </crons>

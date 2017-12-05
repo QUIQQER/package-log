@@ -56,7 +56,18 @@
             <de><![CDATA[Archivierte Logs nach wie vielen Tagen löschen?]]></de>
             <en><![CDATA[Delete archived logs after how many days?]]></en>
         </locale>
-    </groups>
+
+        <locale name="cron.cleanup.delete.title">
+            <de><![CDATA[Alte Logs löschen]]></de>
+            <en><![CDATA[Delete old logs]]></en>
+        </locale>
+
+        <locale name="cron.cleanup.delete.desc">
+            <de><![CDATA[Löscht Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
+            <en><![CDATA[Deletes log files which are older than defined in the log settings]]></en>
+        </locale>
+     </groups>
+
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>

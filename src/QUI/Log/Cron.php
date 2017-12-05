@@ -59,4 +59,25 @@ class Cron
 
         $Mailer->send();
     }
+
+
+    /**
+     * Deletes old log files (and archives)
+     *
+     * @param $params
+     * @param $CronManager
+     */
+    public static function deleteLogs($params, $CronManager)
+    {
+        $Package = QUI::getPackage('quiqqer/log');
+        $Config  = $Package->getConfig();
+
+        $minLogAgeForDelete = $Config->getValue('log_cleanup', 'minLogAgeForDelete');
+
+        $OldLogs = Manager::getLogsOlderThanDays($minLogAgeForDelete);
+
+        foreach ($OldLogs as $OldLog) {
+            unlink($OldLog->getRealPath());
+        }
+    }
 }
