@@ -76,6 +76,11 @@
             <de><![CDATA[Archiviert Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
             <en><![CDATA[Archives log files which are older than defined in the log settings]]></en>
         </locale>
+
+        <locale name="error.setup.cron">
+            <de><![CDATA[Standard Aufgabe zur Log Bereinigung konnte nicht hinzugefügt werden.]]></de>
+            <en><![CDATA[Default cron for log cleanup couldn't be added.]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/log" datatype="js">
