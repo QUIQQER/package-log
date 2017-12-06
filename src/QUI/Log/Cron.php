@@ -75,11 +75,14 @@ class Cron
         $Config  = $Package->getConfig();
 
         $minLogAgeForArchiving = $Config->getValue('log_cleanup', 'minLogAgeForArchiving');
+        $isLogArchivingEnabled = $Config->getValue('log_cleanup', 'isArchivingEnabled');
 
-        Manager::archiveLogsOlderThanDays($minLogAgeForArchiving);
+        if ($isLogArchivingEnabled) {
+            Manager::archiveLogsOlderThanDays($minLogAgeForArchiving);
 
-        // Files are copied into the zip file, so now delete them
-        Manager::deleteLogsOlderThanDays($minLogAgeForArchiving);
+            // Files are copied into the zip file, so now delete them
+            Manager::deleteLogsOlderThanDays($minLogAgeForArchiving);
+        }
     }
 
 
