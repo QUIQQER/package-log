@@ -17,6 +17,112 @@
         </locale>
     </groups>
     <groups name="quiqqer/log" datatype="php">
+        <locale name="settings.general.text">
+            <de><![CDATA[Allgemeine Log-Einstellungen]]></de>
+            <en><![CDATA[General Log Settings]]></en>
+        </locale>
+
+        <locale name="settings.general.log.title">
+            <de><![CDATA[Allgemeine Einstellungen]]></de>
+            <en><![CDATA[General Settings]]></en>
+        </locale>
+        <locale name="settings.general.log.logAllEvents.text">
+            <de><![CDATA[Alle Events und Aktionen der Benutzer loggen]]></de>
+            <en><![CDATA[Log all events and user actions]]></en>
+        </locale>
+        <locale name="settings.general.log.logAllEvents.description">
+            <de><![CDATA[
+                Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
+                Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funkion mit bedacht aktiviert werden.
+                <br />
+                Die Nachrichten werden als Info Nachrichten geloggt.
+            ]]></de>
+            <en><![CDATA[
+                All user actions will be logged. For example which changes they make.
+                This function may cause performance issues, so it should be enabled advisedly.
+                <br />
+                The messages are logged as info messages.
+            ]]></en>
+        </locale>
+        <locale name="settings.general.log.logAdminJsErrors.text">
+            <de><![CDATA[JavaScript Fehler in der Administration loggen]]></de>
+            <en><![CDATA[Log administration JavaScript errors]]></en>
+        </locale>
+        <locale name="settings.general.log.logAdminJsErrors.description">
+            <de><![CDATA[Falls JavaScript Fehler in der Administration auftreten, werden diese an den Server gesendet und in einem seperaten JavaScript error log gespeichert.]]></de>
+            <en><![CDATA[If JavaScript errors occur in the administration they are sent to the server and stored in a seperate JavaScript error log.]]></en>
+        </locale>
+        <locale name="settings.general.log.logFrontendJsErrors.text">
+            <de><![CDATA[JavaScript Fehler im Frontend loggen]]></de>
+            <en><![CDATA[Log frontend JavaScript errors]]></en>
+        </locale>
+        <locale name="settings.general.log.logFrontendJsErrors.description">
+            <de><![CDATA[Falls JavaScript Fehler im Frontend auftreten, werden diese an den Server gesendet und in einem seperaten JavaScript error log gespeichert.]]></de>
+            <en><![CDATA[If JavaScript errors occur in the frontend they are sent to the server and stored in a seperate JavaScript error log.]]></en>
+        </locale>
+
+        <locale name="settings.general.logLevels.title">
+            <de><![CDATA[Log Level Einstellungen]]></de>
+            <en><![CDATA[Log Level Settings]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.alert.text">
+            <de><![CDATA[Alert-Meldungen (Alarme) loggen]]></de>
+            <en><![CDATA[Log Alert-Masseges]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.debug.text">
+            <de><![CDATA[Critical-Meldungen (kritisch) loggen]]></de>
+            <en><![CDATA[Log Critical-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.critical.text">
+            <de><![CDATA[Debug-Meldungen loggen]]></de>
+            <en><![CDATA[Log Debug-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.emergency.text">
+            <de><![CDATA[Emergency-Meldungen (Notfälle) loggen]]></de>
+            <en><![CDATA[Log Emergency-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.error.text">
+            <de><![CDATA[Error-Meldungen (Fehler) loggen]]></de>
+            <en><![CDATA[Log Error-Messages ]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.info.text">
+            <de><![CDATA[Info-Meldungen loggen]]></de>
+            <en><![CDATA[Log Info-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.notice.text">
+            <de><![CDATA[Notice-Meldungen (Hinweise) loggen]]></de>
+            <en><![CDATA[Log Notice-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.warning.text">
+            <de><![CDATA[Warning-Meldungen (Warnungen) loggen]]></de>
+            <en><![CDATA[Log Warning-Messages]]></en>
+        </locale>
+
+        <locale name="settings.general.browserLogs.title">
+            <de><![CDATA[Browser Log Einstellungen]]></de>
+            <en><![CDATA[Browser Log Settings]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.userLoggedIn.text">
+            <de><![CDATA[Browser Log nur für angemeldete Benutzer anzeigen.]]></de>
+            <en><![CDATA[Show browser log only to signed in users]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.browserPhp.text">
+            <de><![CDATA[BrowserPHP Logs einschalten]]></de>
+            <en><![CDATA[Enable BrowserPHP Logs]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.firePhp.text">
+            <de><![CDATA[FirePHP Logs einschalten]]></de>
+            <en><![CDATA[Enable FirePHP Logs]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.chromePhp.text">
+            <de><![CDATA[ChromePHP Logs einschalten]]></de>
+            <en><![CDATA[Enable ChromePHP Logs]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.debug.text">
+            <de><![CDATA[Browser-Debugging einschalten]]></de>
+            <en><![CDATA[Enable browser debugging]]></en>
+        </locale>
+
         <locale name="settings.cleanup.text">
             <de><![CDATA[Log-Bereinigung & -Archivierung]]></de>
             <en><![CDATA[Log Cleanup & Archiving]]></en>

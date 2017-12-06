@@ -128,83 +128,118 @@
             <categories>
 
                 <category name="browser_logs" index="1">
-                    <text>Allgemein Log Einstellungen</text>
+                    <text>
+                        <locale group="quiqqer/log" var="settings.general.text"/>
+                    </text>
                     <icon>fa fa-cogs</icon>
 
-                    <settings title="log_section" name="log_section">
-                        <title>Allgemeine Einstellungen</title>
+                    <settings name="log_section">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.general.log.title"/>
+                        </title>
                         <input conf="log.logAllEvents" type="checkbox">
-                            <text>Alle Events und Aktionen der Benutzer loggen</text>
-                            <description><![CDATA[
-                                Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
-                                Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funkion mit bedacht aktiviert werden.
-                                <br />
-                                Die Nachrichten werden als Info Nachrichten geloggt.
-                            ]]></description>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.log.logAllEvents.text"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/log" var="settings.general.log.logAllEvents.description"/>
+                            </description>
                         </input>
 
                         <input conf="log.logAdminJsErrors" type="checkbox">
-                            <text>JavaScript Fehler in der Administration loggen</text>
-                            <description><![CDATA[
-                                Falls JavaScript Fehler in der Administration erscheinen, werden diese an den Server gesendet und in eine seperate JavaScript error log gespeichert.
-                            ]]></description>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.log.logAdminJsErrors.text"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/log" var="settings.general.log.logAdminJsErrors.description"/>
+                            </description>
                         </input>
 
                         <input conf="log.logFrontendJsErrors" type="checkbox">
-                            <text>JavaScript Fehler im Frontend loggen</text>
-                            <description><![CDATA[
-                                Falls JavaScript Fehler im Frontend erscheinen, werden diese an den Server gesendet und in eine seperate JavaScript error log gespeichert.
-                            ]]></description>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.log.logFrontendJsErrors.text"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/log" var="settings.general.log.logFrontendJsErrors.description"/>
+                            </description>
                         </input>
                     </settings>
 
-                    <settings title="log_levels_section" name="log_levels_section">
-                        <title>Log Level Einstellungen</title>
+                    <settings name="log_levels_section">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.general.logLevels.title"/>
+                        </title>
 
                         <input conf="log_levels.alert" type="checkbox">
-                            <text>Alert-Meldungen (Alarm) sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.alert.text"/>
+                            </text>
                         </input>
                         <input conf="log_levels.critical" type="checkbox">
-                            <text>Critcal-Meldungen (kritisch) sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.critical.text"/>
+                            </text>
                         </input>
                         <input conf="log_levels.debug" type="checkbox">
-                            <text>Debug-Meldungen sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.debug.text"/>
+                            </text>
                         </input>
-
                         <input conf="log_levels.emergency" type="checkbox">
-                            <text>Emergency-Meldungen (Notfall) sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.emergency.text"/>
+                            </text>
                         </input>
                         <input conf="log_levels.error" type="checkbox">
-                            <text>Error-Meldungen (Fehler) sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.error.text"/>
+                            </text>
                         </input>
                         <input conf="log_levels.info" type="checkbox">
-                            <text>Info-Meldungen sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.info.text"/>
+                            </text>
                         </input>
                         <input conf="log_levels.notice" type="checkbox">
-                            <text>Notice-Meldungen (Hinweis) sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.notice.text"/>
+                            </text>
                         </input>
                         <input conf="log_levels.warning" type="checkbox">
-                            <text>Warning-Meldungen (Warnung) sollen geloggt werden</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.logLevels.warning.text"/>
+                            </text>
                         </input>
-
                     </settings>
 
-                    <settings title="browser_logs_section" name="browser_logs_section">
-                        <title>Browser Log Einstellungen</title>
+                    <settings name="browser_logs_section">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.general.browserLogs.title"/>
+                        </title>
                         <input conf="browser_logs.userLogedIn" type="checkbox">
-                            <text>Browser Log nur für angemeldete Benutzer anzeigen.</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.browserLogs.userLoggedIn.text"/>
+                            </text>
                         </input>
                         <input conf="browser_logs.browserphp" type="checkbox">
-                            <text>BrowserPHP Logs einschalten</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.browserLogs.browserPhp.text"/>
+                            </text>
                         </input>
                         <input conf="browser_logs.firephp" type="checkbox">
-                            <text>FirePHP Logs einschalten</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.browserLogs.firePhp.text"/>
+                            </text>
                         </input>
                         <input conf="browser_logs.chromephp" type="checkbox">
-                            <text>ChromePHP Logs einschalten</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.browserLogs.chromePhp.text"/>
+                            </text>
                         </input>
                         <input conf="browser_logs.debug" type="checkbox">
-                            <text>Browser Debugin einschalten</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.general.browserLogs.debug.text"/>
+                            </text>
                         </input>
                     </settings>
                 </category>
