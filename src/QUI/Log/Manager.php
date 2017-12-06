@@ -185,4 +185,59 @@ class Manager extends QUI\QDOM
             QUI\Archiver\Zip::zipFiles($oldLogFiles, $zipPath);
         }
     }
+
+
+    /**
+     * Returns archived log files created before the given amount of seconds
+     *
+     * @param int $seconds - Maximum age for the archived logs in seconds
+     * @return Collection|\DirectoryIterator
+     */
+    public static function getArchivedLogsOlderThanSeconds($seconds)
+    {
+        $DirectoryIterator   = new \DirectoryIterator(self::LOG_ARCHIVE_DIR);
+        $DirectoryCollection = \DusanKasan\Knapsack\Collection::from($DirectoryIterator);
+
+        $OlderArchives = $DirectoryCollection->filter(function ($archive, $key) use ($seconds) {
+            /* @var $archive \DirectoryIterator */
+
+            if ($archive->isDot() || !$archive->isFile() || $archive->getExtension() != 'zip') {
+                return false;
+            }
+
+            $archiveAge = time() - $archive->getCTime();
+
+            return ($archiveAge >= $seconds);
+        });
+
+        return $OlderArchives;
+    }
+
+
+    /**
+     * Returns archived log files created before the given amount of days
+     * (Wrapper for the getArchivedLogsOlderThanSeconds()-function)
+     *
+     * @param int $days - Maximum age for the archived logs in days
+     * @return Collection|\DirectoryIterator
+     */
+    public static function getArchivedLogsOlderThanDays($days)
+    {
+        return self::getArchivedLogsOlderThanSeconds($days * 24 * 60 * 60);
+    }
+
+
+    /**
+     * Deletes all log files which are older than the given amount of days
+     *
+     * @param int $days
+     */
+    public static function deleteArchivedLogsOlderThanDays($days)
+    {
+        $OldArchives = Manager::getArchivedLogsOlderThanDays($days);
+
+        foreach ($OldArchives as $OldArchive) {
+            unlink($OldArchive->getRealPath());
+        }
+    }
 }

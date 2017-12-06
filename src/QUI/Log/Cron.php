@@ -92,13 +92,19 @@ class Cron
      * @param $params
      * @param $CronManager
      */
-    public static function deleteLogs($params, $CronManager)
+    public static function cleanupLogsAndArchives($params, $CronManager)
     {
         $Package = QUI::getPackage('quiqqer/log');
         $Config  = $Package->getConfig();
 
-        $minLogAgeForDelete = $Config->getValue('log_cleanup', 'minLogAgeForDelete');
+        $minLogAgeForDelete       = $Config->getValue('log_cleanup', 'minLogAgeForDelete');
+        $minArchiveAgeForDelete   = $Config->getValue('log_cleanup', 'minArchiveAgeForDelete');
+        $isArchiveDeletionEnabled = $Config->getValue('log_cleanup', 'isArchiveDeletionEnabled');
 
         Manager::deleteLogsOlderThanDays($minLogAgeForDelete);
+
+        if ($isArchiveDeletionEnabled) {
+            Manager::deleteArchivedLogsOlderThanDays($minArchiveAgeForDelete);
+        }
     }
 }

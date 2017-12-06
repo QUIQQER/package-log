@@ -8,7 +8,7 @@
         </params>
     </cron>
 
-    <cron exec="\QUI\Log\Cron::deleteLogs">
+    <cron exec="\QUI\Log\Cron::cleanupLogsAndArchives">
         <title>
             <locale group="quiqqer/log" var="cron.cleanup.delete.title"/>
         </title>
