@@ -213,7 +213,7 @@
 
                     <icon>fa fa-paint-brush</icon>
 
-                    <settings title="log_archiving" name="log_archiving">
+                    <settings name="log_archiving">
                         <title>
                             <locale group="quiqqer/log" var="settings.cleanup.archiving.title"/>
                         </title>
@@ -229,7 +229,7 @@
                         </input>
                     </settings>
 
-                    <settings title="log_deletion" name="log_deletion">
+                    <settings name="log_deletion">
                         <title>
                             <locale group="quiqqer/log" var="settings.cleanup.deletion.title"/>
                         </title>
