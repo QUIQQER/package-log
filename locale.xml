@@ -63,8 +63,8 @@
         </locale>
 
         <locale name="cron.cleanup.delete.desc">
-            <de><![CDATA[Löscht Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
-            <en><![CDATA[Deletes log files which are older than defined in the log settings]]></en>
+            <de><![CDATA[Löscht Log-Dateien (auch archivierte, wenn in den Einstellungen aktiviert), die älter sind als in den Log-Einstellungen festgelegt]]></de>
+            <en><![CDATA[Deletes log files (also archived ones, if enabled in the settings) which are older than defined in the log settings]]></en>
         </locale>
 
         <locale name="cron.cleanup.archive.title">
