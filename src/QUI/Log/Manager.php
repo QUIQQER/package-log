@@ -75,6 +75,11 @@ class Manager extends QUI\QDOM
                 continue;
             }
 
+            // Ignore directories (e.g. archived/ folder)
+            if (is_dir($dir . $file)) {
+                continue;
+            }
+
             $mtime = filemtime($dir . $file);
 
             $list[] = array(
