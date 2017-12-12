@@ -151,11 +151,27 @@ define('package/quiqqer/log/bin/Manager', [
                     var Body   = Control.getContent(),
                         Parent = Body.getParent();
 
+                    var MessageOverlay = $('qui-logs-message');
+                    if (!MessageOverlay) {
+                        MessageOverlay = new Element('div#qui-logs-message.messages-message.message-attention');
+                        MessageOverlay.hide();
+                        MessageOverlay.inject(Parent);
+                    }
+
                     if (!Parent.getElement('.qui-logs-file')) {
                         new Element('div.qui-logs-file').inject(Parent);
                     }
 
                     Control.refreshFile();
+
+                    MessageOverlay.set('text', Locale.get(lg, 'logs.panel.message.trimmed'));
+                    MessageOverlay.show();
+
+                    MessageOverlay.position({
+                        relativeTo: Parent.getElement('.qui-logs-file'),
+                        position  : "topLeft",
+                        offset    : {x: 0, y: -3}
+                    });
                 }
             });
         },
@@ -243,16 +259,16 @@ define('package/quiqqer/log/bin/Manager', [
 
             Ajax.get('package_quiqqer_log_ajax_file', function (result) {
 
-                if (result.isLogTrimmed) {
-                    QUI.getMessageHandler().then(function (MessageHandler) {
-                        MessageHandler.addAttention(Locale.get(lg, 'logs.panel.message.trimmed'));
-                    });
-                }
-
                 File.set(
                     'html',
                     '<pre id="qui-logs-file-data" class="box language-bash" style="margin: 0;">' + result.data + '</pre>'
                 );
+
+                if (result.isLogTrimmed) {
+                    $('qui-logs-message').show();
+                } else {
+                    $('qui-logs-message').hide();
+                }
 
                 Control.Loader.hide();
                 Control.refresh();
@@ -436,6 +452,14 @@ define('package/quiqqer/log/bin/Manager', [
                     File.getElement('pre').setStyles({
                         height: height,
                         width : size.x - width
+                    });
+                }
+
+                var LogMessage = $('qui-logs-message');
+                if(LogMessage) {
+                    LogMessage.setStyles({
+                        height: 40,
+                        width: size.x - width
                     });
                 }
 
