@@ -7,15 +7,15 @@
             <section name="log">
                 <conf name="logAllEvents">
                     <type><![CDATA[bool]]></type>
-                    <default>0</default>
+                    <defaultvalue>0</defaultvalue>
                 </conf>
                 <conf name="logAdminJsErrors">
                     <type><![CDATA[bool]]></type>
-                    <default>0</default>
+                    <defaultvalue>0</defaultvalue>
                 </conf>
                 <conf name="logFrontendJsErrors">
                     <type><![CDATA[bool]]></type>
-                    <default>0</default>
+                    <defaultvalue>0</defaultvalue>
                 </conf>
             </section>
 
