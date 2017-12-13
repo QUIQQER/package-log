@@ -296,6 +296,8 @@
                         <locale group="quiqqer/log" var="settings.graylog.text"/>
                     </text>
 
+                    <icon>fa fa-heartbeat</icon>
+
                     <settings name="graylog_section">
                         <title>
                             <locale group="quiqqer/log" var="settings.graylog.title"/>
@@ -318,6 +320,8 @@
                         <locale group="quiqqer/log" var="settings.cube.text"/>
                     </text>
 
+                    <icon>fa fa-cube</icon>
+
                     <settings name="cube_section">
                         <title>
                             <locale group="quiqqer/log" var="settings.cube.title"/>
@@ -338,6 +342,8 @@
                         <locale group="quiqqer/log" var="settings.newrelic.text"/>
                     </text>
 
+                    <icon>fa fa-circle-o</icon>
+
                     <settings name="newrelic_section">
                         <title>
                             <locale group="quiqqer/log" var="settings.newrelic.title"/>
@@ -357,6 +363,8 @@
                     <text>
                         <locale group="quiqqer/log" var="settings.syslogudp.text"/>
                     </text>
+
+                    <icon>fa fa-server</icon>
 
                     <settings name="syslogudp_host">
                         <title>
