@@ -3,9 +3,9 @@
 QUIQQER Log
 ========
 
-Ergänzt QUIQQER um eine erweiterte Logverwaltung.
+Expands QUIQQER with extended log-management.
 
-Paketname:
+Package Name:
 
     quiqqer/log
 
@@ -13,22 +13,24 @@ Paketname:
 Features
 --------
 
-- Erweiterte Logverwaltung
-- JavaScript Fehler-Loging
+- Extended Log-Management
+- Log Cleanup & Archiving
+- JavaScript Error-Logging
+- Log-Level-Settings
 - Log-Level-Einstellungen
 - FirePHP, ChromePHP Loging (Browser Debuging)
-- Kann Logs zu einem Cube Server senden
-- Kann Logs zu einem New Relic senden
-- Kann Logs zu einem Syslog UDP Server senden
+- Send Logs To Cube Servers
+- Send Logs To New Relic
+- Send Logs To Syslog UDP Servers
 
 
-Installation
+Setup
 ------------
 
-Der Paketname ist: quiqqer/log
+Package name is: `quiqqer/log`
 
 
-Mitwirken
+Contribute
 ----------
 
 - Issue Tracker: https://dev.quiqqer.com/quiqqer/package-log/issues
@@ -38,24 +40,11 @@ Mitwirken
 Support
 -------
 
-Falls Sie Fehler gefunden, Wünsche oder Verbesserungsvorschläge haben, 
-können Sie uns gern per Mail an support@pcsg.de darüber informieren.  
-Wir werden versuchen auf Ihre Wünsche einzugehen bzw. diese an die 
-zuständigen Entwickler des Projektes weiterleiten.
+If you found any flaws, have any wishes or suggestions you can send an email
+to [support@pcsg.de](mailto:support@pcsg.de) to inform us about your concerns. 
+We will try to respond to your request and forward it to the responsible developer.
 
 
 License
 -------
 GPL-3.0+
-
-
-Entwickler
---------
-
-Erweitert QUIQQER um ein neues globales Event
-- onQuiqqerLogGetLogger [ Monolog\Logger $Logger ]
-
-Wird gefeuert wenn ein Monolog Logger initialisiert wurde.
-Mit diesem Event können neue Monolog Logger dem $Logger hinzugefügrt werden.
-
-onQuiqqerLogGetLogger
