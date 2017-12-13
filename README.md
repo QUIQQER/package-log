@@ -1,3 +1,5 @@
+![QUIQQER Log](bin/images/Readme.jpg)
+
 QUIQQER Log
 ========
 
