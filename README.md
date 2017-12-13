@@ -46,6 +46,7 @@ zuständigen Entwickler des Projektes weiterleiten.
 
 License
 -------
+GPL-3.0+
 
 
 Entwickler
