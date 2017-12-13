@@ -163,6 +163,96 @@
             <en><![CDATA[Delete archived logs after how many days?]]></en>
         </locale>
 
+
+        <locale name="settings.graylog.text">
+            <de><![CDATA[GrayLog2 Server]]></de>
+            <en><![CDATA[GrayLog2 Server]]></en>
+        </locale>
+
+        <locale name="settings.graylog.title">
+            <de><![CDATA[GrayLog2 Server Einstellungen]]></de>
+            <en><![CDATA[GrayLog2 Server Settings]]></en>
+        </locale>
+
+        <locale name="settings.graylog.server">
+            <de><![CDATA[GrayLog2 Server URL]]></de>
+            <en><![CDATA[GrayLog2 Server URL]]></en>
+        </locale>
+
+        <locale name="settings.graylog.port">
+            <de><![CDATA[GrayLog2 Server Port]]></de>
+            <en><![CDATA[GrayLog2 Server Port]]></en>
+        </locale>
+
+
+        <locale name="settings.cube.text">
+            <de><![CDATA[Cube Server]]></de>
+            <en><![CDATA[Cube Server]]></en>
+        </locale>
+
+        <locale name="settings.cube.title">
+            <de><![CDATA[Cube Server Einstellungen]]></de>
+            <en><![CDATA[Cube Server Settings]]></en>
+        </locale>
+
+        <locale name="settings.cube.server.text">
+            <de><![CDATA[Cube Server URL]]></de>
+            <en><![CDATA[Cube Server URL]]></en>
+        </locale>
+
+        <locale name="settings.cube.server.description">
+            <de><![CDATA[Mehr Informationen zu Cube Server finden Sie unter: <a href="https://github.com/square/cube" target="_blank">https://github.com/square/cube</a>]]></de>
+            <en><![CDATA[More information about Cube Server can be found at: <a href="https://github.com/square/cube" target="_blank">https://github.com/square/cube</a>]]></en>
+        </locale>
+
+
+        <locale name="settings.newrelic.text">
+            <de><![CDATA[NewRelic]]></de>
+            <en><![CDATA[NewRelic]]></en>
+        </locale>
+
+        <locale name="settings.newrelic.title">
+            <de><![CDATA[NewRelic Einstellungen]]></de>
+            <en><![CDATA[NewRelic Settings]]></en>
+        </locale>
+
+        <locale name="settings.newrelic.appname.text">
+            <de><![CDATA[NewRelic App-Name]]></de>
+            <en><![CDATA[NewRelic App-Name]]></en>
+        </locale>
+
+        <locale name="settings.newrelic.appname.description">
+            <de><![CDATA[Mehr Informationen zu New Relic finden Sie unter: <a href="https://www.newrelic.com" target="_blank">https://www.newrelic.com</a>]]></de>
+            <en><![CDATA[More information about New Relic can be found at: <a href="https://www.newrelic.com" target="_blank">https://www.newrelic.com</a>]]></en>
+        </locale>
+
+
+        <locale name="settings.syslogudp.text">
+            <de><![CDATA[Syslog UDP Server]]></de>
+            <en><![CDATA[Syslog UDP Server]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.title">
+            <de><![CDATA[Syslog UDP Server Einstellungen]]></de>
+            <en><![CDATA[Syslog UDP Server Settings]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.host.text">
+            <de><![CDATA[Syslog UDP Host]]></de>
+            <en><![CDATA[Syslog UDP Host]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.host.description">
+            <de><![CDATA[Es kann eine IP-Adresse oder eine Domain angegeben werden (z.B.: 192.168.1.200 oder my.server.com).]]></de>
+            <en><![CDATA[You can enter an IP-address or a domain (e.g.: 192.168.1.200 or my.server.com).]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.port.text">
+            <de><![CDATA[Syslog UDP Port]]></de>
+            <en><![CDATA[Syslog UDP Port]]></en>
+        </locale>
+
+        
         <locale name="cron.cleanup.delete.title">
             <de><![CDATA[Alte Logs löschen]]></de>
             <en><![CDATA[Delete old logs]]></en>

@@ -292,61 +292,88 @@
 
 
                 <category name="graylog" index="3">
-                    <text>GrayLog2 Server</text>
+                    <text>
+                        <locale group="quiqqer/log" var="settings.graylog.text"/>
+                    </text>
 
-                    <settings title="graylog_section" name="graylog_section">
-                        <title>Cube Server Einstellungen</title>
+                    <settings name="graylog_section">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.graylog.title"/>
+                        </title>
                         <input conf="graylog.server" type="string">
-                            <text>GrayLog2 Server URL</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.graylog.server"/>
+                            </text>
                         </input>
                         <input conf="graylog.port" type="number">
-                            <text>GrayLog2 Server PORT</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.graylog.port"/>
+                            </text>
                         </input>
                     </settings>
                 </category>
 
                 <category name="cube" index="4">
-                    <text>Cube Server</text>
+                    <text>
+                        <locale group="quiqqer/log" var="settings.cube.text"/>
+                    </text>
 
-                    <settings title="cube_section" name="cube_section">
-                        <title>Cube Server Einstellungen</title>
+                    <settings name="cube_section">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.cube.title"/>
+                        </title>
                         <input conf="cube.server" type="string">
-                            <text>Cube Server URL</text>
-                            <description><![CDATA[
-                                Mehr Informationen zu Cube Server finden Sie unter: https://github.com/square/cube
-                            ]]></description>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.cube.server.text"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/log" var="settings.cube.server.description"/>
+                            </description>
                         </input>
                     </settings>
                 </category>
 
                 <category name="newrelic" index="5">
-                    <text>NewRelic</text>
+                    <text>
+                        <locale group="quiqqer/log" var="settings.newrelic.text"/>
+                    </text>
 
-                    <settings title="newrelic_section" name="newrelic_section">
-                        <title>NewRelic Einstellungen</title>
+                    <settings name="newrelic_section">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.newrelic.title"/>
+                        </title>
                         <input conf="newRelic.appname" type="string">
-                            <text>NewRelic APP-Name</text>
-                            <description><![CDATA[
-                                Mehr Informationen zu New Relic finden Sie unter: https://www.newrelic.com
-                            ]]></description>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.newrelic.appname.text"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/log" var="settings.newrelic.appname.description"/>
+                            </description>
                         </input>
                     </settings>
                 </category>
 
                 <category name="syslogudp" index="6">
-                    <text>Syslog UDP Server</text>
+                    <text>
+                        <locale group="quiqqer/log" var="settings.syslogudp.text"/>
+                    </text>
 
-                    <settings title="syslogudp_host" name="syslogudp_host">
-                        <title>Syslog UDP Server Einstellungen</title>
+                    <settings name="syslogudp_host">
+                        <title>
+                            <locale group="quiqqer/log" var="settings.syslogudp.title"/>
+                        </title>
                         <input conf="syslogUdp.host" type="string">
-                            <text>UDP Syslog Host</text>
-                            <description><![CDATA[
-                                Es kann eine IP-Adresse oder ein Server DNS angegeben werden.
-                                z.B.: 192.168.1.200 oder my.server.com
-                            ]]></description>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.syslogudp.host.text"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/log" var="settings.syslogudp.host.description"/>
+                            </description>
                         </input>
                         <input conf="syslogUdp.port" type="string">
-                            <text>UDP Syslog Port</text>
+                            <text>
+                                <locale group="quiqqer/log" var="settings.syslogudp.port.text"/>
+                            </text>
                         </input>
                     </settings>
 
