@@ -273,9 +273,14 @@
             <en><![CDATA[Archives log files which are older than defined in the log settings]]></en>
         </locale>
 
-        <locale name="error.setup.cron">
+        <locale name="error.setup.cron.deletion">
             <de><![CDATA[Standard Aufgabe zur Log Bereinigung konnte nicht hinzugefügt werden.]]></de>
             <en><![CDATA[Default cron for log cleanup couldn't be added.]]></en>
+        </locale>
+
+        <locale name="error.setup.cron.archiving">
+            <de><![CDATA[Standard Aufgabe zur Log Archivierung konnte nicht hinzugefügt werden.]]></de>
+            <en><![CDATA[Default cron for log archiving couldn't be added.]]></en>
         </locale>
     </groups>
 

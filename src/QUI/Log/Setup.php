@@ -22,21 +22,39 @@ class Setup
             mkdir($logArchiveDir);
         }
 
-        // Setup cron for default log deletion every 180 days
         $CronManager = new QUI\Cron\Manager();
-        $cronName    = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.delete.title');
-
         $Config             = QUI::getPackage('quiqqer/log')->getConfig();
-        $isCronAlreadySetup = $Config->getValue('log_cleanup', 'isCronAlreadySetup');
 
-        if (!$CronManager->isCronSetUp($cronName) && !$isCronAlreadySetup) {
+        // Setup cron for default log deletion every 180 days
+        $cleanupCronName           = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.delete.title');
+        $isCleanupCronAlreadySetup = $Config->getValue('log_cleanup', 'isCleanupCronAlreadySetup');
+
+        if (!$CronManager->isCronSetUp($cleanupCronName) && !$isCleanupCronAlreadySetup) {
             try {
-                $CronManager->add($cronName, 0, 0, 180, 0, 0);
+                $CronManager->add($cleanupCronName, 0, 0, 180, 0, 0);
 
-                $Config->setValue('log_cleanup', 'isCronAlreadySetup', 1);
+                $Config->setValue('log_cleanup', 'isCleanupCronAlreadySetup', 1);
                 $Config->save();
             } catch (QUI\Exception $exception) {
-                $msg = QUI::getLocale()->get('quiqqer/log', 'error.setup.cron');
+                $msg = QUI::getLocale()->get('quiqqer/log', 'error.setup.cron.deletion');
+                QUI\System\Log::addError($msg);
+                QUI::getMessagesHandler()->addError($msg);
+            }
+        }
+
+
+        // Setup cron for default log archiving every 3 days
+        $archivingCronName           = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.archive.title');
+        $isArchivingCronAlreadySetup = $Config->getValue('log_cleanup', 'isArchivingCronAlreadySetup');
+
+        if (!$CronManager->isCronSetUp($archivingCronName) && !$isArchivingCronAlreadySetup) {
+            try {
+                $CronManager->add($archivingCronName, 0, 0, 3, 0, 0);
+
+                $Config->setValue('log_cleanup', 'isArchivingCronAlreadySetup', 1);
+                $Config->save();
+            } catch (QUI\Exception $exception) {
+                $msg = QUI::getLocale()->get('quiqqer/log', 'error.setup.cron.archiving');
                 QUI\System\Log::addError($msg);
                 QUI::getMessagesHandler()->addError($msg);
             }

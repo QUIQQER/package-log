@@ -40,7 +40,11 @@
                     <type><![CDATA[bool]]></type>
                     <defaultvalue>0</defaultvalue>
                 </conf>
-                <conf name="isCronAlreadySetup">
+                <conf name="isCleanupCronAlreadySetup">
+                    <type><![CDATA[bool]]></type>
+                    <defaultvalue>0</defaultvalue>
+                </conf>
+                <conf name="isArchivingCronAlreadySetup">
                     <type><![CDATA[bool]]></type>
                     <defaultvalue>0</defaultvalue>
                 </conf>
