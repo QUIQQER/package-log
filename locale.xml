@@ -6,13 +6,13 @@
             <en><![CDATA[QUIQQER - Log]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Ergänzt QUIQQER um eine erweiterte Logverwaltung. Verwalten Sie die Logs von QUIQQER, schauen Sie Fehlermeldungen nach oder machen Sie sich ein Überblick was im System so passiert.]]></de>
+            <de><![CDATA[Ergänzt QUIQQER um eine erweiterte Log-Verwaltung. Verwalten Sie die Logs von QUIQQER, schauen Sie Fehlermeldungen nach oder machen Sie sich ein Überblick was im System so passiert.]]></de>
             <en><![CDATA[Extend QUIQQER with a log management. Manage the logs of QUIQQER, check for errors, or get an overview of what's happening in the system.]]></en>
         </locale>
     </groups>
     <groups name="quiqqer/log" datatype="php,js">
         <locale name="menu.title">
-            <de><![CDATA[Logverwaltung]]></de>
+            <de><![CDATA[Log-Verwaltung]]></de>
             <en><![CDATA[Log Management]]></en>
         </locale>
     </groups>
@@ -33,7 +33,7 @@
         <locale name="settings.general.log.logAllEvents.description">
             <de><![CDATA[
                 Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
-                Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funkion mit bedacht aktiviert werden.
+                Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funktion mit bedacht aktiviert werden.
                 <br />
                 Die Nachrichten werden als Info Nachrichten geloggt.
             ]]></de>
@@ -57,8 +57,8 @@
             <en><![CDATA[Log frontend JavaScript errors]]></en>
         </locale>
         <locale name="settings.general.log.logFrontendJsErrors.description">
-            <de><![CDATA[Falls JavaScript Fehler im Frontend auftreten, werden diese an den Server gesendet und in einem seperaten JavaScript error log gespeichert.]]></de>
-            <en><![CDATA[If JavaScript errors occur in the frontend they are sent to the server and stored in a seperate JavaScript error log.]]></en>
+            <de><![CDATA[Falls JavaScript Fehler im Frontend auftreten, werden diese an den Server gesendet und in einem separaten JavaScript error log gespeichert.]]></de>
+            <en><![CDATA[If JavaScript errors occur in the frontend they are sent to the server and stored in a separate JavaScript error log.]]></en>
         </locale>
 
         <locale name="settings.general.logLevels.title">
@@ -67,7 +67,7 @@
         </locale>
         <locale name="settings.general.logLevels.alert.text">
             <de><![CDATA[Alert-Meldungen (Alarme) loggen]]></de>
-            <en><![CDATA[Log Alert-Masseges]]></en>
+            <en><![CDATA[Log Alert-Messages]]></en>
         </locale>
         <locale name="settings.general.logLevels.debug.text">
             <de><![CDATA[Critical-Meldungen (kritisch) loggen]]></de>
