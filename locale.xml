@@ -142,6 +142,10 @@
             <de><![CDATA[Logs archivieren?]]></de>
             <en><![CDATA[Archive logs?]]></en>
         </locale>
+        <locale name="settings.cleanup.archiving.isArchivingEnabled.description">
+            <de><![CDATA[Fasst alte Log-Dateien in einem ZIP-Archiv zusammen um Speicherplatz freizumachen und um den Überblick zu bewahren.]]></de>
+            <en><![CDATA[Moves old log files into a zip archive to free storage and prevents losing the overview.]]></en>
+        </locale>
 
         <locale name="settings.cleanup.archiving.minLogAgeForArchiving">
             <de><![CDATA[Logs nach wie vielen Tagen archivieren?]]></de>
@@ -151,6 +155,10 @@
         <locale name="settings.cleanup.archiving.minLogAgeForDelete">
             <de><![CDATA[Logs nach wie vielen Tagen löschen?]]></de>
             <en><![CDATA[Delete logs after how many days?]]></en>
+        </locale>
+        <locale name="settings.cleanup.archiving.minLogAgeForDelete.description">
+            <de><![CDATA[Betrifft nur Log-Dateien, die nicht archiviert wurden.]]></de>
+            <en><![CDATA[Only affects non archived log files.]]></en>
         </locale>
 
         <locale name="settings.cleanup.archiving.isArchiveDeletionEnabled">
