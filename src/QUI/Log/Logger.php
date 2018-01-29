@@ -14,7 +14,7 @@ use Monolog;
  * QUIQQER logging service
  *
  * @package quiqqer/log
- * @author  www.pcsg.de (Henning Leutz)
+ * @author  Henning Leutz (PCSG)
  * @licence For copyright and license information, please view the /README.md
  */
 class Logger

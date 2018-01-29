@@ -1,4 +1,9 @@
 <?php
+/**
+ * Starts a download for a log file
+ *
+ * @author Jan Wennrich (PCSG)
+ */
 
 // Import QUIQQER Bootstrap
 define('QUIQQER_SYSTEM', true);

@@ -11,6 +11,8 @@ use QUI;
 /**
  * Setup routine for log package
  * @package QUI\Log\Setup
+ *
+ * @author Jan Wennrich (PCSG)
  */
 class Setup
 {
