@@ -8,6 +8,13 @@
  */
 function package_quiqqer_log_ajax_file($file)
 {
+    if (!QUI::getUserBySession()->getPermission('quiqqer.packages.quiqqerlog.canUse')) {
+        exit;
+    }
+
+    // Return filename component of input so no files outside the log directory can be accessed
+    $file = basename($file);
+
     $log          = VAR_DIR . 'log/' . $file;
     $data         = '';
     $isLogTrimmed = false;
