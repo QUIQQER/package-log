@@ -6,10 +6,292 @@
             <en><![CDATA[QUIQQER - Log]]></en>
         </locale>
         <locale name="package.description">
-            <de><![CDATA[Log Manager und Logging Funktionalität für QUIQQER.]]></de>
-            <en><![CDATA[Log management and logging functionality for QUIQQER.]]></en>
+            <de><![CDATA[Ergänzt QUIQQER um eine erweiterte Log-Verwaltung. Verwalten Sie die Logs von QUIQQER, schauen Sie Fehlermeldungen nach oder machen Sie sich ein Überblick was im System so passiert.]]></de>
+            <en><![CDATA[Extend QUIQQER with a log management. Manage the logs of QUIQQER, check for errors, or get an overview of what's happening in the system.]]></en>
         </locale>
     </groups>
+    <groups name="quiqqer/log" datatype="php,js">
+        <locale name="menu.title">
+            <de><![CDATA[Log-Verwaltung]]></de>
+            <en><![CDATA[Log Management]]></en>
+        </locale>
+    </groups>
+    <groups name="quiqqer/log" datatype="php">
+        <locale name="settings.general.text">
+            <de><![CDATA[Allgemeine Log-Einstellungen]]></de>
+            <en><![CDATA[General Log Settings]]></en>
+        </locale>
+
+        <locale name="settings.general.log.title">
+            <de><![CDATA[Allgemeine Einstellungen]]></de>
+            <en><![CDATA[General Settings]]></en>
+        </locale>
+        <locale name="settings.general.log.logAllEvents.text">
+            <de><![CDATA[Alle Events und Aktionen der Benutzer loggen]]></de>
+            <en><![CDATA[Log all events and user actions]]></en>
+        </locale>
+        <locale name="settings.general.log.logAllEvents.description">
+            <de><![CDATA[
+                Es werden alle Aktionen der Benutzer geloggt. Zum Beispiel welche Änderungen diese machen.
+                Diese Funktion kann unter Umständen performance fressend sein, daher sollte diese Funktion mit bedacht aktiviert werden.
+                <br />
+                Die Nachrichten werden als Info Nachrichten geloggt.
+            ]]></de>
+            <en><![CDATA[
+                All user actions will be logged. For example which changes they make.
+                This function may cause performance issues, so it should be enabled advisedly.
+                <br />
+                The messages are logged as info messages.
+            ]]></en>
+        </locale>
+        <locale name="settings.general.log.logAdminJsErrors.text">
+            <de><![CDATA[JavaScript Fehler in der Administration loggen]]></de>
+            <en><![CDATA[Log administration JavaScript errors]]></en>
+        </locale>
+        <locale name="settings.general.log.logAdminJsErrors.description">
+            <de><![CDATA[Falls JavaScript Fehler in der Administration auftreten, werden diese an den Server gesendet und in einem seperaten JavaScript error log gespeichert.]]></de>
+            <en><![CDATA[If JavaScript errors occur in the administration they are sent to the server and stored in a seperate JavaScript error log.]]></en>
+        </locale>
+        <locale name="settings.general.log.logFrontendJsErrors.text">
+            <de><![CDATA[JavaScript Fehler im Frontend loggen]]></de>
+            <en><![CDATA[Log frontend JavaScript errors]]></en>
+        </locale>
+        <locale name="settings.general.log.logFrontendJsErrors.description">
+            <de><![CDATA[Falls JavaScript Fehler im Frontend auftreten, werden diese an den Server gesendet und in einem separaten JavaScript error log gespeichert.]]></de>
+            <en><![CDATA[If JavaScript errors occur in the frontend they are sent to the server and stored in a separate JavaScript error log.]]></en>
+        </locale>
+
+        <locale name="settings.general.logLevels.title">
+            <de><![CDATA[Log Level Einstellungen]]></de>
+            <en><![CDATA[Log Level Settings]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.alert.text">
+            <de><![CDATA[Alert-Meldungen (Alarme) loggen]]></de>
+            <en><![CDATA[Log Alert-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.debug.text">
+            <de><![CDATA[Critical-Meldungen (kritisch) loggen]]></de>
+            <en><![CDATA[Log Critical-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.critical.text">
+            <de><![CDATA[Debug-Meldungen loggen]]></de>
+            <en><![CDATA[Log Debug-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.emergency.text">
+            <de><![CDATA[Emergency-Meldungen (Notfälle) loggen]]></de>
+            <en><![CDATA[Log Emergency-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.error.text">
+            <de><![CDATA[Error-Meldungen (Fehler) loggen]]></de>
+            <en><![CDATA[Log Error-Messages ]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.info.text">
+            <de><![CDATA[Info-Meldungen loggen]]></de>
+            <en><![CDATA[Log Info-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.notice.text">
+            <de><![CDATA[Notice-Meldungen (Hinweise) loggen]]></de>
+            <en><![CDATA[Log Notice-Messages]]></en>
+        </locale>
+        <locale name="settings.general.logLevels.warning.text">
+            <de><![CDATA[Warning-Meldungen (Warnungen) loggen]]></de>
+            <en><![CDATA[Log Warning-Messages]]></en>
+        </locale>
+
+        <locale name="settings.general.browserLogs.title">
+            <de><![CDATA[Browser Log Einstellungen]]></de>
+            <en><![CDATA[Browser Log Settings]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.userLoggedIn.text">
+            <de><![CDATA[Browser Log nur für angemeldete Benutzer anzeigen.]]></de>
+            <en><![CDATA[Show browser log only to signed in users]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.browserPhp.text">
+            <de><![CDATA[BrowserPHP Logs einschalten]]></de>
+            <en><![CDATA[Enable BrowserPHP Logs]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.firePhp.text">
+            <de><![CDATA[FirePHP Logs einschalten]]></de>
+            <en><![CDATA[Enable FirePHP Logs]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.chromePhp.text">
+            <de><![CDATA[ChromePHP Logs einschalten]]></de>
+            <en><![CDATA[Enable ChromePHP Logs]]></en>
+        </locale>
+        <locale name="settings.general.browserLogs.debug.text">
+            <de><![CDATA[Browser-Debugging einschalten]]></de>
+            <en><![CDATA[Enable browser debugging]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.text">
+            <de><![CDATA[Log-Bereinigung & -Archivierung]]></de>
+            <en><![CDATA[Log Cleanup & Archiving]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.title">
+            <de><![CDATA[Log-Archivierung]]></de>
+            <en><![CDATA[Log Archiving]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.deletion.title">
+            <de><![CDATA[Log-Bereinigung]]></de>
+            <en><![CDATA[Log Cleanup]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.isArchivingEnabled">
+            <de><![CDATA[Logs archivieren?]]></de>
+            <en><![CDATA[Archive logs?]]></en>
+        </locale>
+        <locale name="settings.cleanup.archiving.isArchivingEnabled.description">
+            <de><![CDATA[Fasst alte Log-Dateien in einem ZIP-Archiv zusammen um Speicherplatz freizumachen und um den Überblick zu bewahren.]]></de>
+            <en><![CDATA[Moves old log files into a zip archive to free storage and prevents losing the overview.]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.minLogAgeForArchiving">
+            <de><![CDATA[Logs nach wie vielen Tagen archivieren?]]></de>
+            <en><![CDATA[Archive logs after how many days?]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.minLogAgeForDelete">
+            <de><![CDATA[Logs nach wie vielen Tagen löschen?]]></de>
+            <en><![CDATA[Delete logs after how many days?]]></en>
+        </locale>
+        <locale name="settings.cleanup.archiving.minLogAgeForDelete.description">
+            <de><![CDATA[Betrifft nur Log-Dateien, die nicht archiviert wurden.]]></de>
+            <en><![CDATA[Only affects non archived log files.]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.isArchiveDeletionEnabled">
+            <de><![CDATA[Archivierte Logs löschen?]]></de>
+            <en><![CDATA[Delete archived logs?]]></en>
+        </locale>
+
+        <locale name="settings.cleanup.archiving.minArchiveAgeForDelete">
+            <de><![CDATA[Archivierte Logs nach wie vielen Tagen löschen?]]></de>
+            <en><![CDATA[Delete archived logs after how many days?]]></en>
+        </locale>
+
+
+        <locale name="settings.graylog.text">
+            <de><![CDATA[GrayLog2 Server]]></de>
+            <en><![CDATA[GrayLog2 Server]]></en>
+        </locale>
+
+        <locale name="settings.graylog.title">
+            <de><![CDATA[GrayLog2 Server Einstellungen]]></de>
+            <en><![CDATA[GrayLog2 Server Settings]]></en>
+        </locale>
+
+        <locale name="settings.graylog.server">
+            <de><![CDATA[GrayLog2 Server URL]]></de>
+            <en><![CDATA[GrayLog2 Server URL]]></en>
+        </locale>
+
+        <locale name="settings.graylog.port">
+            <de><![CDATA[GrayLog2 Server Port]]></de>
+            <en><![CDATA[GrayLog2 Server Port]]></en>
+        </locale>
+
+
+        <locale name="settings.cube.text">
+            <de><![CDATA[Cube Server]]></de>
+            <en><![CDATA[Cube Server]]></en>
+        </locale>
+
+        <locale name="settings.cube.title">
+            <de><![CDATA[Cube Server Einstellungen]]></de>
+            <en><![CDATA[Cube Server Settings]]></en>
+        </locale>
+
+        <locale name="settings.cube.server.text">
+            <de><![CDATA[Cube Server URL]]></de>
+            <en><![CDATA[Cube Server URL]]></en>
+        </locale>
+
+        <locale name="settings.cube.server.description">
+            <de><![CDATA[Mehr Informationen zu Cube Server finden Sie unter: <a href="https://github.com/square/cube" target="_blank">https://github.com/square/cube</a>]]></de>
+            <en><![CDATA[More information about Cube Server can be found at: <a href="https://github.com/square/cube" target="_blank">https://github.com/square/cube</a>]]></en>
+        </locale>
+
+
+        <locale name="settings.newrelic.text">
+            <de><![CDATA[NewRelic]]></de>
+            <en><![CDATA[NewRelic]]></en>
+        </locale>
+
+        <locale name="settings.newrelic.title">
+            <de><![CDATA[NewRelic Einstellungen]]></de>
+            <en><![CDATA[NewRelic Settings]]></en>
+        </locale>
+
+        <locale name="settings.newrelic.appname.text">
+            <de><![CDATA[NewRelic App-Name]]></de>
+            <en><![CDATA[NewRelic App-Name]]></en>
+        </locale>
+
+        <locale name="settings.newrelic.appname.description">
+            <de><![CDATA[Mehr Informationen zu New Relic finden Sie unter: <a href="https://www.newrelic.com" target="_blank">https://www.newrelic.com</a>]]></de>
+            <en><![CDATA[More information about New Relic can be found at: <a href="https://www.newrelic.com" target="_blank">https://www.newrelic.com</a>]]></en>
+        </locale>
+
+
+        <locale name="settings.syslogudp.text">
+            <de><![CDATA[Syslog UDP Server]]></de>
+            <en><![CDATA[Syslog UDP Server]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.title">
+            <de><![CDATA[Syslog UDP Server Einstellungen]]></de>
+            <en><![CDATA[Syslog UDP Server Settings]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.host.text">
+            <de><![CDATA[Syslog UDP Host]]></de>
+            <en><![CDATA[Syslog UDP Host]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.host.description">
+            <de><![CDATA[Es kann eine IP-Adresse oder eine Domain angegeben werden (z.B.: 192.168.1.200 oder my.server.com).]]></de>
+            <en><![CDATA[You can enter an IP-address or a domain (e.g.: 192.168.1.200 or my.server.com).]]></en>
+        </locale>
+
+        <locale name="settings.syslogudp.port.text">
+            <de><![CDATA[Syslog UDP Port]]></de>
+            <en><![CDATA[Syslog UDP Port]]></en>
+        </locale>
+
+        
+        <locale name="cron.cleanup.delete.title">
+            <de><![CDATA[Alte Logs löschen]]></de>
+            <en><![CDATA[Delete old logs]]></en>
+        </locale>
+
+        <locale name="cron.cleanup.delete.desc">
+            <de><![CDATA[Löscht Log-Dateien (auch archivierte, wenn in den Einstellungen aktiviert), die älter sind als in den Log-Einstellungen festgelegt]]></de>
+            <en><![CDATA[Deletes log files (also archived ones, if enabled in the settings) which are older than defined in the log settings]]></en>
+        </locale>
+
+        <locale name="cron.cleanup.archive.title">
+            <de><![CDATA[Alte Logs archivieren]]></de>
+            <en><![CDATA[Archive old logs]]></en>
+        </locale>
+
+        <locale name="cron.cleanup.archive.desc">
+            <de><![CDATA[Archiviert Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
+            <en><![CDATA[Archives log files which are older than defined in the log settings]]></en>
+        </locale>
+
+        <locale name="error.setup.cron.deletion">
+            <de><![CDATA[Standard Aufgabe zur Log Bereinigung konnte nicht hinzugefügt werden.]]></de>
+            <en><![CDATA[Default cron for log cleanup couldn't be added.]]></en>
+        </locale>
+
+        <locale name="error.setup.cron.archiving">
+            <de><![CDATA[Standard Aufgabe zur Log Archivierung konnte nicht hinzugefügt werden.]]></de>
+            <en><![CDATA[Default cron for log archiving couldn't be added.]]></en>
+        </locale>
+    </groups>
+
     <groups name="quiqqer/log" datatype="js">
         <locale name="logs.panel.title">
             <de><![CDATA[Log-Manager]]></de>
@@ -31,9 +313,17 @@
             <de><![CDATA[Markierte Log-Dateien löschen]]></de>
             <en><![CDATA[Delete selected log files]]></en>
         </locale>
+        <locale name="logs.panel.btn.download.marked">
+            <de><![CDATA[Markierte Log-Datei herunterladen]]></de>
+            <en><![CDATA[Download selected log file]]></en>
+        </locale>
         <locale name="logs.panel.btn.open.log">
             <de><![CDATA[Log vom [date] öffnen]]></de>
             <en><![CDATA[Open log from [date]]]></en>
+        </locale>
+        <locale name="logs.panel.btn.close.log">
+            <de><![CDATA[Log schließen]]></de>
+            <en><![CDATA[Close log file]]></en>
         </locale>
         <locale name="logs.panel.delete.window.title">
             <de><![CDATA[Log löschen: [file]]]></de>
@@ -54,6 +344,10 @@
         <locale name="logs.panel.search.btn.start.title">
             <de><![CDATA[Suche starten]]></de>
             <en><![CDATA[Start search]]></en>
+        </locale>
+        <locale name="logs.panel.message.trimmed">
+            <de><![CDATA[Hinweis: Diese Log-Datei ist zu groß um sie komplett anzuzeigen, daher wurde sie gekürzt. Herunterladen um den gesamten Inhalt zu sehen.]]></de>
+            <en><![CDATA[Notice: This log file is too large to display, therefore it was truncated. Download it to view the entire content.]]></en>
         </locale>
     </groups>
 </locales>

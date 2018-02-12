@@ -6,6 +6,7 @@
 
 define('package/quiqqer/log/bin/Manager', [
 
+    'qui/QUI',
     'qui/controls/desktop/Panel',
     'controls/grid/Grid',
     'Ajax',
@@ -16,7 +17,7 @@ define('package/quiqqer/log/bin/Manager', [
 
     'css!package/quiqqer/log/bin/Manager.css'
 
-], function (Panel, Grid, Ajax, Locale, QUIButton, QUIButtonSeparator, QUIConfirm) {
+], function (QUI, Panel, Grid, Ajax, Locale, QUIButton, QUIButtonSeparator, QUIConfirm) {
     "use strict";
 
     var lg = 'quiqqer/log';
@@ -34,6 +35,8 @@ define('package/quiqqer/log/bin/Manager', [
             'resize',
             'refreshFile',
             'deleteActiveLog',
+            'closeActiveLog',
+            'downloadActiveLog',
             '$onCreate',
             '$onResize',
             '$onDestroy',
@@ -132,6 +135,8 @@ define('package/quiqqer/log/bin/Manager', [
 
             Control.Loader.show();
 
+            Control.getButtons('closeLog').enable();
+
             Control.$openLog = true;
             Control.$file    = file;
 
@@ -149,11 +154,27 @@ define('package/quiqqer/log/bin/Manager', [
                     var Body   = Control.getContent(),
                         Parent = Body.getParent();
 
+                    var MessageOverlay = $('qui-logs-message');
+                    if (!MessageOverlay) {
+                        MessageOverlay = new Element('div#qui-logs-message.messages-message.message-attention');
+                        MessageOverlay.hide();
+                        MessageOverlay.inject(Parent);
+                    }
+
                     if (!Parent.getElement('.qui-logs-file')) {
                         new Element('div.qui-logs-file').inject(Parent);
                     }
 
                     Control.refreshFile();
+
+                    MessageOverlay.set('text', Locale.get(lg, 'logs.panel.message.trimmed'));
+                    MessageOverlay.show();
+
+                    MessageOverlay.position({
+                        relativeTo: Parent.getElement('.qui-logs-file'),
+                        position  : "topLeft",
+                        offset    : {x: 0, y: -3}
+                    });
                 }
             });
         },
@@ -200,6 +221,60 @@ define('package/quiqqer/log/bin/Manager', [
             }).open();
         },
 
+
+        /**
+         * Download the active log
+         */
+        downloadActiveLog: function () {
+            var data         = this.$Grid.getSelectedData(),
+                log          = data[0].file,
+                downloadFile = URL_OPT_DIR + 'quiqqer/log/bin/downloadLog.php?log=' + encodeURIComponent(log),
+                iframeId     = Math.floor(Date.now() / 1000),
+                Frame        = new Element('iframe', {
+                    id             : 'download-iframe-' + iframeId,
+                    src            : downloadFile,
+                    styles         : {
+                        left    : -1000,
+                        height  : 10,
+                        position: 'absolute',
+                        top     : -1000,
+                        width   : 10
+                    },
+                    'data-iframeid': iframeId
+                }).inject(document.body);
+        },
+
+
+        /**
+         * Closes the active log (panel)
+         */
+        closeActiveLog: function() {
+
+            var Control = this,
+                Body   = Control.getContent(),
+                Parent = Body.getParent();
+
+            Control.Loader.show();
+
+            Control.$openLog = false;
+            Control.$file    = '';
+
+            // Log Content Panel
+            Parent.getElement('.qui-logs-file').destroy();
+
+            // Log Overlay Message
+            Parent.getElement('#qui-logs-message').destroy();
+
+            // Resize Log Table to full width
+            Control.$onResize();
+            Control.getContent().setStyle('width', '100%');
+
+            Control.getButtons('closeLog').disable();
+
+            Control.Loader.hide();
+        },
+
+
         /**
          * Refresh the current file
          *
@@ -216,14 +291,23 @@ define('package/quiqqer/log/bin/Manager', [
             this.Loader.show();
 
             Ajax.get('package_quiqqer_log_ajax_file', function (result) {
+
                 File.set(
                     'html',
-                    '<pre class="box language-bash" style="margin: 0;">' + result + '</pre>'
+                    '<pre id="qui-logs-file-data" class="box language-bash" style="margin: 0;">' + result.data + '</pre>'
                 );
+
+                if (result.isLogTrimmed) {
+                    $('qui-logs-message').show();
+                } else {
+                    $('qui-logs-message').hide();
+                }
 
                 Control.Loader.hide();
                 Control.refresh();
 
+                var LogFileData = File.getElement('#qui-logs-file-data');
+                LogFileData.scrollTop = LogFileData.scrollHeight;
             }, {
                 'package': 'quiqqer/log',
                 file     : this.$file
@@ -338,6 +422,39 @@ define('package/quiqqer/log/bin/Manager', [
                 })
             );
 
+            this.addButton(
+                new QUIButtonSeparator()
+            );
+
+            this.addButton(
+                new QUIButton({
+                    name     : 'download',
+                    text     : Locale.get(lg, 'logs.panel.btn.download.marked'),
+                    textimage: 'fa fa-download',
+                    disabled : true,
+                    events   : {
+                        onClick: this.downloadActiveLog
+                    }
+                })
+            );
+
+
+            this.addButton(
+                new QUIButton({
+                    name    : 'closeLog',
+                    icon    : 'fa fa-close',
+                    title   : Locale.get(lg, 'logs.panel.btn.close.log'),
+                    disabled: true,
+                    events  : {
+                        onClick: this.closeActiveLog
+                    },
+                    styles  : {
+                        float: 'right'
+                    }
+                })
+            );
+
+
             //this.resize.delay( 200 );
             this.getLogs.delay(100, this);
         },
@@ -385,6 +502,14 @@ define('package/quiqqer/log/bin/Manager', [
                     File.getElement('pre').setStyles({
                         height: height,
                         width : size.x - width
+                    });
+                }
+
+                var LogMessage = $('qui-logs-message');
+                if(LogMessage) {
+                    LogMessage.setStyles({
+                        height: 40,
+                        width: size.x - width
                     });
                 }
 
@@ -436,13 +561,16 @@ define('package/quiqqer/log/bin/Manager', [
          * @param {Object} data - Grid Data
          */
         $gridClick: function (data) {
-            var len    = data.target.selected.length,
-                Delete = this.getButtons('delete');
+            var len      = data.target.selected.length,
+                Delete   = this.getButtons('delete'),
+                Download = this.getButtons('download');
 
             Delete.disable();
+            Download.disable();
 
             if (len) {
                 Delete.enable();
+                Download.enable();
             }
         },
 

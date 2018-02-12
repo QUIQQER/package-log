@@ -12,7 +12,9 @@ use QUI;
  * Class Events - Main Events
  *
  * @package quiqqer/log
- * @author www.pcsg.de (Henning Leutz)
+ *
+ * @author Henning Leutz (PCSG)
+ * @author Jan Wennrich (PCSG)
  */
 class Events
 {

@@ -12,7 +12,7 @@ use QUI;
  * QUIQQER logging service
  *
  * @package quiqqer/log
- * @author  www.pcsg.de (Henning Leutz)
+ * @author  Henning Leutz (PCSG)
  */
 class Admin
 {
