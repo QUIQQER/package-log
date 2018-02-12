@@ -35,6 +35,7 @@ define('package/quiqqer/log/bin/Manager', [
             'resize',
             'refreshFile',
             'deleteActiveLog',
+            'closeActiveLog',
             'downloadActiveLog',
             '$onCreate',
             '$onResize',
@@ -133,6 +134,8 @@ define('package/quiqqer/log/bin/Manager', [
             var Control = this;
 
             Control.Loader.show();
+
+            Control.getButtons('closeLog').enable();
 
             Control.$openLog = true;
             Control.$file    = file;
@@ -239,6 +242,36 @@ define('package/quiqqer/log/bin/Manager', [
                     },
                     'data-iframeid': iframeId
                 }).inject(document.body);
+        },
+
+
+        /**
+         * Closes the active log (panel)
+         */
+        closeActiveLog: function() {
+
+            var Control = this,
+                Body   = Control.getContent(),
+                Parent = Body.getParent();
+
+            Control.Loader.show();
+
+            Control.$openLog = false;
+            Control.$file    = '';
+
+            // Log Content Panel
+            Parent.getElement('.qui-logs-file').destroy();
+
+            // Log Overlay Message
+            Parent.getElement('#qui-logs-message').destroy();
+
+            // Resize Log Table to full width
+            Control.$onResize();
+            Control.getContent().setStyle('width', '100%');
+
+            Control.getButtons('closeLog').disable();
+
+            Control.Loader.hide();
         },
 
 
@@ -404,6 +437,23 @@ define('package/quiqqer/log/bin/Manager', [
                     }
                 })
             );
+
+
+            this.addButton(
+                new QUIButton({
+                    name    : 'closeLog',
+                    icon    : 'fa fa-close',
+                    title   : Locale.get(lg, 'logs.panel.btn.close.log'),
+                    disabled: true,
+                    events  : {
+                        onClick: this.closeActiveLog
+                    },
+                    styles  : {
+                        float: 'right'
+                    }
+                })
+            );
+
 
             //this.resize.delay( 200 );
             this.getLogs.delay(100, this);

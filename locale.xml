@@ -321,6 +321,10 @@
             <de><![CDATA[Log vom [date] öffnen]]></de>
             <en><![CDATA[Open log from [date]]]></en>
         </locale>
+        <locale name="logs.panel.btn.close.log">
+            <de><![CDATA[Log schließen]]></de>
+            <en><![CDATA[Close log file]]></en>
+        </locale>
         <locale name="logs.panel.delete.window.title">
             <de><![CDATA[Log löschen: [file]]]></de>
             <en><![CDATA[Delete log: [file]]]></en>
