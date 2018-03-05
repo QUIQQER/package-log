@@ -33,7 +33,7 @@ class Setup
 
         if (!$CronManager->isCronSetUp($cleanupCronName) && !$isCleanupCronAlreadySetup) {
             try {
-                $CronManager->add($cleanupCronName, 0, 0, 0, 0, 1);
+                $CronManager->add($cleanupCronName, "0", "0", "*", "*", 1);
 
                 $Config->setValue('log_cleanup', 'isCleanupCronAlreadySetup', 1);
                 $Config->save();
@@ -51,7 +51,7 @@ class Setup
 
         if (!$CronManager->isCronSetUp($archivingCronName) && !$isArchivingCronAlreadySetup) {
             try {
-                $CronManager->add($archivingCronName, 0, 4, 0, 0, 0);
+                $CronManager->add($archivingCronName, 0, 4, "*", "*", "*");
 
                 $Config->setValue('log_cleanup', 'isArchivingCronAlreadySetup', 1);
                 $Config->save();
