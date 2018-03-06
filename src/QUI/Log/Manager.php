@@ -187,8 +187,6 @@ class Manager extends QUI\QDOM
         foreach ($oldLogsGrouped as $date => $oldLogFiles) {
             $zipPath = Manager::LOG_DIR . 'archived/' . $date . '.zip';
 
-            QUI\System\Log::write($zipPath);
-
             QUI\Archiver\Zip::zipFiles($oldLogFiles, $zipPath);
         }
     }
