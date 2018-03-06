@@ -7,6 +7,7 @@
 namespace QUI\Log;
 
 use DusanKasan\Knapsack\Collection;
+
 use QUI;
 use QUI\Utils\System\File;
 
@@ -20,22 +21,22 @@ use QUI\Utils\System\File;
  */
 class Manager extends QUI\QDOM
 {
-    const LOG_DIR = VAR_DIR . 'log/';
+    const LOG_DIR = VAR_DIR.'log/';
 
-    const LOG_ARCHIVE_DIR = self::LOG_DIR . 'archived/';
+    const LOG_ARCHIVE_DIR = self::LOG_DIR.'archived/';
 
     /**
      * constructor
      *
      * @param array $params
      */
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         // default
-        $this->setAttributes(array(
+        $this->setAttributes([
             'sortOn' => 'mdate',
             'sortNy' => 'DESC'
-        ));
+        ]);
 
         $this->setAttributes($params);
     }
@@ -51,7 +52,7 @@ class Manager extends QUI\QDOM
     public function search($search = '')
     {
         $dir   = self::LOG_DIR;
-        $list  = array();
+        $list  = [];
         $files = File::readDir($dir);
 
         $sortOn = $this->getAttribute('sortOn');
@@ -78,17 +79,17 @@ class Manager extends QUI\QDOM
             }
 
             // Ignore directories (e.g. archived/ folder)
-            if (is_dir($dir . $file)) {
+            if (is_dir($dir.$file)) {
                 continue;
             }
 
-            $mtime = filemtime($dir . $file);
+            $mtime = filemtime($dir.$file);
 
-            $list[] = array(
+            $list[] = [
                 'file'  => $file,
                 'mtime' => $mtime,
                 'mdate' => date('Y-m-d H:i:s', $mtime)
-            );
+            ];
         }
 
         // sort
@@ -133,23 +134,21 @@ class Manager extends QUI\QDOM
     public static function getLogsOlderThanSeconds($seconds)
     {
         $DirectoryIterator   = new \DirectoryIterator(self::LOG_DIR);
-        $DirectoryCollection = \DusanKasan\Knapsack\Collection::from($DirectoryIterator);
+        $DirectoryCollection = Collection::from($DirectoryIterator);
 
-        $OlderLogs = $DirectoryCollection->filter(function ($log, $key) use ($seconds) {
+        $OlderLogs = $DirectoryCollection->filter(function ($log) use ($seconds) {
             /* @var $log \DirectoryIterator */
-
             if ($log->isDot() || !$log->isFile() || $log->getExtension() != 'log') {
                 return false;
             }
 
-            $logAge = time() - $log->getCTime();
+            $logAge = time() - $log->getMTime();
 
             return ($logAge >= $seconds);
         });
 
         return $OlderLogs;
     }
-
 
     /**
      * Deletes all log files which are older than the given amount of days
@@ -177,7 +176,7 @@ class Manager extends QUI\QDOM
     {
         $OldLogs = Manager::getLogsOlderThanDays($days);
 
-        $oldLogsGrouped = array();
+        $oldLogsGrouped = [];
 
         foreach ($OldLogs as $OldLog) {
             $date                    = date('Y-m-d', $OldLog->getCTime());
@@ -185,14 +184,11 @@ class Manager extends QUI\QDOM
         }
 
         foreach ($oldLogsGrouped as $date => $oldLogFiles) {
-            $zipPath = Manager::LOG_DIR . 'archived/' . $date . '.zip';
-
-            QUI\System\Log::write($zipPath);
+            $zipPath = Manager::LOG_DIR.'archived/'.$date.'.zip';
 
             QUI\Archiver\Zip::zipFiles($oldLogFiles, $zipPath);
         }
     }
-
 
     /**
      * Returns archived log files created before the given amount of seconds
@@ -203,16 +199,15 @@ class Manager extends QUI\QDOM
     public static function getArchivedLogsOlderThanSeconds($seconds)
     {
         $DirectoryIterator   = new \DirectoryIterator(self::LOG_ARCHIVE_DIR);
-        $DirectoryCollection = \DusanKasan\Knapsack\Collection::from($DirectoryIterator);
+        $DirectoryCollection = Collection::from($DirectoryIterator);
 
-        $OlderArchives = $DirectoryCollection->filter(function ($archive, $key) use ($seconds) {
+        $OlderArchives = $DirectoryCollection->filter(function ($archive) use ($seconds) {
             /* @var $archive \DirectoryIterator */
-
             if ($archive->isDot() || !$archive->isFile() || $archive->getExtension() != 'zip') {
                 return false;
             }
 
-            $archiveAge = time() - $archive->getCTime();
+            $archiveAge = time() - $archive->getMTime();
 
             return ($archiveAge >= $seconds);
         });

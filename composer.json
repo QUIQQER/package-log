@@ -19,6 +19,9 @@
     "quiqqer\/quiqqer": "*",
     "monolog\/monolog": "1.*"
   },
+  "suggest": {
+    "ext-zip": "Required to archive logs in zip files."
+  },
   "autoload": {
     "psr-4": {
       "QUI\\Log\\": "src\/QUI\/Log"
