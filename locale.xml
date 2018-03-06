@@ -290,6 +290,11 @@
             <de><![CDATA[Standard Aufgabe zur Log Archivierung konnte nicht hinzugefügt werden.]]></de>
             <en><![CDATA[Default cron for log archiving couldn't be added.]]></en>
         </locale>
+
+        <locale name="error.config.save.zip">
+            <de><![CDATA[Die php-Erweiterung "zip" wird benötigt um Logs zu archivieren.]]></de>
+            <en><![CDATA[The php-extension "zip" is required to archive logs.]]></en>
+        </locale>
     </groups>
 
     <groups name="quiqqer/log" datatype="js">
