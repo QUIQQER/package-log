@@ -7,4 +7,5 @@
     <event on="onHeaderLoaded" fire="\QUI\Log\Logger::onHeaderLoaded" />
     <event on="onTemplateGetHeader" fire="\QUI\Log\Events::onTemplateGetHeader" />
     <event on="onPackageSetup" fire="\QUI\Log\Setup::run" />
+    <event on="onPackageConfigSave" fire="\QUI\Log\Events::onPackageConfigSave" />
 </events>

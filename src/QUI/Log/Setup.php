@@ -25,7 +25,7 @@ class Setup
         }
 
         $CronManager = new QUI\Cron\Manager();
-        $Config             = QUI::getPackage('quiqqer/log')->getConfig();
+        $Config      = QUI::getPackage('quiqqer/log')->getConfig();
 
         // Setup cron for default log deletion every 180 days
         $cleanupCronName           = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.delete.title');

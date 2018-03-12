@@ -215,7 +215,6 @@ class Manager extends QUI\QDOM
         return $OlderArchives;
     }
 
-
     /**
      * Returns archived log files created before the given amount of days
      * (Wrapper for the getArchivedLogsOlderThanSeconds()-function)
@@ -227,7 +226,6 @@ class Manager extends QUI\QDOM
     {
         return self::getArchivedLogsOlderThanSeconds($days * 24 * 60 * 60);
     }
-
 
     /**
      * Deletes all log files which are older than the given amount of days
