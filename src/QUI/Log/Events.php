@@ -68,4 +68,30 @@ class Events
               </script>'
         );
     }
+
+
+    /**
+     * Fired when a package's config is saved.
+     *
+     * If the saved package is "log" and the log archiving is enabled:
+     * the function checks if the required php zip extension is installed.
+     * If it's not installed an error message is displayed to the user.
+     *
+     * @param QUI\Package\Package $Package
+     *
+     * @throws QUI\Exception
+     */
+    public static function onPackageConfigSave(QUI\Package\Package $Package)
+    {
+        if ($Package->getName() == "quiqqer/log") {
+            $isArchivingEnabled = $Package->getConfig()->getValue('log_cleanup', 'isArchivingEnabled');
+            if ($isArchivingEnabled) {
+                try {
+                    QUI\Archiver\Zip::check();
+                } catch (QUI\Exception $exception) {
+                    QUI::getMessagesHandler()->addError(QUI::getLocale()->get("quiqqer/log", "error.config.save.zip"));
+                }
+            }
+        }
+    }
 }
