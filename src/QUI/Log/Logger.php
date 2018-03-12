@@ -38,7 +38,7 @@ class Logger
      *
      * @var array
      */
-    public static $logLevels = array(
+    public static $logLevels = [
         'debug'     => true,
         'info'      => true,
         'notice'    => true,
@@ -47,7 +47,7 @@ class Logger
         'critical'  => true,
         'alert'     => true,
         'emergency' => true
-    );
+    ];
 
     /**
      * event on fire event
@@ -83,13 +83,13 @@ class Logger
         }
 
         $Logger = self::getLogger();
-        $User   = \QUI::getUserBySession();
+        $User   = QUI::getUserBySession();
 
-        $context = array(
+        $context = [
             'username'  => $User->getName(),
             'uid'       => $User->getId(),
             'arguments' => $arguments
-        );
+        ];
 
         $arguments = func_get_args();
 
@@ -99,7 +99,7 @@ class Logger
             $event = $arguments[0];
         }
 
-        $Logger->addInfo('event log ' . $event, $context);
+        $Logger->addInfo('event log '.$event, $context);
     }
 
 
@@ -188,10 +188,10 @@ class Logger
         $Logger = self::getLogger();
         $User   = QUI::getUserBySession();
 
-        $context = array(
+        $context = [
             'username' => $User->getName(),
             'uid'      => $User->getId()
-        );
+        ];
 
         switch ($loglevel) {
             case Log::LEVEL_DEBUG:
@@ -274,7 +274,7 @@ class Logger
         self::addSyslogUDPHandlerToLogger($Logger);
 
         try {
-            QUI::getEvents()->fireEvent('quiqqerLogGetLogger', array($Logger));
+            QUI::getEvents()->fireEvent('quiqqerLogGetLogger', [$Logger]);
         } catch (\Exception $Exception) {
             $Logger->addNotice($Exception->getMessage());
         }
