@@ -20,6 +20,7 @@ class Setup
     {
         // Create Log Archive Directory
         $logArchiveDir = Manager::LOG_ARCHIVE_DIR;
+        
         if (!is_dir($logArchiveDir)) {
             mkdir($logArchiveDir);
         }
@@ -30,6 +31,15 @@ class Setup
         // Setup cron for default log deletion every 180 days
         $cleanupCronName           = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.delete.title');
         $isCleanupCronAlreadySetup = $Config->getValue('log_cleanup', 'isCleanupCronAlreadySetup');
+
+        if (!QUI::getDataBase()->table()->exist('cron')) {
+            try {
+                $CronPackage = QUI::getPackage('quiqqer/cron');
+                $CronPackage->setup();
+            } catch (QUI\Exception $Exception) {
+                QUI\System\Log::writeDebugException($Exception);
+            }
+        }
 
         if (!$CronManager->isCronSetUp($cleanupCronName) && !$isCleanupCronAlreadySetup) {
             try {
