@@ -20,7 +20,7 @@ class Setup
     {
         // Create Log Archive Directory
         $logArchiveDir = Manager::LOG_ARCHIVE_DIR;
-        
+
         if (!is_dir($logArchiveDir)) {
             mkdir($logArchiveDir);
         }
@@ -32,6 +32,18 @@ class Setup
         $cleanupCronName           = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.delete.title');
         $isCleanupCronAlreadySetup = $Config->getValue('log_cleanup', 'isCleanupCronAlreadySetup');
 
+        // if locale doesn't exists, we try to import the locale.xml
+        if (!QUI::getLocale()->exists('quiqqer/log', 'cron.cleanup.delete.title')) {
+            try {
+                // locale import
+                QUI\Translator::batchImportFromPackage(QUI::getPackage('quiqqer/log'));
+            } catch (QUI\Exception $Exception) {
+                QUI\System\Log::writeDebugException($Exception);
+            }
+        }
+
+
+        // if cron doesn't installed, we try to execute the setup, so we can add the cron
         if (!QUI::getDataBase()->table()->exist('cron')) {
             try {
                 $CronPackage = QUI::getPackage('quiqqer/cron');
@@ -41,6 +53,7 @@ class Setup
             }
         }
 
+        
         if (!$CronManager->isCronSetUp($cleanupCronName) && !$isCleanupCronAlreadySetup) {
             try {
                 $CronManager->add($cleanupCronName, "0", "0", "*", "*", 1);
