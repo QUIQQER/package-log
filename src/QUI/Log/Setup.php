@@ -37,6 +37,7 @@ class Setup
             try {
                 // locale import
                 QUI\Translator::batchImportFromPackage(QUI::getPackage('quiqqer/log'));
+                $cleanupCronName = QUI::getLocale()->get('quiqqer/log', 'cron.cleanup.delete.title');
             } catch (QUI\Exception $Exception) {
                 QUI\System\Log::writeDebugException($Exception);
             }
@@ -53,7 +54,7 @@ class Setup
             }
         }
 
-        
+
         if (!$CronManager->isCronSetUp($cleanupCronName) && !$isCleanupCronAlreadySetup) {
             try {
                 $CronManager->add($cleanupCronName, "0", "0", "*", "*", 1);

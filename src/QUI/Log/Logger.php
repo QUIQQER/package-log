@@ -60,7 +60,7 @@ class Logger
         if (self::$logOnFireEvent === null) {
             self::$logOnFireEvent = 0;
 
-            if (self::getPlugin()->getSettings('log', 'logAllEvents')) {
+            if (self::getPackage()->getConfig()->get('log', 'logAllEvents')) {
                 self::$logOnFireEvent = 1;
             }
         }
@@ -118,58 +118,57 @@ class Logger
             return;
         }
 
-        $errorlevel = error_reporting();
-        $errorlevel = $errorlevel & E_ERROR;
+        $errorlevel = E_ERROR;
 
         if (self::$logLevels['warning']) {
-            $errorlevel = $errorlevel & E_WARNING;
+            $errorlevel = $errorlevel | E_WARNING;
         }
 
         if (self::$logLevels['error']
             || self::$logLevels['critical']
             || self::$logLevels['alert']
         ) {
-            $errorlevel = $errorlevel & E_PARSE;
+            $errorlevel = $errorlevel | E_PARSE;
         }
 
         if (self::$logLevels['notice']) {
-            $errorlevel = $errorlevel & E_NOTICE;
+            $errorlevel = $errorlevel | E_NOTICE;
         }
 
         if (self::$logLevels['error']) {
-            $errorlevel = $errorlevel & E_CORE_ERROR;
+            $errorlevel = $errorlevel | E_CORE_ERROR;
         }
 
         if (self::$logLevels['warning']) {
-            $errorlevel = $errorlevel & E_CORE_WARNING;
+            $errorlevel = $errorlevel | E_CORE_WARNING;
         }
 
         if (self::$logLevels['error']) {
-            $errorlevel = $errorlevel & E_COMPILE_ERROR;
+            $errorlevel = $errorlevel | E_COMPILE_ERROR;
         }
 
         if (self::$logLevels['warning']) {
-            $errorlevel = $errorlevel & E_COMPILE_WARNING;
+            $errorlevel = $errorlevel | E_COMPILE_WARNING;
         }
 
         if (self::$logLevels['error']) {
-            $errorlevel = $errorlevel & E_USER_ERROR;
+            $errorlevel = $errorlevel | E_USER_ERROR;
         }
 
         if (self::$logLevels['warning']) {
-            $errorlevel = $errorlevel & E_USER_WARNING;
+            $errorlevel = $errorlevel | E_USER_WARNING;
         }
 
         if (self::$logLevels['notice']) {
-            $errorlevel = $errorlevel & E_USER_NOTICE;
+            $errorlevel = $errorlevel | E_USER_NOTICE;
         }
 
         if (self::$logLevels['info']) {
-            $errorlevel = $errorlevel & E_STRICT;
+            $errorlevel = $errorlevel | E_STRICT;
         }
 
         if (self::$logLevels['error']) {
-            $errorlevel = $errorlevel & E_RECOVERABLE_ERROR;
+            $errorlevel = $errorlevel | E_RECOVERABLE_ERROR;
         }
 
 
@@ -260,7 +259,7 @@ class Logger
         self::$Logger = $Logger;
 
         // which levels should be loged
-        self::$logLevels = self::getPlugin()->getSettings('log_levels');
+        self::$logLevels = self::getPackage()->getConfig()->get('log_levels');
 
         $Logger->pushHandler(new QUI\Log\Monolog\LogHandler());
 
@@ -284,10 +283,12 @@ class Logger
 
     /**
      * Return the quiqqer log plugins
+     *
+     * @return QUI\Package\Package
      */
-    public static function getPlugin()
+    public static function getPackage()
     {
-        return QUI::getPluginManager()->get('quiqqer/log');
+        return QUI::getPackage('quiqqer/log');
     }
 
     /**
@@ -301,15 +302,14 @@ class Logger
      */
     public static function addBrowserPHPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $browser = self::getPlugin()->getSettings('browser_logs');
+        $browser = self::getPackage()->getConfig()->get('browser_logs');
 
         if (!$browser) {
             return;
         }
 
-        $browserphp  = self::getPlugin()->getSettings('browser_logs', 'browserphp');
-        $userLogedIn = self::getPlugin()
-            ->getSettings('browser_logs', 'userLogedIn');
+        $browserphp  = self::getPackage()->getConfig()->get('browser_logs', 'browserphp');
+        $userLogedIn = self::getPackage()->getConfig()->get('browser_logs', 'userLogedIn');
 
         if (empty($browserphp) || !$browserphp) {
             return;
@@ -333,15 +333,14 @@ class Logger
      */
     public static function addChromePHPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $browser = self::getPlugin()->getSettings('browser_logs');
+        $browser = self::getPackage()->getConfig()->get('browser_logs');
 
         if (!$browser) {
             return;
         }
 
-        $chromephp   = self::getPlugin()->getSettings('browser_logs', 'chromephp');
-        $userLogedIn = self::getPlugin()
-            ->getSettings('browser_logs', 'userLogedIn');
+        $chromephp   = self::getPackage()->getConfig()->get('browser_logs', 'chromephp');
+        $userLogedIn = self::getPackage()->getConfig()->get('browser_logs', 'userLogedIn');
 
         if (empty($chromephp) || !$chromephp) {
             return;
@@ -365,13 +364,13 @@ class Logger
      */
     public static function addCubeHandlerToLogger(Monolog\Logger $Logger)
     {
-        $cube = self::getPlugin()->getSettings('cube');
+        $cube = self::getPackage()->getConfig()->get('cube');
 
         if (!$cube) {
             return;
         }
 
-        $server = self::getPlugin()->getSettings('cube', 'server');
+        $server = self::getPackage()->getConfig()->get('cube', 'server');
 
         if (empty($server)) {
             return;
@@ -392,15 +391,14 @@ class Logger
      */
     public static function addFirePHPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $browser = self::getPlugin()->getSettings('browser_logs');
+        $browser = self::getPackage()->getConfig()->get('browser_logs');
 
         if (!$browser) {
             return;
         }
 
-        $firephp     = self::getPlugin()->getSettings('browser_logs', 'firephp');
-        $userLogedIn = self::getPlugin()
-            ->getSettings('browser_logs', 'userLogedIn');
+        $firephp     = self::getPackage()->getConfig()->get('browser_logs', 'firephp');
+        $userLogedIn = self::getPackage()->getConfig()->get('browser_logs', 'userLogedIn');
 
         if (empty($firephp) || !$firephp) {
             return;
@@ -424,14 +422,14 @@ class Logger
      */
     public static function addGraylogToLogger(Monolog\Logger $Logger)
     {
-        $graylog = self::getPlugin()->getSettings('graylog');
+        $graylog = self::getPackage()->getConfig()->get('graylog');
 
         if (!$graylog) {
             return;
         }
 
-        $server = self::getPlugin()->getSettings('graylog', 'server');
-        $port   = self::getPlugin()->getSettings('graylog', 'port');
+        $server = self::getPackage()->getConfig()->get('graylog', 'server');
+        $port   = self::getPackage()->getConfig()->get('graylog', 'port');
 
         if (empty($server) || empty($port)) {
             return;
@@ -449,8 +447,8 @@ class Logger
         try {
             $Publisher = new \Gelf\Publisher(
                 new \Gelf\Transport\TcpTransport(
-                    self::getPlugin()->getSettings('graylog', 'server'),
-                    self::getPlugin()->getSettings('graylog', 'port')
+                    self::getPackage()->getConfig()->get('graylog', 'server'),
+                    self::getPackage()->getConfig()->get('graylog', 'port')
                 )
             );
 
@@ -469,13 +467,13 @@ class Logger
      */
     public static function addNewRelicToLogger(Monolog\Logger $Logger)
     {
-        $newRelic = self::getPlugin()->getSettings('newRelic');
+        $newRelic = self::getPackage()->getConfig()->get('newRelic');
 
         if (!$newRelic) {
             return;
         }
 
-        $appname = self::getPlugin()->getSettings('newRelic', 'appname');
+        $appname = self::getPackage()->getConfig()->get('newRelic', 'appname');
 
         if (empty($appname)) {
             return;
@@ -503,13 +501,13 @@ class Logger
      */
     public static function addRedisHandlerToLogger(Monolog\Logger $Logger)
     {
-        $redis = self::getPlugin()->getSettings('redis');
+        $redis = self::getPackage()->getConfig()->get('redis');
 
         if (!$redis) {
             return;
         }
 
-        $server = self::getPlugin()->getSettings('redis', 'server');
+        $server = self::getPackage()->getConfig()->get('redis', 'server');
 
         if (empty($server)) {
             return;
@@ -536,14 +534,14 @@ class Logger
      */
     public static function addSyslogUDPHandlerToLogger(Monolog\Logger $Logger)
     {
-        $syslog = self::getPlugin()->getSettings('syslogUdp');
+        $syslog = self::getPackage()->getConfig()->get('syslogUdp');
 
         if (!$syslog) {
             return;
         }
 
-        $host = self::getPlugin()->getSettings('syslogUdp', 'host');
-        $port = self::getPlugin()->getSettings('syslogUdp', 'port');
+        $host = self::getPackage()->getConfig()->get('syslogUdp', 'host');
+        $port = self::getPackage()->getConfig()->get('syslogUdp', 'port');
 
         if (empty($host)) {
             return;
