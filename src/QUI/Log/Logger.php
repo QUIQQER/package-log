@@ -112,7 +112,7 @@ class Logger
             error_reporting(E_ALL);
 
             if (DEVELOPMENT == 1) {
-                error_reporting(E_ALL ^ E_DEPRECATED);
+                error_reporting(E_ALL | E_DEPRECATED);
             }
 
             return;
@@ -170,7 +170,6 @@ class Logger
         if (self::$logLevels['error']) {
             $errorlevel = $errorlevel | E_RECOVERABLE_ERROR;
         }
-
 
         error_reporting($errorlevel);
     }
