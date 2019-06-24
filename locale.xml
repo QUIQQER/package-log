@@ -260,36 +260,51 @@
             <en><![CDATA[Syslog UDP Port]]></en>
         </locale>
 
-        
+        <!-- region Crons -->
+        <!-- region Send Via Mail -->
+        <locale name="cron.mail.title">
+            <de><![CDATA[Logs: Gestrige Logs an E-Mail-Adresse senden]]></de>
+            <en><![CDATA[Logs: Send yesterday's logs to email address]]></en>
+        </locale>
+        <locale name="cron.mail.desc">
+            <de><![CDATA[Sendet die Log-Dateien des Vortages an die per Cron-Einstellung angegebene E-Mail Adresse.]]></de>
+            <en><![CDATA[Sends the log files of the previous day to the e-mail address specified by the cron setting.]]></en>
+        </locale>
+        <!-- endregion -->
+
+        <!-- region Cleanup Logs -->
         <locale name="cron.cleanup.delete.title">
-            <de><![CDATA[Alte Logs löschen]]></de>
-            <en><![CDATA[Delete old logs]]></en>
+            <de><![CDATA[Logs: Alte Logs löschen]]></de>
+            <en><![CDATA[Logs: Delete old logs]]></en>
         </locale>
-
         <locale name="cron.cleanup.delete.desc">
-            <de><![CDATA[Löscht Log-Dateien (auch archivierte, wenn in den Einstellungen aktiviert), die älter sind als in den Log-Einstellungen festgelegt]]></de>
-            <en><![CDATA[Deletes log files (also archived ones, if enabled in the settings) which are older than defined in the log settings]]></en>
-        </locale>
-
-        <locale name="cron.cleanup.archive.title">
-            <de><![CDATA[Alte Logs archivieren]]></de>
-            <en><![CDATA[Archive old logs]]></en>
-        </locale>
-
-        <locale name="cron.cleanup.archive.desc">
-            <de><![CDATA[Archiviert Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt]]></de>
-            <en><![CDATA[Archives log files which are older than defined in the log settings]]></en>
+            <de><![CDATA[Löscht Log-Dateien (auch archivierte, wenn in den Einstellungen aktiviert), die älter sind als in den Log-Einstellungen festgelegt.]]></de>
+            <en><![CDATA[Deletes log files (also archived ones, if enabled in the settings) which are older than defined in the log settings.]]></en>
         </locale>
 
         <locale name="error.setup.cron.deletion">
             <de><![CDATA[Standard Aufgabe zur Log Bereinigung konnte nicht hinzugefügt werden.]]></de>
             <en><![CDATA[Default cron for log cleanup couldn't be added.]]></en>
         </locale>
+        <!-- endregion -->
+
+        <!-- region Archive Logs -->
+        <locale name="cron.cleanup.archive.title">
+            <de><![CDATA[Logs: Alte Logs archivieren]]></de>
+            <en><![CDATA[Logs: Archive old logs]]></en>
+        </locale>
+        <locale name="cron.cleanup.archive.desc">
+            <de><![CDATA[Archiviert Log-Dateien, die älter sind als in den Log-Einstellungen festgelegt.]]></de>
+            <en><![CDATA[Archives log files which are older than defined in the log settings.]]></en>
+        </locale>
 
         <locale name="error.setup.cron.archiving">
             <de><![CDATA[Standard Aufgabe zur Log Archivierung konnte nicht hinzugefügt werden.]]></de>
             <en><![CDATA[Default cron for log archiving couldn't be added.]]></en>
         </locale>
+        <!-- endregion -->
+        <!-- endregion -->
+
 
         <locale name="error.config.save.zip">
             <de><![CDATA[Die php-Erweiterung "zip" wird benötigt um Logs zu archivieren.]]></de>
